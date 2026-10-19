@@ -1,0 +1,7 @@
+async(page)=>{
+ await page.evaluate(async()=>{
+  const pause=ms=>new Promise(resolve=>setTimeout(resolve,ms));const move=(target,duration)=>new Promise(resolve=>{const from=scrollY,start=performance.now();const tick=now=>{const t=Math.min(1,(now-start)/duration);scrollTo({top:from+(target-from)*t*t*(3-2*t),behavior:'instant'});if(t<1)requestAnimationFrame(tick);else resolve();};requestAnimationFrame(tick);});
+  document.documentElement.style.scrollBehavior='auto';await pause(900);
+  for(const id of ['studio','work','project-detail']){await move(scrollY+document.getElementById(id).getBoundingClientRect().top-85,2200);await pause(1300);}
+ });
+}

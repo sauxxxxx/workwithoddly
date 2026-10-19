@@ -1,0 +1,87 @@
+async (page) => {
+  const results = [];
+  const check = (name, pass, detail = '') => { results.push({ name, pass, detail }); if (!pass) throw new Error(name + ': ' + detail); };
+  const desktop = {width:1440,height:900};
+  await page.setViewportSize(desktop);
+  await page.goto('http://127.0.0.1:3214/');
+  await page.evaluate(() => document.fonts.ready);
+  await page.waitForTimeout(600);
+  check('ten scene sequence', await page.locator('[data-scene]').count() === 9);
+  check('one main heading', await page.locator('h1').count() === 1);
+  check('all sixteen services', await page.locator('[data-service-list] details').count() === 16);
+  check('no placeholder email links', await page.locator('a[href*=".example"]').count() === 0);
+  for (const selector of ['#technology', '#automation', '#creative']) {
+    const items = page.locator(selector + ' details');
+    await items.nth(0).locator('summary').click();
+    check(selector + ' service opens', await items.nth(0).getAttribute('open') !== null);
+    await items.nth(1).locator('summary').click();
+    check(selector + ' disclosure grouping', await items.nth(0).getAttribute('open') === null && await items.nth(1).getAttribute('open') !== null);
+    await items.nth(1).locator('summary').click();
+  }
+  for (const name of ['CasaToon','Joyno Accounting','JoynoSync']) {
+    await page.locator('#more-work ol a').filter({hasText:name}).focus();
+    await page.waitForTimeout(300);
+    const preview = page.locator('#more-work [aria-live] img');
+    await preview.evaluate(el => el.decode());
+    check(name + ' focus preview', (await preview.getAttribute('alt')).includes(name));
+  }
+  await page.locator('#automation button').filter({hasText:'Organise'}).click();
+  check('workflow manual step', await page.locator('#automation button').filter({hasText:'Organise'}).getAttribute('aria-pressed') === 'true');
+  await page.getByRole('button',{name:'Open menu',exact:true}).click();
+  check('menu locks scroll', await page.evaluate(() => document.documentElement.style.overflow === 'hidden'));
+  await page.keyboard.press('Escape');
+  check('menu restores focus', await page.getByRole('button',{name:'Open menu',exact:true}).evaluate(el => el === document.activeElement));
+  await page.getByRole('button',{name:'Open menu',exact:true}).click();
+  await page.locator('#site-menu').getByRole('link',{name:'Work',exact:true}).click();
+  await page.waitForTimeout(1400);
+  check('menu anchor reaches work', await page.locator('#work').evaluate(el => Math.abs(el.getBoundingClientRect().top) < 180));
+  await page.getByRole('button',{name:'Start a project',exact:true}).click();
+  await page.getByLabel('Your name').fill('Review');
+  await page.getByLabel('Email address',{exact:true}).fill('review@example.com');
+  await page.getByLabel('A little about your project').fill('Website and workflow project brief.');
+  const download = page.waitForEvent('download');
+  await page.getByRole('button',{name:'Save project brief',exact:true}).click();
+  const file = await download;
+  check('contact saves actual brief', file.suggestedFilename() === 'ODDLY-project-brief.txt');
+  await file.saveAs('output/playwright/ODDLY-project-brief.txt');
+  await page.keyboard.press('Escape');
+  await page.waitForFunction(()=>document.documentElement.style.overflow !== 'hidden');
+  check('dialog unlocks scroll', await page.evaluate(() => document.documentElement.style.overflow !== 'hidden'));
+  const layouts = [];
+  for (const width of [320,390,768,1024,1440]) {
+    await page.setViewportSize({width,height:width < 900 ? 844 : 900});
+    await page.waitForTimeout(250);
+    const fits = await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth + 1);
+    layouts.push({width,fits}); check('layout fits ' + width, fits);
+  }
+  await page.setViewportSize({width:390,height:844});
+  const toggle = page.getByRole('button',{name:'Preview CasaToon',exact:true});
+  await toggle.click();
+  const id = await toggle.getAttribute('aria-controls');
+  check('touch preview expands', await page.locator('#'+id).isVisible());
+  check('touch keeps project link', await page.locator('#more-work ol a').filter({hasText:'CasaToon'}).getAttribute('href') === '/work/casatoon/');
+  await page.emulateMedia({reducedMotion:'reduce'});
+  await page.goto('http://127.0.0.1:3214/');
+  await page.evaluate(()=>window.scrollTo(0,document.querySelector('#technology').offsetTop));
+  await page.waitForTimeout(500);
+  check('reduced motion has no smooth scroll', await page.evaluate(()=>!document.documentElement.classList.contains('lenis')));
+  check('reduced motion does not autoplay', await page.locator('video').evaluate(el=>el.paused));
+  await page.screenshot({path:'output/playwright/reduced-motion.png'});
+  await page.emulateMedia({reducedMotion:'no-preference'});
+  await page.setViewportSize(desktop);
+  await page.goto('http://127.0.0.1:3214/work/joyno-accounting/');
+  check('case study route', await page.title() === 'Joyno Accounting — ODDLY®');
+  check('real product link', await page.locator('a[href="https://joynoadmin.tech/"]').count() > 0);
+  const fallback = await page.context().browser().newContext({viewport:desktop});
+  await fallback.addInitScript(()=>{const get=HTMLCanvasElement.prototype.getContext; HTMLCanvasElement.prototype.getContext=function(kind,...args){return kind.startsWith('webgl') ? null : get.call(this,kind,...args);};});
+  const still = await fallback.newPage();
+  await still.goto('http://127.0.0.1:3214/');
+  await still.waitForTimeout(500);
+  check('unavailable WebGL fallback', await still.locator('img[src="/stills/opening-desktop.webp"]').isVisible());
+  await still.evaluate(()=>window.scrollTo(0,document.querySelector('#technology').offsetTop));
+  await still.screenshot({path:'output/playwright/no-webgl-technology.png'});
+  check('no-WebGL chapter remains composed', await still.locator('#technology img').isVisible());
+  await fallback.close();
+  await page.goto('http://127.0.0.1:3214/');
+  await page.evaluate(data=>window.verification=data, {results,layouts});
+}

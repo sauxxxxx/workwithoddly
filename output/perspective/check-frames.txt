@@ -1,0 +1,7 @@
+async(page)=>{
+ await page.reload();await page.setViewportSize({width:1440,height:900});await page.evaluate(()=>{document.documentElement.style.scrollBehavior='auto';scrollTo(0,0);});await page.waitForTimeout(1400);await page.screenshot({path:'output/perspective/hero-v2.png'});
+ for(const [name,p] of [['studio',0],['turn',.35],['frame',.66],['project',.86],['exit',1.14]]){
+  await page.evaluate(p=>{const el=document.getElementById('studio');const start=scrollY+el.getBoundingClientRect().top;scrollTo({top:start+(el.offsetHeight-innerHeight)*p,behavior:'instant'});},p);
+  await page.waitForTimeout(650);await page.screenshot({path:'output/perspective/'+name+'-v2.png'});
+ }
+}

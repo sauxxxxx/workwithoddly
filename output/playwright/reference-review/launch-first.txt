@@ -1,0 +1,12 @@
+async(page)=>{
+ for(const [name,url] of [['oryzo','https://oryzo.ai/'],['atlas','https://atlasmotion.com/'],['devin','https://archive-devin-ai.lusion.co/']]){
+  try{
+   await page.goto(url,{waitUntil:'domcontentloaded',timeout:25000});
+   await page.waitForTimeout(4500);
+   await page.screenshot({path:'output/playwright/reference-review/'+name+'-launch.png'});
+   await page.mouse.move(920,450);await page.mouse.wheel(0,850);
+   await page.waitForTimeout(2300);
+   await page.screenshot({path:'output/playwright/reference-review/'+name+'-scroll.png'});
+  }catch(error){await page.screenshot({path:'output/playwright/reference-review/'+name+'-unavailable.png'});}
+ }
+}

@@ -1,0 +1,634 @@
+# MASTER PROMPT — ODDLY® Creative Technology Studio
+## Build a Distinctive, Award-Level Website with Scroll-Driven 3D
+
+You are acting as a world-class digital art director, creative developer, interaction designer, and senior frontend engineer.
+
+Your task is to transform the ODDLY® website into a distinctive, production-quality digital experience that combines experimental art direction, editorial typography, sculptural 3D objects, scroll-driven animation, and a credible multidisciplinary portfolio.
+
+This is not a conventional agency website redesign.
+
+The result must feel like a carefully art-directed digital experience made by an independent creative technology studio with a strong visual point of view. It must not resemble a generic AI-generated website, a typical Framer template, or a standard agency landing page with animated decorations.
+
+You are expected to inspect the existing project, make independent design decisions, implement the actual website, and verify the result.
+
+Do not stop after producing a plan, a mood board, a static screenshot, or a list of recommendations. Build the working website.
+
+---
+
+# 1. FIRST: INSPECT THE EXISTING PROJECT
+
+Before making changes:
+
+1. Inspect the existing repository, application structure, package configuration, installed dependencies, routing, assets, styles, and current implementation.
+2. Identify the existing framework and continue using it unless a compelling technical reason requires a change.
+3. Inspect the current ODDLY website if internet access is available: https://oddly-eight.vercel.app/
+4. Review any supplied design references, especially the PIXY creative agency reference provided by the user.
+5. Identify reusable assets, existing project screenshots, brand elements, and functional components.
+6. Determine what is worth retaining and what should be redesigned.
+
+Do not blindly replace the project with a new starter template.
+
+Do not delete existing functionality or useful assets without understanding their purpose.
+
+If the project is already functional, improve it in place.
+
+After inspecting the codebase, proceed with implementation. Do not ask the user to approve every minor design decision. Make informed decisions independently and document any genuinely important assumptions.
+
+# 2. UNDERSTAND THE CREATIVE DIRECTION
+
+The visual reference is a minimalist creative agency website with a pale background, extremely condensed typography, sculptural 3D forms emerging from the edges of the viewport, compact navigation, and a strong central composition.
+
+The reference is compelling because of its composition and art direction—not simply because it contains large text or 3D objects.
+
+Its defining characteristics are:
+
+- One dominant visual idea per composition.
+- Bold, condensed display typography used with intention.
+- Sculptural forms that overlap, frame, and interact with the layout.
+- Objects partially cropped by the viewport.
+- Large areas of carefully controlled negative space.
+- Small, precise navigation and supporting labels.
+- Unusual visual balance and asymmetry.
+- A clear hierarchy between the primary subject and secondary information.
+- A sense that the scene has been art-directed rather than assembled from predefined website components.
+
+Use these principles as inspiration. Do not reproduce the reference literally, copy its branding, or create a clone.
+
+The result must be unmistakably ODDLY.
+
+## The central concept
+
+**ODDLY is a living editorial composition in which typography, 3D sculptures, and digital work evolve together as visitors scroll.**
+
+The website is not a fully immersive 3D world or a conventional page decorated with 3D images.
+
+It is a carefully composed 2D website with a real-time 3D visual layer that responds to scroll progress.
+
+The experience should feel experimental and visually confident while remaining commercially useful, readable, accessible, and performant.
+
+# 3. BRAND IDENTITY
+
+Brand name: ODDLY®
+
+Positioning: Creative Technology Studio
+
+Brand statement: Different by design. Built for better.
+
+Location: Cebu, Philippines.
+
+ODDLY brings together technology, automation, and creative services to help businesses build digital products, improve operations, and communicate more effectively.
+
+## Brand colors
+
+Use the established palette:
+
+- Charcoal: #0F172A
+- Coral: #FF7A59
+- Lavender: #A78BFA
+- Sage: #7BA894
+- Cream: #F8F6EF
+
+Use cream or a soft neutral as the primary canvas, with charcoal providing contrast.
+
+Coral should be the signature accent and can be incorporated into a recurring 3D element.
+
+Lavender and sage should be used selectively. Do not force every brand color into every composition.
+
+Avoid automatically turning every section into a dark panel or cream-colored card.
+
+## Typography
+
+- Plus Jakarta Sans for brand typography, headings, and supporting display text.
+- Inter for body copy, navigation, and interface elements.
+
+You may use an appropriately licensed condensed display font if it substantially improves the art direction. Verify its availability and licensing before adding it.
+
+Typography should feel deliberately composed. Vary scale, width, weight, line breaks, and alignment according to the visual objective.
+
+Do not make every heading enormous.
+
+Do not use the same typography treatment for every section.
+
+Do not default to rounded, heavy sans-serif typography simply because it is popular in modern landing pages.
+
+# 4. ART DIRECTION: DO NOT MAKE ANOTHER GENERIC AGENCY WEBSITE
+
+This is the most important instruction in this brief.
+
+The previous design attempts repeatedly fell into this pattern:
+
+- Text on the left, image on the right.
+- Three equal service columns.
+- A conventional row of project cards.
+- Another text-and-image section.
+- A standard process timeline.
+- A team section.
+- A contact banner.
+
+Changing the colors, adding sculptural objects, or making the headings larger does not solve the problem.
+
+**Do not use the same underlying layout with different styling.**
+
+The composition must change according to the content and the visual story.
+
+Explore multiple compositional approaches:
+
+- Typography occupying the center of the viewport while 3D objects enter from the edges.
+- A large typographic composition with supporting copy positioned in an unexpected but readable location.
+- A nearly full-viewport artwork interrupted by a compact index or navigation element.
+- Objects passing behind and in front of typography.
+- Editorial project presentations that alternate between dense and sparse compositions.
+- Full-bleed imagery interrupted by small, precise text.
+- Asymmetrical layouts that do not depend on a two-column template.
+- Oversized project imagery with contextual details positioned independently.
+- Sections where the object, rather than the text, becomes the primary subject.
+- Sections where the 3D layer recedes and the actual project work becomes dominant.
+
+Not every section must be radically different. They should share a coherent design language without repeating the same composition.
+
+## Prohibited design shortcuts
+
+Do not create:
+
+- A giant heading followed by generic feature cards.
+- Three identical service cards simply because there are three service categories.
+- A uniform grid of floating laptop mockups.
+- A repeated text-left/image-right layout.
+- Generic dashboard illustrations.
+- Decorative spheres, blobs, rings, stars, or arches without a clear art-direction purpose.
+- Excessive rounded corners, gradients, glassmorphism, or shadows.
+- A generic template with a new color palette.
+- A page composed entirely of giant typography.
+- A page composed entirely of small minimalist text.
+- Random asymmetry that makes the site harder to understand.
+- Fake awards, invented client logos, fabricated testimonials, or made-up business metrics.
+
+The goal is not to make the site strange for the sake of being strange.
+
+The goal is to create a coherent, original visual identity.
+
+# 5. REAL 3D OBJECTS — NOT STATIC DECORATIONS
+
+Implement actual 3D geometry rendered in the browser.
+
+Preferred stack, subject to the existing project's compatibility:
+
+- Three.js.
+- React Three Fiber if the project uses React.
+- Drei where appropriate.
+- GSAP with ScrollTrigger for scroll-linked choreography.
+- Existing animation libraries may be reused if they can provide equivalent control.
+
+Do not use a static PNG, a generated background image, or a pre-rendered video as a substitute for the core 3D experience.
+
+Static renders may be used as optional fallbacks on unsupported devices.
+
+## The sculptural visual language
+
+Develop a small, curated collection of original sculptural objects that belong to the ODDLY brand.
+
+Possible material and form directions:
+
+- A distinctive coral loop or twisted sculptural form.
+- A tactile lavender geometric structure.
+- A raw concrete-like form in a neutral gray.
+- A restrained charcoal element that contrasts with the other objects.
+
+These are possible ingredients, not a requirement to include all of them.
+
+Choose forms that work together as one art-directed installation.
+
+Objects should have convincing geometry, material response, lighting, shadows, and depth.
+
+Use carefully controlled materials such as matte surfaces, roughened ceramic, painted metal, and textured concrete where appropriate.
+
+Avoid generic shiny chrome, neon sci-fi objects, random primitive shapes, excessive glow, and the familiar AI-generated combination of spheres and blobs.
+
+The sculptures should feel intentionally designed, not selected from a generic 3D asset collection.
+
+## Technical requirements
+
+- Create or source appropriate 3D models.
+- Use GLTF/GLB or procedural geometry as appropriate.
+- Configure lighting, materials, shadows, and camera placement.
+- Keep the main 3D scene persistent where technically practical.
+- Avoid unnecessarily remounting the entire WebGL scene between sections.
+- Use scroll progress to control object position, rotation, scale, and camera movement.
+- Use pointer movement only for subtle, optional interactions.
+- Avoid excessive continuous animation that competes with the content.
+- Ensure object movement remains smooth and coordinated.
+- Clean up event listeners, animation contexts, and GPU resources correctly.
+- Respect reduced-motion preferences.
+
+A small number of excellent 3D objects is preferable to many mediocre ones.
+
+# 6. SCROLL-DRIVEN EXPERIENCE
+
+Scrolling must change the visual composition in a meaningful way.
+
+The website should feel as though the visitor is moving through a sequence of art-directed compositions, not scrolling past unrelated sections with fade-in effects.
+
+Use a combination of:
+
+- Scroll-linked object transformations.
+- Controlled rotation and translation.
+- Camera movement where it improves the composition.
+- Depth changes and carefully managed overlap.
+- Typography entering or leaving the composition.
+- Image-mask transitions.
+- Pinned scenes used selectively.
+- Changes in object lighting or material emphasis where appropriate.
+- Transitions that connect one composition to the next.
+
+Avoid animating every element.
+
+Motion should communicate a transition, reveal something important, or reinforce the brand identity.
+
+## Example motion narrative
+
+This is a creative direction, not a rigid storyboard. Improve it if a stronger solution emerges.
+
+### Opening composition
+
+The ODDLY identity is the main focal point.
+
+A coral sculpture emerges from one edge of the viewport. A second, more restrained object balances the opposite side.
+
+The objects have real volume and convincing material properties.
+
+Typography, navigation, and supporting copy remain sharp and readable.
+
+The objects may respond slightly to pointer movement, but the composition should not wobble constantly.
+
+### Transition into the studio
+
+As the user scrolls, the coral object rotates and travels through the composition.
+
+The wordmark or a supporting typographic element changes position or scale.
+
+The object helps introduce the studio's three disciplines.
+
+Do not simply fade out the hero and fade in three cards.
+
+### Technology
+
+The visual language transitions toward digital products and systems.
+
+A sculptural object can move aside or change its relationship to the viewport, revealing genuine project imagery and interface previews.
+
+Technology should feel precise, structured, and functional without resorting to generic dashboards or floating device mockups.
+
+### Automation
+
+The composition shifts toward systems, connections, and relationships.
+
+Use carefully art-directed lines, modular visual elements, or a transformed object to suggest orchestration and connected workflows.
+
+Do not make a generic AI brain, glowing network sphere, or holographic dashboard.
+
+### Creative
+
+The page opens into a more expressive visual composition.
+
+Real campaign artwork, content, video stills, and graphic design should become prominent.
+
+The 3D elements should support the work instead of competing with it.
+
+### Selected work
+
+The portfolio becomes the focus.
+
+The 3D layer may recede, move out of view, or frame the project imagery.
+
+Projects should not all appear as identical cards.
+
+Use different compositions for websites, software products, AI products, and marketing campaigns.
+
+Project selection should be functional and lead to a detailed case study or project page.
+
+### Closing
+
+The objects return to a coherent final composition.
+
+The coral signature element can reconnect visually with the ODDLY wordmark or final contact statement.
+
+The ending should feel like a conclusion to the visual journey, not a generic footer with decorative 3D.
+
+## Important motion rule
+
+Every major transition should have a clear beginning, progression, and end.
+
+Do not implement disconnected animations merely to demonstrate that GSAP is installed.
+
+The result must feel choreographed.
+
+# 7. THE HOMEPAGE CONTENT
+
+The site must represent ODDLY's full service offering.
+
+ODDLY is not exclusively a web development company.
+
+## Technology
+
+- Website development.
+- Application development.
+- Custom software.
+- UI/UX design.
+- Digital products and business systems.
+
+## Automation
+
+- AI solutions.
+- Business workflow automation.
+- CRM systems.
+- Internal business tools.
+- AI-powered products and integrations.
+
+## Creative
+
+- Digital marketing.
+- Search engine optimization.
+- Content creation.
+- Video editing.
+- Social media graphics.
+- Campaign design and creative production.
+
+Present these services in an integrated visual narrative rather than a repetitive set of cards.
+
+Keep service discovery easy and ensure each service has a clear description.
+
+## Project references
+
+Use these real project references where relevant:
+
+1. The Beach Park — Hadsan: hospitality website, digital experience, and SEO.
+2. CasaToon: AI animation product and creative technology.
+3. Joyno Accounting: accounting software and business systems.
+4. JoynoSync: CRM and workflow management.
+5. Shark's Tail: hospitality website and digital presentation.
+6. NxOne DC: marketing, content, and SEO.
+7. Marketing & Content: campaigns, social graphics, and video production.
+
+These references describe project categories, not permission to invent results.
+
+Inspect the existing assets and project data before creating new imagery.
+
+Prioritize actual screenshots, actual interfaces, existing project media, and authentic deliverables.
+
+If an asset is missing, create a neutral placeholder or a clearly replaceable visual treatment.
+
+Do not invent conversion rates, revenue figures, testimonials, client endorsements, or project outcomes.
+
+## Case studies
+
+Create a reusable structure for project details.
+
+Each case study should explain, where information is available:
+
+- Project overview.
+- Client or product context.
+- The problem or opportunity.
+- ODDLY's role and contribution.
+- The solution delivered.
+- Actual deliverables.
+- Verified results, if available.
+- Relevant images or videos.
+- A clear way to explore the next project or contact the studio.
+
+Do not force all case studies into the same visual template. Use a shared information architecture with project-specific art direction.
+
+# 8. NAVIGATION AND USABILITY
+
+The visual experience must not sacrifice usability.
+
+Provide clear access to:
+
+- Work.
+- Services.
+- About.
+- Contact.
+
+The navigation may be compact and editorial.
+
+A custom menu interaction is welcome if it feels purposeful and works reliably.
+
+Visitors should be able to navigate directly to important content rather than being forced to complete a long scroll animation.
+
+Support keyboard navigation and visible focus states.
+
+Links and controls must be real, functional elements.
+
+Do not create decorative controls that appear interactive but do nothing.
+
+Do not make the entire site depend on a custom cursor.
+
+# 9. VISUAL DESIGN SYSTEM
+
+Establish reusable design tokens for:
+
+- Color.
+- Typography.
+- Spacing.
+- Grid and alignment.
+- Section dimensions.
+- Motion durations.
+- Easing.
+- Borders and dividers.
+- Image treatments.
+- Responsive behavior.
+
+The design system should support the art direction without forcing every section into the same template.
+
+Use a consistent set of principles rather than identical component layouts.
+
+Allow the compositions to vary in density, alignment, scale, and use of imagery.
+
+Keep supporting typography readable and avoid filling the interface with unnecessary uppercase micro-labels.
+
+Use the coral dot as a recurring signature only where it contributes to the composition.
+
+# 10. RESPONSIVE DESIGN
+
+The desktop experience may be visually ambitious, but the site must work on phones and tablets.
+
+Do not simply shrink the desktop layout.
+
+On smaller screens:
+
+- Simplify the 3D scene.
+- Reduce polygon count, texture resolution, and shadow complexity where necessary.
+- Reposition or remove objects that obscure content.
+- Preserve the primary typographic composition.
+- Keep navigation usable.
+- Maintain access to all services and projects.
+- Provide touch-friendly interactions.
+- Prevent horizontal overflow.
+- Avoid pinned sections that trap the user in awkward scrolling.
+- Ensure case studies remain readable.
+
+If real-time 3D is too expensive on a particular device, provide a graceful fallback using optimized static renders or simpler animation.
+
+The fallback must retain the visual identity rather than becoming an unrelated generic page.
+
+# 11. PERFORMANCE AND ACCESSIBILITY
+
+A visually impressive site that is slow or unusable is not a successful result.
+
+Implement the following:
+
+- Lazy-load nonessential models and media.
+- Optimize GLTF/GLB assets.
+- Compress textures.
+- Use sensible polygon counts.
+- Avoid unnecessarily high device-pixel ratios.
+- Use adaptive rendering quality where appropriate.
+- Limit expensive real-time shadows and post-processing.
+- Avoid blocking the initial render while 3D assets load.
+- Provide an attractive loading or fallback state if required.
+- Respect `prefers-reduced-motion`.
+- Keep text as HTML rather than rendering it into the 3D scene.
+- Maintain accessible contrast.
+- Provide keyboard-accessible navigation.
+- Avoid motion that creates unnecessary discomfort.
+- Ensure the primary content remains usable if WebGL fails.
+
+Do not use smooth-scrolling libraries unless they materially improve the experience and remain accessible.
+
+# 12. CONTENT AND ASSET MANAGEMENT
+
+Keep project information and replaceable media separate from the animation logic.
+
+Use the existing architecture if it is already appropriate. Otherwise, introduce a clean structure for:
+
+- Projects.
+- Services.
+- Case studies.
+- Team information.
+- Images and video.
+- 3D model references.
+- Animation configuration.
+
+Temporary assets must be easy to replace without rewriting components.
+
+Do not scatter hardcoded project details throughout the codebase.
+
+Do not rely on unstable third-party image URLs for critical production content.
+
+Do not invent team members or assign fictional portraits to real people.
+
+If the team information is unavailable, create a layout that can accept real information later.
+
+# 13. IMPLEMENTATION WORKFLOW
+
+Follow this sequence.
+
+## Phase A — Audit
+
+Inspect the project, identify the stack, understand the current site, and inventory existing assets.
+
+## Phase B — Art direction
+
+Define the visual system, core sculptural forms, typography, and scroll narrative.
+
+Make sure the proposed compositions do not all rely on the same text-and-image arrangement.
+
+## Phase C — Build the core experience
+
+Implement the main responsive page, real-time 3D scene, and scroll-linked animation.
+
+Prioritize the opening composition and its transition into the next section.
+
+## Phase D — Complete the website
+
+Implement the service experience, selected work, case-study navigation, studio information, and closing contact composition.
+
+Do not leave the website as a hero-only experiment.
+
+## Phase E — Integrate content
+
+Use real available project assets and create replaceable placeholders only where necessary.
+
+Ensure the content is consistent across the site.
+
+## Phase F — Verify
+
+Run the available linting, type checks, build process, and tests.
+
+Fix errors rather than merely reporting them.
+
+Check desktop and mobile layouts.
+
+Verify the 3D animation and scroll interactions in a browser if browser tooling is available.
+
+Test reduced-motion behavior, keyboard navigation, loading states, and WebGL fallback behavior.
+
+Do not claim that something works unless it has been verified.
+
+# 14. ACCEPTANCE CRITERIA
+
+The project is not complete until the following criteria are met.
+
+### Art direction
+
+- The website does not resemble a generic agency template.
+- The composition is not simply text on one side and images on the other.
+- The services are not presented as three repetitive cards by default.
+- The portfolio is not merely a row of identical project thumbnails.
+- The sculptural elements have a coherent visual identity.
+- Typography is expressive but not oversized everywhere.
+- The design contains intentional negative space and meaningful visual contrast.
+- Each major section has a composition suited to its content.
+- The visual experience remains compelling without motion.
+
+### 3D and animation
+
+- At least one genuine 3D scene is implemented.
+- The core sculptures use actual 3D geometry or suitable real-time models.
+- Scroll progress controls meaningful object transformations.
+- The opening transitions into later sections through coordinated motion.
+- Animations do not constantly compete with text.
+- The scene behaves reliably across viewport sizes.
+- Reduced-motion and fallback behavior are implemented.
+
+### Business functionality
+
+- Visitors can understand the three service disciplines.
+- Projects have clear labels and working navigation.
+- Project information is not fabricated.
+- Contact links work.
+- The site communicates both creative capability and technical competence.
+
+### Engineering
+
+- The application builds successfully.
+- There are no unresolved critical runtime errors.
+- Responsive behavior is tested.
+- Assets are reasonably optimized.
+- Existing useful functionality is preserved.
+
+# 15. FINAL ART-DIRECTION TEST
+
+Before declaring completion, ask yourself:
+
+1. If I remove the logo and colors, does the composition still feel distinctive?
+2. Could another creative agency use the same layout merely by changing its name?
+3. Are the 3D objects actually integrated into the experience, or are they just decorations?
+4. Does the scroll animation create a coherent narrative?
+5. Have I repeated the same composition across several sections?
+6. Is the portfolio showing real evidence of capability?
+7. Does the design have restraint, or have I added effects simply because I can?
+8. Does the website feel intentionally art-directed rather than generated from a design recipe?
+
+If the result fails these tests, revise it before completion.
+
+## FINAL INSTRUCTION
+
+Work directly in the existing project and build the complete website.
+
+Do not return only a plan, mockup, or explanation.
+
+Do not ask the user to choose between several generic design directions.
+
+Make strong art-direction decisions, implement them, test the result, and report what was actually completed.
+
+**The objective is not to create another beautiful agency website. The objective is to create an ODDLY website whose visual composition, 3D choreography, and presentation of real work are distinctive enough to be remembered.**

@@ -1,0 +1,28 @@
+async(page)=>{
+ page.setDefaultTimeout(8000);
+ const results=[];const errors=[];page.on('pageerror',error=>errors.push(error.message));
+ const check=(name,pass)=>{results.push({name,pass});if(!pass)throw new Error(name);};
+ await page.setViewportSize({width:1440,height:900});await page.emulateMedia({reducedMotion:'no-preference'});await page.goto('http://127.0.0.1:3214/');await page.waitForTimeout(1300);
+ await page.evaluate(()=>{history.scrollRestoration='manual';document.documentElement.style.scrollBehavior='auto';scrollTo({top:0,behavior:'instant'});});await page.waitForTimeout(500);
+ check('approved opening text',(await page.locator('h1').innerText()).toLowerCase().replace(/\s+/g,' ')==='creative technology studio');
+ check('live room and sculpture stages',await page.locator('canvas').count()===2);
+ check('hidden reveal excluded from tab order',await page.locator('[data-sequence-project]').getAttribute('inert')!==null);
+ await page.getByRole('button',{name:'Open menu',exact:true}).click();await page.locator('#site-menu').getByRole('link',{name:'Work',exact:true}).click();await page.waitForTimeout(1700);
+ check('work anchor reaches the revealed project',await page.locator('[data-sequence-project]').evaluate(el=>getComputedStyle(el).opacity>.98&&el.getAttribute('inert')===null));
+ check('project frame fits viewport',await page.locator('[data-sequence-window]').evaluate(el=>{const r=el.getBoundingClientRect();return r.top>80&&r.bottom<innerHeight-35&&r.left>=0&&r.right<=innerWidth;}));
+ await page.screenshot({path:'output/perspective/anchor-review.png'});
+ await page.evaluate(()=>scrollTo({top:document.getElementById('studio').offsetTop+150,behavior:'instant'}));await page.waitForTimeout(500);
+ check('reverse scroll restores studio copy',await page.locator('[data-sequence-story]').evaluate(el=>getComputedStyle(el).opacity>.98));
+ await page.screenshot({path:'output/perspective/reverse-review.png'});
+ for(const width of [320,390,768,1024,1440]){await page.setViewportSize({width,height:width<900?844:900});await page.waitForTimeout(300);check('no horizontal overflow at '+width,await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));}
+ await page.emulateMedia({reducedMotion:'reduce'});await page.evaluate(()=>scrollTo({top:document.getElementById('studio').offsetTop,behavior:'instant'}));await page.waitForTimeout(500);
+ check('reduced motion uses normal document flow',await page.locator('[data-opening-sequence]>div').first().evaluate(el=>getComputedStyle(el).position!=='sticky'));
+ check('reduced motion keeps project accessible',await page.locator('[data-sequence-project]').getAttribute('inert')===null);
+ check('reduced motion has no autoplay',await page.locator('video').evaluate(el=>el.paused));
+ await page.screenshot({path:'output/perspective/reduced-motion.png'});
+ const mobile=await page.context().browser().newContext({viewport:{width:390,height:844},hasTouch:true,isMobile:true});const touch=await mobile.newPage();await touch.goto('http://127.0.0.1:3214/');await touch.waitForTimeout(700);await touch.locator('a[href="#studio"]').click();await touch.waitForTimeout(600);
+ check('touch scroll remains native',await touch.evaluate(()=>matchMedia('(pointer:coarse)').matches&&!document.documentElement.classList.contains('lenis')));
+ await touch.getByRole('button',{name:'Open menu',exact:true}).click();await touch.locator('#site-menu').getByRole('link',{name:'Work',exact:true}).click();await touch.waitForTimeout(700);check('mobile project readable',await touch.locator('[data-sequence-window]').isVisible());await touch.screenshot({path:'output/perspective/mobile-anchor.png'});await mobile.close();
+ const fallback=await page.context().browser().newContext({viewport:{width:1440,height:900}});await fallback.addInitScript(()=>{const get=HTMLCanvasElement.prototype.getContext;HTMLCanvasElement.prototype.getContext=function(kind,...args){return kind.startsWith('webgl')?null:get.call(this,kind,...args);};});const still=await fallback.newPage();await still.goto('http://127.0.0.1:3214/');await still.waitForTimeout(1000);await still.evaluate(()=>{document.documentElement.style.scrollBehavior='auto';scrollTo({top:scrollY+document.getElementById('work').getBoundingClientRect().top,behavior:'instant'});});await still.waitForTimeout(600);check('no-WebGL project link works',await still.locator('[data-sequence-project]').evaluate(el=>getComputedStyle(el).opacity>.98));await still.screenshot({path:'output/perspective/no-webgl.png'});await fallback.close();
+ check('no application exceptions',errors.length===0);await page.evaluate(data=>window.perspectiveVerification=data,{results,errors});
+}

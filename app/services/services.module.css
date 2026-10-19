@@ -1,0 +1,145 @@
+.intro {
+  min-height: 78svh;
+  display: grid;
+  align-content: end;
+  justify-items: start;
+  gap: var(--s-5);
+  padding: calc(var(--nav-h) + var(--s-8)) var(--margin) var(--s-8);
+}
+
+.tag {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.tag span {
+  color: var(--coral);
+  margin-right: 0.5em;
+}
+
+.title {
+  font-size: min(15vw, 26svh);
+}
+
+.jump {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2);
+}
+
+.jump a {
+  padding: 0.55rem 1rem;
+  border-radius: 999px;
+  border: 1px solid var(--rule-strong);
+  font-size: var(--t-small);
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color var(--d-fast) linear, color var(--d-fast) linear;
+}
+
+.jump a:hover {
+  background: var(--charcoal);
+  color: var(--cream);
+}
+
+.discipline {
+  position: relative;
+  min-height: 100svh;
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: var(--gutter);
+  align-content: center;
+  padding: var(--s-9) var(--margin);
+  border-top: var(--hair);
+}
+
+.head {
+  grid-column: 1 / span 6;
+  align-self: start;
+}
+
+.word {
+  margin-top: var(--s-4);
+  font-size: min(7.6vw, 19svh);
+}
+
+.lede {
+  margin-top: var(--s-5);
+  max-width: 28ch;
+  font-family: var(--f-brand);
+  font-size: var(--t-lead);
+  line-height: 1.25;
+  letter-spacing: -0.015em;
+}
+
+.list {
+  grid-column: 7 / -1;
+  align-self: center;
+}
+
+/* Alternate sides so the 3D piece (which frames the top right) never covers the list. */
+.discipline[data-side="left"] .head {
+  grid-column: 7 / -1;
+  grid-row: 1;
+}
+
+.discipline[data-side="left"] .list {
+  grid-column: 1 / span 6;
+  grid-row: 1;
+}
+
+.seen {
+  margin-top: var(--s-6);
+  font-size: var(--t-small);
+  color: var(--ink-soft);
+}
+
+.seen a {
+  color: var(--ink);
+  font-weight: 600;
+  text-decoration-color: var(--coral);
+  text-decoration-thickness: 2px;
+}
+
+.close {
+  display: grid;
+  place-items: center;
+  padding: var(--s-9) var(--margin) var(--s-10);
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  padding: 0.9rem 1.4rem;
+  border-radius: 999px;
+  background: var(--charcoal);
+  color: var(--cream);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.pill:hover {
+  background: var(--coral);
+  color: var(--charcoal);
+}
+
+@media (max-width: 899px) {
+  .head,
+  .list,
+  .discipline[data-side="left"] .head,
+  .discipline[data-side="left"] .list {
+    grid-column: 1 / -1;
+    grid-row: auto;
+  }
+
+  .list {
+    margin-top: var(--s-7);
+  }
+
+  .word {
+    font-size: min(15vw, 16svh);
+  }
+}

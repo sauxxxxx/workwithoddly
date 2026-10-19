@@ -1,0 +1,5 @@
+async(page)=>{
+ await page.goto('https://choochooworld.com/');await page.getByText('Start Building',{exact:true}).waitFor({state:'visible',timeout:20000});await page.getByText('Start Building',{exact:true}).click();await page.waitForTimeout(3000);await page.screenshot({path:'output/playwright/reference-review/choo-build.png'});
+ await page.goto('https://oryzo.ai/');await page.waitForTimeout(3500);for(let i=0;i<4;i++){await page.mouse.wheel(0,1100);await page.waitForTimeout(500);}await page.waitForTimeout(2000);await page.screenshot({path:'output/playwright/reference-review/oryzo-deeper.png'});
+ await page.goto('https://www.psychoactive.co.nz/');await page.waitForTimeout(5000);for(let i=0;i<5;i++){await page.mouse.wheel(0,1000);await page.waitForTimeout(400);}await page.waitForTimeout(2000);await page.screenshot({path:'output/playwright/reference-review/psychoactive-deeper.png'});
+}

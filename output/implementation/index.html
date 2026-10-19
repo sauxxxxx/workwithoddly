@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>ODDLY / Implemented page review</title>
+    <link rel="icon" type="image/svg+xml" href="../../app/icon.svg" />
+    <link rel="stylesheet" href="review.css" />
+  </head>
+  <body>
+    <header>
+      <a href="http://127.0.0.1:3214/">ODDLY<span>®</span></a>
+      <p>Implementation review / 15 October 2026</p>
+      <a href="http://127.0.0.1:3214/">Open actual page ↗</a>
+    </header>
+    <main>
+      <div class="intro">
+        <p class="eyebrow">The complete sequence</p>
+        <h1>From first impression<br />to the next conversation.</h1>
+        <p>
+          Actual browser captures and scroll recordings of the implemented
+          website. The approved hero continues into the studio, the work, three
+          capability chapters, the project index, About, and Contact.
+        </p>
+      </div>
+      <section class="recordings" aria-labelledby="recording-title">
+        <h2 id="recording-title">Watch the movement.</h2>
+        <p>
+          Normal document scroll, sculpture transitions, settling interfaces,
+          and layered typography. Includes a short reverse scroll through the
+          capability chapters.
+        </p>
+        <video
+          controls
+          playsinline
+          preload="metadata"
+          poster="desktop-hero.webp"
+          src="desktop-scroll.mp4"
+          aria-label="Desktop full page scroll recording"
+        ></video>
+        <details>
+          <summary>Mobile scroll recording</summary>
+          <video
+            controls
+            playsinline
+            preload="none"
+            poster="mobile-hero.webp"
+            src="mobile-scroll.mp4"
+            aria-label="Mobile full page scroll recording"
+          ></video>
+        </details>
+      </section>
+      <section class="frames" aria-labelledby="frames-title">
+        <div class="frames-head">
+          <h2 id="frames-title">The resting frames.</h2>
+          <div class="switch" role="group" aria-label="Frame size">
+            <button type="button" aria-pressed="true" data-mode="desktop">
+              Desktop</button
+            ><button type="button" aria-pressed="false" data-mode="mobile">
+              Mobile
+            </button>
+          </div>
+        </div>
+        <div id="frame-list"></div>
+      </section>
+      <section class="notes">
+        <div>
+          <p class="eyebrow">Verified</p>
+          <h2>Built and checked.</h2>
+          <p>
+            Production static export and lint pass. Browser checks cover 320,
+            390, 768, 1024, and 1440px; all sixteen service descriptions;
+            keyboard project previews; touch preview controls; menu focus and
+            anchors; project navigation; the downloadable brief; reduced motion;
+            and unavailable WebGL.
+          </p>
+          <p>
+            The stage uses the original geometry and materials. Native touch
+            scrolling and composed chapter stills keep the mobile page readable.
+            These checks are not a physical-device performance benchmark or a
+            claim of reference-site parity.
+          </p>
+        </div>
+        <div>
+          <p class="eyebrow">Assets and contact</p>
+          <h2>What is real. What remains.</h2>
+          <p>
+            Beach Park imagery and interface recording come from
+            <a href="https://thebeachpark.vercel.app/"
+              >the studio-confirmed site</a
+            >. Joyno Accounting, JoynoSync, and CasaToon show their publicly
+            accessible entry views; authenticated workspace interiors have not
+            been captured.
+          </p>
+          <p>
+            Creative uses original ODDLY studies, labeled as studio work. Client
+            creative assets, remaining project imagery, and verified outcomes
+            remain pending.
+          </p>
+          <p>
+            A real studio email is still needed. Until configured, “Start a
+            project” creates a local brief to save and share; it does not send
+            an enquiry.
+          </p>
+        </div>
+      </section>
+    </main>
+    <footer>
+      <a href="http://127.0.0.1:3214/">Open ODDLY ↗</a
+      ><a href="../storyboard/index.html">Original storyboard ↗</a>
+    </footer>
+    <script src="review.js"></script>
+  </body>
+</html>

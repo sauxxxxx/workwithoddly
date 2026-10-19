@@ -1,0 +1,256 @@
+{
+  "name": "noomo",
+  "url": "https://noomoagency.com/",
+  "loadMs": 7606,
+  "gateClicked": null,
+  "fingerprint": {
+    "title": "Digital Storytelling & 3D Website Design Agency | Noomo",
+    "globals": {
+      "THREE": "156",
+      "gsap": false,
+      "ScrollTrigger": false,
+      "Lenis": false,
+      "LocomotiveScroll": false,
+      "barba": false,
+      "PIXI": false,
+      "Webflow": false,
+      "next": false,
+      "nuxt": true,
+      "vue": true,
+      "react": false,
+      "Howler": false
+    },
+    "htmlClasses": " ",
+    "canvases": [
+      {
+        "ctx": "webgl2",
+        "w": 1440,
+        "h": 900,
+        "pos": "static",
+        "z": "auto"
+      }
+    ],
+    "fonts": [
+      "NeueRoman normal",
+      "NeueMachina normal"
+    ],
+    "body": {
+      "font": "\"Source Sans Pro\", -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helve",
+      "size": "16px",
+      "weight": "400",
+      "color": "rgb(0, 0, 0)",
+      "bg": "rgb(201, 210, 231)"
+    },
+    "biggestText": [
+      {
+        "t": "INNOVATE –",
+        "px": 120,
+        "f": "NeueMachina"
+      },
+      {
+        "t": "Design that elevates your digital presence",
+        "px": 62,
+        "f": "NeueMachina"
+      },
+      {
+        "t": "AT NOOMO, WE CREATE 3D STORYTELLING WEBSITES AND I",
+        "px": 60,
+        "f": "NeueMachina"
+      },
+      {
+        "t": "FROM IMMERSIVE 3D WEBSITES TO CINEMATIC BRAND VIDE",
+        "px": 60,
+        "f": "NeueMachina"
+      },
+      {
+        "t": "Great work can’t happen without team a.",
+        "px": 60,
+        "f": "NeueMachina"
+      },
+      {
+        "t": "RECOGNITION FOR INNOVATIVE WORK THAT PUSHES WHAT'S",
+        "px": 60,
+        "f": "NeueMachina"
+      },
+      {
+        "t": "BUT WE'RE HERE NOT TO TALK ABOUT OURSELVES - WE'RE",
+        "px": 60,
+        "f": "NeueMachina"
+      },
+      {
+        "t": "Webby",
+        "px": 54,
+        "f": "NeueMachina"
+      }
+    ],
+    "scrollHeight": 24350,
+    "bodyOverflow": "visible",
+    "htmlOverflow": "visible",
+    "videos": 1,
+    "links": [
+      "WORK",
+      "OUR STORY",
+      "LABS",
+      "INSIGHTS",
+      "CONNECT",
+      "Work",
+      "Our Story",
+      "LABS",
+      "Insights",
+      "Connect",
+      "Let's work together",
+      "View project View project",
+      "View project View project",
+      "View project View project",
+      "View project View project",
+      "View All",
+      "Editorial\nInteractive\nWeb\n\nREAD\nDesigning Vogue Business' Gen Z Report: Interactive Editorial Website\n\nEditorial\n\nJan 8, 2026",
+      "Storytelling\nWebsite\n3D\n\nREAD\nThe Power of Digital Storytelling or How to Tell the Story Without Words\n\nStorytelling\n\nJul 28, 2025",
+      "3D\nImmersive\nWebsite\n\nREAD\nNoomo ValenTime, an Immersive Storytelling About Love\n\n3D\n\nMay 1, 2025",
+      "AI\nImmersive\n3D\n\nREAD\nAI-powered Brand Activation: Building Interactive 3D Music Experiences\n\nAI\n\nNov 06, 2024",
+      "Immersive\n3D\nAR\n\nREAD\nElevate Marketing and Sales by Using Immersive Web Experiences\n\nImmersive Experiences\n\nMay 10, 2024",
+      "Work",
+      "Our story",
+      "Insights",
+      "Connect",
+      "Privacy policy",
+      "LinkedIn",
+      "Instagram",
+      "Dribbble",
+      "X"
+    ]
+  },
+  "libsByScriptSignature": {
+    "gsap": [
+      "ScrollSmoother.521d17e7.js",
+      "ScrollTrigger.039d4140.js",
+      "ScrollToPlugin.e2ef7d76.js",
+      "entry.d04896df.js"
+    ],
+    "scrolltrigger": [
+      "ScrollSmoother.521d17e7.js",
+      "ScrollTrigger.039d4140.js",
+      "homeNews.vue.1eb31a0d.js",
+      "ScrollToPlugin.e2ef7d76.js"
+    ],
+    "three": [
+      "entry.d04896df.js",
+      "67a7f8b0-0ac7-4f26-998f-c6de0c01c36c"
+    ],
+    "draco": [
+      "index.9a78ca5f.js",
+      "our-story.6cb008da.js",
+      "newsObject.vue.3cd46be3.js",
+      "67a7f8b0-0ac7-4f26-998f-c6de0c01c36c"
+    ],
+    "gltf": [
+      "index.9a78ca5f.js",
+      "newsObject.vue.3cd46be3.js"
+    ],
+    "webgpu": [
+      "index.9a78ca5f.js"
+    ],
+    "pixi": [
+      "gtm.js?id=GTM-KXQJRFKX",
+      "js?id=G-9R6X953ER3",
+      "js?id=G-9R6X953ER3&cx=c&gtm=4e6ae1h1"
+    ]
+  },
+  "threeRevision": null,
+  "assets": {
+    "models": [
+      "Platform-O.glb",
+      "CoinbaseBall2.glb",
+      "Cards2Anim.glb",
+      "M.glb",
+      "Dendy3.glb",
+      "Jellyfish.glb",
+      "BG2.glb",
+      "Clouds.glb",
+      "HeartLocation.glb",
+      "N.glb",
+      "O.glb",
+      "Rocket.glb",
+      "Eye.glb",
+      "Plug.glb",
+      "lightning.glb",
+      "Sun.glb",
+      "Bitcoin.glb",
+      "netrixtest3.glb",
+      "playWithMesh.glb",
+      "SoundOff.glb",
+      "awwwardsModel.glb",
+      "heart.glb",
+      "webbby.glb",
+      "reddot.glb",
+      "SFDF_op1.glb",
+      "goblet.glb",
+      "Like.glb"
+    ],
+    "videos": [
+      "showrel2026.mp4"
+    ],
+    "audio": [],
+    "fonts": [
+      "NeueMachina-Regular.e896c98c.otf",
+      "NeueHaasDisplayRoman.d8850e5c.ttf"
+    ],
+    "scriptCount": 36,
+    "hosts": [
+      "noomoagency.com",
+      "www.googletagmanager.com",
+      "noomo-website.cdn.prismic.io",
+      "",
+      "www.google-analytics.com",
+      "images.prismic.io",
+      "xanderspace.ams3.digitaloceanspaces.com"
+    ]
+  },
+  "frames": [
+    {
+      "file": "noomo-01.png",
+      "scrollY": 810
+    },
+    {
+      "file": "noomo-02.png",
+      "scrollY": 1620
+    },
+    {
+      "file": "noomo-03.png",
+      "scrollY": 2430
+    },
+    {
+      "file": "noomo-04.png",
+      "scrollY": 3240
+    },
+    {
+      "file": "noomo-05.png",
+      "scrollY": 4050
+    },
+    {
+      "file": "noomo-06.png",
+      "scrollY": 4860
+    },
+    {
+      "file": "noomo-07.png",
+      "scrollY": 5670
+    },
+    {
+      "file": "noomo-08.png",
+      "scrollY": 6480
+    },
+    {
+      "file": "noomo-09.png",
+      "scrollY": 7290
+    },
+    {
+      "file": "noomo-10.png",
+      "scrollY": 8100
+    },
+    {
+      "file": "noomo-11.png",
+      "scrollY": 8910
+    }
+  ],
+  "errors": []
+}

@@ -1,0 +1,642 @@
+{
+  "name": "psychoactive",
+  "url": "https://www.psychoactive.co.nz/",
+  "loadMs": 8871,
+  "gateClicked": null,
+  "fingerprint": {
+    "title": "Psychoactive Studios — AI-era Design & Development Agency",
+    "globals": {
+      "THREE": "185",
+      "gsap": false,
+      "ScrollTrigger": false,
+      "Lenis": true,
+      "LocomotiveScroll": false,
+      "barba": false,
+      "PIXI": false,
+      "Webflow": false,
+      "next": false,
+      "nuxt": false,
+      "vue": true,
+      "react": false,
+      "Howler": true
+    },
+    "htmlClasses": "in-mist lenis ",
+    "canvases": [
+      {
+        "ctx": "webgl2",
+        "w": 504,
+        "h": 283,
+        "pos": "absolute",
+        "z": "1"
+      },
+      {
+        "ctx": "none",
+        "w": 504,
+        "h": 283,
+        "pos": "absolute",
+        "z": "2"
+      },
+      {
+        "ctx": "none",
+        "w": 202,
+        "h": 103,
+        "pos": "absolute",
+        "z": "2"
+      },
+      {
+        "ctx": "none",
+        "w": 202,
+        "h": 103,
+        "pos": "absolute",
+        "z": "2"
+      },
+      {
+        "ctx": "none",
+        "w": 202,
+        "h": 103,
+        "pos": "absolute",
+        "z": "2"
+      },
+      {
+        "ctx": "none",
+        "w": 202,
+        "h": 103,
+        "pos": "absolute",
+        "z": "2"
+      },
+      {
+        "ctx": "none",
+        "w": 202,
+        "h": 103,
+        "pos": "absolute",
+        "z": "2"
+      },
+      {
+        "ctx": "none",
+        "w": 202,
+        "h": 103,
+        "pos": "absolute",
+        "z": "2"
+      },
+      {
+        "ctx": "none",
+        "w": 202,
+        "h": 103,
+        "pos": "absolute",
+        "z": "2"
+      },
+      {
+        "ctx": "none",
+        "w": 202,
+        "h": 103,
+        "pos": "absolute",
+        "z": "2"
+      },
+      {
+        "ctx": "none",
+        "w": 202,
+        "h": 103,
+        "pos": "absolute",
+        "z": "2"
+      },
+      {
+        "ctx": "none",
+        "w": 202,
+        "h": 103,
+        "pos": "absolute",
+        "z": "2"
+      },
+      {
+        "ctx": "none",
+        "w": 202,
+        "h": 103,
+        "pos": "absolute",
+        "z": "2"
+      },
+      {
+        "ctx": "none",
+        "w": 202,
+        "h": 103,
+        "pos": "absolute",
+        "z": "2"
+      },
+      {
+        "ctx": "webgl2",
+        "w": 1120,
+        "h": 574,
+        "pos": "absolute",
+        "z": "0"
+      },
+      {
+        "ctx": "webgl2",
+        "w": 1120,
+        "h": 574,
+        "pos": "absolute",
+        "z": "2"
+      },
+      {
+        "ctx": "webgl2",
+        "w": 548,
+        "h": 281,
+        "pos": "absolute",
+        "z": "0"
+      },
+      {
+        "ctx": "webgl2",
+        "w": 548,
+        "h": 281,
+        "pos": "absolute",
+        "z": "2"
+      },
+      {
+        "ctx": "webgl2",
+        "w": 548,
+        "h": 281,
+        "pos": "absolute",
+        "z": "0"
+      },
+      {
+        "ctx": "webgl2",
+        "w": 548,
+        "h": 281,
+        "pos": "absolute",
+        "z": "2"
+      },
+      {
+        "ctx": "webgl2",
+        "w": 548,
+        "h": 281,
+        "pos": "absolute",
+        "z": "0"
+      },
+      {
+        "ctx": "webgl2",
+        "w": 548,
+        "h": 281,
+        "pos": "absolute",
+        "z": "2"
+      },
+      {
+        "ctx": "webgl2",
+        "w": 548,
+        "h": 281,
+        "pos": "absolute",
+        "z": "0"
+      },
+      {
+        "ctx": "webgl2",
+        "w": 548,
+        "h": 281,
+        "pos": "absolute",
+        "z": "2"
+      },
+      {
+        "ctx": "webgl2",
+        "w": 1120,
+        "h": 574,
+        "pos": "absolute",
+        "z": "0"
+      },
+      {
+        "ctx": "webgl2",
+        "w": 1120,
+        "h": 574,
+        "pos": "absolute",
+        "z": "2"
+      },
+      {
+        "ctx": "webgl2",
+        "w": 548,
+        "h": 281,
+        "pos": "absolute",
+        "z": "0"
+      },
+      {
+        "ctx": "webgl2",
+        "w": 548,
+        "h": 281,
+        "pos": "absolute",
+        "z": "2"
+      },
+      {
+        "ctx": "webgl2",
+        "w": 548,
+        "h": 281,
+        "pos": "absolute",
+        "z": "0"
+      },
+      {
+        "ctx": "webgl2",
+        "w": 548,
+        "h": 281,
+        "pos": "absolute",
+        "z": "2"
+      },
+      {
+        "ctx": "none",
+        "w": 114,
+        "h": 114,
+        "pos": "absolute",
+        "z": "2"
+      },
+      {
+        "ctx": "none",
+        "w": 114,
+        "h": 114,
+        "pos": "absolute",
+        "z": "2"
+      },
+      {
+        "ctx": "none",
+        "w": 114,
+        "h": 114,
+        "pos": "absolute",
+        "z": "2"
+      },
+      {
+        "ctx": "webgl2",
+        "w": 1440,
+        "h": 900,
+        "pos": "static",
+        "z": "auto"
+      },
+      {
+        "ctx": "none",
+        "w": 0,
+        "h": 0,
+        "pos": "fixed",
+        "z": "97"
+      },
+      {
+        "ctx": "webgl2",
+        "w": 1440,
+        "h": 900,
+        "pos": "static",
+        "z": "auto"
+      }
+    ],
+    "fonts": [
+      "Roobert 400",
+      "Roobert 500",
+      "RoobertMono 500"
+    ],
+    "body": {
+      "font": "Roobert, sans-serif",
+      "size": "16px",
+      "weight": "400",
+      "color": "rgb(255, 255, 255)",
+      "bg": "rgb(16, 16, 18)"
+    },
+    "biggestText": [
+      {
+        "t": "Brand, Strategy & Content",
+        "px": 209.995,
+        "f": "Roobert"
+      },
+      {
+        "t": "Design & Motion",
+        "px": 209.995,
+        "f": "Roobert"
+      },
+      {
+        "t": "Development",
+        "px": 209.995,
+        "f": "Roobert"
+      },
+      {
+        "t": "Growth & Partnership",
+        "px": 209.995,
+        "f": "Roobert"
+      },
+      {
+        "t": "50+",
+        "px": 209.995,
+        "f": "Roobert"
+      },
+      {
+        "t": "scale",
+        "px": 181.44,
+        "f": "Roobert"
+      },
+      {
+        "t": "42",
+        "px": 72,
+        "f": "Roobert"
+      },
+      {
+        "t": "Psychoactive Studios — AI-era design and developme",
+        "px": 32,
+        "f": "Roobert"
+      }
+    ],
+    "scrollHeight": 9350,
+    "bodyOverflow": "clip visible",
+    "htmlOverflow": "clip visible",
+    "videos": 6,
+    "links": [
+      "SKIP TO MAIN CONTENT",
+      "About",
+      "Work",
+      "Services",
+      "Content",
+      "LET’S TALK",
+      "START A PROJECT",
+      "SuperAI Conference",
+      "Blackbird VC",
+      "Summer Game Fest",
+      "Woolf University",
+      "Adidas & All Blacks",
+      "World of WearableArt",
+      "Hellboy Web of Wyrd",
+      "BurgerFuel",
+      "VIEW ALL WORK",
+      "CLIENTS",
+      "ANNOUNCEMENT\nHow We Designed Psychoactive 3.0",
+      "RESOURCE\nHow We Created the Sound for the New Psychoactive Website",
+      "RESOURCE\nMOSAIC: Cards for Hard Conversations, Now Fully Online",
+      "EXPLORE OUR CONTENT HUB",
+      "Zendetta↗",
+      "Zendetta↗",
+      "Zendetta↗",
+      "Zendetta↗",
+      "Things, Inc.↗",
+      "ABOUT",
+      "WORK",
+      "CLIENTS",
+      "SERVICES"
+    ]
+  },
+  "libsByScriptSignature": {
+    "webgpu": [
+      "CRaUj4ZQ.js"
+    ],
+    "lenis": [
+      "DpjzYhqG.js"
+    ],
+    "howler": [
+      "DQHneF1Y.js"
+    ],
+    "gsap": [
+      "DBzICErp.js",
+      "DWxn8li7.js",
+      "BWGI3USa.js"
+    ],
+    "scrolltrigger": [
+      "DBzICErp.js",
+      "DWxn8li7.js",
+      "BWGI3USa.js"
+    ],
+    "three": [
+      "Cz4XK8st.js"
+    ]
+  },
+  "threeRevision": null,
+  "assets": {
+    "models": [],
+    "videos": [
+      "video-player-dots-overlay.svg",
+      "tpkS6goFnp12NeBrOdVAaFVPzCIVogWA0201801L01ZoMUg.m3u8",
+      "L4cwV1O9pQPNJ1px400NV3sNGpNbbX6V3rbrybMq9a6A.m3u8",
+      "L4cwV1O9pQPNJ1px400NV3sNGpNbbX6V3rbrybMq9a6A.m3u8",
+      "rendition.m3u8?cdn=fastly&expires=1792742400&skid=default&signature=Nm",
+      "rendition.m3u8?cdn=fastly&expires=1792742400&skid=default&signature=Nm",
+      "18446744073709551615.m4s?skid=default&signature=NmFkYjE0MDBfZTNkNzYxND",
+      "18446744073709551615.m4s?skid=default&signature=NmFkYjE0MDBfZTNkNzYxND",
+      "0.m4s?skid=default&signature=NmFkYjE0MDBfODRjMzE2MDIwZGI0ZjdlZjg4MTk1M",
+      "0.m4s?skid=default&signature=NmFkYjE0MDBfODRjMzE2MDIwZGI0ZjdlZjg4MTk1M",
+      "rendition.m3u8?cdn=fastly&expires=1792742400&skid=default&signature=Nm",
+      "18446744073709551615.m4s?skid=default&signature=NmFkYjE0MDBfN2RlYTJjNT",
+      "0.m4s?skid=default&signature=NmFkYjE0MDBfOGFkMTAzNGJkMTFiZDJhMTM3ZWZkN",
+      "rendition.m3u8?cdn=fastly&expires=1792742400&skid=default&signature=Nm",
+      "rendition.m3u8?cdn=fastly&expires=1792742400&skid=default&signature=Nm",
+      "18446744073709551615.m4s?skid=default&signature=NmFkYjE0MDBfMTI0NmU3Zj",
+      "18446744073709551615.m4s?skid=default&signature=NmFkYjE0MDBfMTI0NmU3Zj",
+      "1.m4s?skid=default&signature=NmFkYjE0MDBfM2E1YTE3NTdjMDgwMmUzYzI0OGI4Y",
+      "1.m4s?skid=default&signature=NmFkYjE0MDBfM2E1YTE3NTdjMDgwMmUzYzI0OGI4Y",
+      "rendition.m3u8?cdn=fastly&expires=1792742400&skid=default&signature=Nm",
+      "18446744073709551615.m4s?skid=default&signature=NmFkYjE0MDBfNGRhODMwZm",
+      "1.m4s?skid=default&signature=NmFkYjE0MDBfYWE5ODg3OTQ1MzFlODY3OGQyODBkM",
+      "DGN9W75V8nDh4aERGzkYEbj4VOptDviiaNfPY6gA6Is.m3u8",
+      "L4cwV1O9pQPNJ1px400NV3sNGpNbbX6V3rbrybMq9a6A.m3u8",
+      "rendition.m3u8?cdn=fastly&expires=1792742400&skid=default&signature=Nm",
+      "18446744073709551615.m4s?skid=default&signature=NmFkYjE0MDBfZTNkNzYxND",
+      "0.m4s?skid=default&signature=NmFkYjE0MDBfODRjMzE2MDIwZGI0ZjdlZjg4MTk1M",
+      "rendition.m3u8?cdn=fastly&expires=1792742400&skid=default&signature=Nm",
+      "18446744073709551615.m4s?skid=default&signature=NmFkYjE0MDBfMTI0NmU3Zj",
+      "1.m4s?skid=default&signature=NmFkYjE0MDBfM2E1YTE3NTdjMDgwMmUzYzI0OGI4Y",
+      "rendition.m3u8?cdn=fastly&expires=1792742400&skid=default&signature=Nm",
+      "rendition.m3u8?cdn=fastly&expires=1792742400&skid=default&signature=Nm",
+      "0.m4s?skid=default&signature=NmFkYjE0MDBfZjdhZTBiMjVkYTcyMmRiZGYyMDMzM",
+      "0.m4s?skid=default&signature=NmFkYjE0MDBfOWIxMDZiYTI5NDA3NWRkNjIyN2EyM",
+      "18446744073709551615.m4s?skid=default&signature=NmFkYjE0MDBfMzNiYTllZj",
+      "18446744073709551615.m4s?skid=default&signature=NmFkYjE0MDBfYTMwNTFlNj",
+      "rendition.m3u8?cdn=fastly&expires=1792742400&skid=default&signature=Nm",
+      "rendition.m3u8?cdn=fastly&expires=1792742400&skid=default&signature=Nm",
+      "0.m4s?skid=default&signature=NmFkYjE0MDBfMTViYjBmYzk5ZWZmYWI1ZTMwY2NjY",
+      "18446744073709551615.m4s?skid=default&signature=NmFkYjE0MDBfMGY1NWE3YT",
+      "rendition.m3u8?cdn=fastly&expires=1792742400&skid=default&signature=Nm",
+      "rendition.m3u8?cdn=fastly&expires=1792742400&skid=default&signature=Nm",
+      "18446744073709551615.m4s?skid=default&signature=NmFkYjE0MDBfZGYyMzZkZG",
+      "1.m4s?skid=default&signature=NmFkYjE0MDBfNDU0Nzk5NjA5NTI3OTJiYzJlODcxY",
+      "rendition.m3u8?cdn=fastly&expires=1792742400&skid=default&signature=Nm",
+      "18446744073709551615.m4s?skid=default&signature=NmFkYjE0MDBfNzYwMWZhOW",
+      "1.m4s?skid=default&signature=NmFkYjE0MDBfNzJiYTJiYmM4ZDNiYmI2NTIzMDNhN",
+      "2.m4s?skid=default&signature=NmFkYjE0MDBfOTdjYjg3ZDZlOGQwMDYyYjgwOWQ4Z",
+      "3.m4s?skid=default&signature=NmFkYjE0MDBfNDU2NGIyNmY2YjA1MzYzYWZjYzMyO",
+      "4.m4s?skid=default&signature=NmFkYjE0MDBfMDMyOGMyNjQyY2M2YWVmOTJhZDRjM",
+      "3.m4s?skid=default&signature=NmFkYjE0MDBfMTQ2MWQzNzU4NmU5ZTJkYWM4YjFkZ",
+      "5.m4s?skid=default&signature=NmFkYjE0MDBfOGMxYmIyMWY4NDgzNmUyYzBjZWQ0N",
+      "6.m4s?skid=default&signature=NmFkYjE0MDBfZjc5NzRlZjA2MDk0MDQzZjM2MWFlN",
+      "7.m4s?skid=default&signature=NmFkYjE0MDBfMWUwNWYwYmU4YTZlMjBhYTMxMWRmN",
+      "6.m4s?skid=default&signature=NmFkYjE0MDBfMDU2YWI4OTU2Yzk2NzExZmFlMmE3Y",
+      "8.m4s?skid=default&signature=NmFkYjE0MDBfOTY3ZDU5YzYxMjIyMGJlZjBmZTkwN",
+      "9.m4s?skid=default&signature=NmFkYjE0MDBfMjI5ZDhiN2Q1ZmVkM2IyZTNiZDA5N",
+      "0.m4s?skid=default&signature=NmFkYjE0MDBfZGUyNmI5ODQ4ZTVmNjE5ODdmOWVkN",
+      "0.m4s?skid=default&signature=NmFkYjE0MDBfMTk3YjczMjY5NjEwMTNiZmJiZmYyM",
+      "0.m4s?skid=default&signature=NmFkYjE0MDBfZGUyNmI5ODQ4ZTVmNjE5ODdmOWVkN",
+      "0.m4s?skid=default&signature=NmFkYjE0MDBfZGUyNmI5ODQ4ZTVmNjE5ODdmOWVkN",
+      "10.m4s?skid=default&signature=NmFkYjE0MDBfMWQ5YTgyYTI0ZWYxMjViMjQzYzg2",
+      "11.m4s?skid=default&signature=NmFkYjE0MDBfMGUzYWVkMmZlYzNmYzBiZTAxN2Zh",
+      "12.m4s?skid=default&signature=NmFkYjE0MDBfN2IxNTYwYWVmNjJkNzVmMTZjN2U0",
+      "L4cwV1O9pQPNJ1px400NV3sNGpNbbX6V3rbrybMq9a6A.m3u8",
+      "rendition.m3u8?cdn=fastly&expires=1792742400&skid=default&signature=Nm",
+      "18446744073709551615.m4s?skid=default&signature=NmFkYjE0MDBfZTNkNzYxND",
+      "0.m4s?skid=default&signature=NmFkYjE0MDBfODRjMzE2MDIwZGI0ZjdlZjg4MTk1M",
+      "rendition.m3u8?cdn=fastly&expires=1792742400&skid=default&signature=Nm",
+      "18446744073709551615.m4s?skid=default&signature=NmFkYjE0MDBfMTI0NmU3Zj",
+      "1.m4s?skid=default&signature=NmFkYjE0MDBfM2E1YTE3NTdjMDgwMmUzYzI0OGI4Y",
+      "zcMhZdPpBbEz502SfJ01BSX7B01PZ8axsMSYLg006F00Lpd8.m3u8?redundant_stream",
+      "02DqXW02V3CvlvBJQ022g100ADRYlQU01TZMvutEffhYhTqw.m3u8?redundant_stream",
+      "wri9qmfp01VRcEsGsWtOgWeo4JPHFjOYXPQy1mZ9oNNo.m3u8?redundant_streams=tr",
+      "dfqGMUi1jsMIX00EvdRnywVIeWIQpEr6UF02R3Ovftp3A.m3u8?redundant_streams=t",
+      "L4cwV1O9pQPNJ1px400NV3sNGpNbbX6V3rbrybMq9a6A.m3u8?redundant_streams=tr",
+      "Gs9aZT00jpkPxKzJmbajcZES7rw2WYYaTmLFIu00Gt5f4.m3u8?redundant_streams=t",
+      "rendition.m3u8?cdn=fastly&expires=1792742400&skid=default&signature=Nm",
+      "rendition.m3u8?cdn=fastly&expires=1792742400&skid=default&signature=Nm",
+      "18446744073709551615.m4s?skid=default&signature=NmFkYjE0MDBfZTNkNzYxND",
+      "0.m4s?skid=default&signature=NmFkYjE0MDBfODRjMzE2MDIwZGI0ZjdlZjg4MTk1M",
+      "18446744073709551615.m4s?skid=default&signature=NmFkYjE0MDBfNWI2NjFkMW",
+      "0.m4s?skid=default&signature=NmFkYjE0MDBfODI1ZWViYTA4ODVkZDY1NTkwN2NiZ",
+      "rendition.m3u8?cdn=fastly&expires=1792742400&skid=default&signature=Nm",
+      "18446744073709551615.m4s?skid=default&signature=NmFkYjE0MDBfNjUyNDQxZG",
+      "0.m4s?skid=default&signature=NmFkYjE0MDBfOGFmYjNkOTI2ZWI4MWU0MWI3MzVjN",
+      "rendition.m3u8?cdn=fastly&expires=1792742400&skid=default&signature=Nm",
+      "rendition.m3u8?cdn=fastly&expires=1792742400&skid=default&signature=Nm",
+      "18446744073709551615.m4s?skid=default&signature=NmFkYjE0MDBfMGFiZGFlYm",
+      "rendition.m3u8?cdn=fastly&expires=1792742400&skid=default&signature=Nm",
+      "18446744073709551615.m4s?skid=default&signature=NmFkYjE0MDBfODBhNWEyZm",
+      "0.m4s?skid=default&signature=NmFkYjE0MDBfYTFmNGUzYjVjNTY0ZGRhNzQxNGRkY",
+      "0.m4s?skid=default&signature=NmFkYjE0MDBfMzNmNDgwMzY4YjM5MzYwYzQzYzAzN",
+      "rendition.m3u8?cdn=fastly&expires=1792742400&skid=default&signature=Nm",
+      "18446744073709551615.m4s?skid=default&signature=NmFkYjE0MDBfNzAxZmZkYT",
+      "0.m4s?skid=default&signature=NmFkYjE0MDBfOGVhOTdkNjhhYzFkOTM0N2E0MjAxY",
+      "0.m4s?skid=default&signature=NmFkYjE0MDBfZGUyNmI5ODQ4ZTVmNjE5ODdmOWVkN"
+    ],
+    "audio": [
+      "frog-new.mp3",
+      "home-load.mp3",
+      "contact-response-short.mp3",
+      "about-load.mp3",
+      "slider-2.mp3",
+      "slider-1.mp3",
+      "contact-load.mp3",
+      "webflow-load.mp3",
+      "content-load.mp3",
+      "warp-hover.mp3",
+      "services-load.mp3",
+      "contact-responses.mp3",
+      "slider-3.mp3",
+      "logo-hover.mp3",
+      "talk-btn-hover-3.mp3",
+      "talk-btn-hover-2.mp3",
+      "accordion-close.mp3",
+      "talk-btn-hover-5.mp3",
+      "talk-btn-hover-4.mp3",
+      "work-load.mp3",
+      "accordion-open.mp3",
+      "sound-btn-hover-1.mp3",
+      "talk-btn-hover.mp3",
+      "text-hover-short.mp3",
+      "ai-hover.mp3",
+      "text-hover-2.mp3",
+      "text-hover-4.mp3",
+      "talk-btn-hover-1.mp3",
+      "text-hover-1.mp3",
+      "text-hover-3.mp3",
+      "text-hover-5.mp3",
+      "card-hover.mp3",
+      "showreel-hover-1.mp3",
+      "menu-open.mp3",
+      "mute-hover.mp3",
+      "showreel-hover-2.mp3",
+      "share-hover.mp3",
+      "awards-footer-hover-5.mp3",
+      "click-1.mp3",
+      "menu-close.mp3",
+      "showreel-hover-3.mp3",
+      "play-hover-simple.mp3",
+      "play-hover-menu.mp3",
+      "awards-footer-hover-1.mp3",
+      "awards-footer-hover-2.mp3",
+      "awards-footer-hover-4.mp3",
+      "click-3.mp3",
+      "click-5.mp3",
+      "menu-hover-close.mp3",
+      "menu-hover-1.mp3",
+      "showreel-open-1.mp3",
+      "scroll-btn-hover.mp3",
+      "btn-hover-down.mp3",
+      "btn-hover-simple.mp3",
+      "awards-footer-hover-3.mp3",
+      "click-4.mp3",
+      "click-2.mp3",
+      "18446744073709551615.m4s?skid=default&signature=NmFkYjE0MDBfMWM0MzdjYj",
+      "0.m4s?skid=default&signature=NmFkYjE0MDBfYmFkNjc2NTgyZTYyYjkzMWRhZmMwY",
+      "0.m4s?skid=default&signature=NmFkYjE0MDBfOTUzYzdkYmUwOTI5OWEyZDgxNDlhN",
+      "18446744073709551615.m4s?skid=default&signature=NmFkYjE0MDBfZjc3ZjE3MD",
+      "1.m4s?skid=default&signature=NmFkYjE0MDBfZjdkOGVhYzRjMDQ3MDRkNDUxNzE4Z",
+      "2.m4s?skid=default&signature=NmFkYjE0MDBfMzljNDQwZjVhOTY1NTc5NTVlYmJmN",
+      "4.m4s?skid=default&signature=NmFkYjE0MDBfYmRjZDJiZTkyNWI2MzQ4ZTU2ODQ4M",
+      "5.m4s?skid=default&signature=NmFkYjE0MDBfNjA3ZmJmNTViOGRlMDFjYWRkNmVkZ",
+      "7.m4s?skid=default&signature=NmFkYjE0MDBfMzA4ZDAwOTIxYWYyZjk3YjAwNmUyM",
+      "8.m4s?skid=default&signature=NmFkYjE0MDBfNTI0N2M3NWU4ZmVlZjdhNzYzZGI1N",
+      "9.m4s?skid=default&signature=NmFkYjE0MDBfZjhlNjljNzVhMzJiMjIzMzY4MjhkZ",
+      "10.m4s?skid=default&signature=NmFkYjE0MDBfN2E2ZTY3MWU2MjRmOTI1MzI3NTFl",
+      "11.m4s?skid=default&signature=NmFkYjE0MDBfOTkxNjBlZWE0ZmNmYWIxYzBlMWRh",
+      "12.m4s?skid=default&signature=NmFkYjE0MDBfYTgyYzhkZGYyNWQ3MTEwNTA1YmY2"
+    ],
+    "fonts": [
+      "Roobert-Regular-latin.woff2",
+      "RoobertMonoTRIAL-Medium-latin.woff2",
+      "Roobert-Medium-latin.woff2"
+    ],
+    "scriptCount": 91,
+    "hosts": [
+      "www.psychoactive.co.nz",
+      "new-psychoactive-website-media.syd1.cdn.digitaloceanspaces.com",
+      "image.mux.com",
+      "stream.mux.com",
+      "manifest-oci-us-ashburn-1-vop1.fastly.mux.com",
+      "chunk-oci-us-ashburn-1-vop1.fastly.mux.com",
+      "manifest-oci-us-phoenix-1-vop1.fastly.mux.com",
+      "chunk-oci-us-phoenix-1-vop1.fastly.mux.com",
+      "www.gstatic.com"
+    ]
+  },
+  "frames": [
+    {
+      "file": "psychoactive-01.png",
+      "scrollY": 810
+    },
+    {
+      "file": "psychoactive-02.png",
+      "scrollY": 1620
+    },
+    {
+      "file": "psychoactive-03.png",
+      "scrollY": 2430
+    },
+    {
+      "file": "psychoactive-04.png",
+      "scrollY": 3240
+    },
+    {
+      "file": "psychoactive-05.png",
+      "scrollY": 4050
+    },
+    {
+      "file": "psychoactive-06.png",
+      "scrollY": 4860
+    },
+    {
+      "file": "psychoactive-07.png",
+      "scrollY": 5670
+    },
+    {
+      "file": "psychoactive-08.png",
+      "scrollY": 6480
+    },
+    {
+      "file": "psychoactive-09.png",
+      "scrollY": 7290
+    },
+    {
+      "file": "psychoactive-10.png",
+      "scrollY": 8100
+    },
+    {
+      "file": "psychoactive-11.png",
+      "scrollY": 8450
+    }
+  ],
+  "errors": [
+    "Cannot read properties of null (reading 'canvas')",
+    "Cannot read properties of null (reading 'canvas')",
+    "Cannot read properties of null (reading 'canvas')",
+    "Cannot read properties of null (reading 'canvas')",
+    "Cannot read properties of null (reading 'canvas')",
+    "Cannot read properties of null (reading 'canvas')",
+    "Cannot read properties of null (reading 'canvas')",
+    "Cannot read properties of null (reading 'canvas')"
+  ]
+}

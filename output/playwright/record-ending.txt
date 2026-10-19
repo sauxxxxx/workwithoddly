@@ -1,0 +1,16 @@
+async (page) => {
+  await page.evaluate(async()=>{
+    const move=(target,duration)=>new Promise(resolve=>{
+      const from=scrollY, started=performance.now();
+      const tick=now=>{const t=Math.min(1,(now-started)/duration);window.scrollTo({top:from+(target-from)*t*t*(3-2*t),behavior:'instant'});if(t<1)requestAnimationFrame(tick);else resolve();};
+      requestAnimationFrame(tick);
+    });
+    const pause=ms=>new Promise(resolve=>setTimeout(resolve,ms));
+    for(const id of ['more-work','about','contact']){
+      await move(scrollY+document.getElementById(id).getBoundingClientRect().top,3600);
+      await pause(1800);
+    }
+    await move(document.documentElement.scrollHeight-innerHeight,1400);
+    await pause(1400);
+  });
+}

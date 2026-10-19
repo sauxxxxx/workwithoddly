@@ -1,0 +1,308 @@
+- generic [ref=e2]:
+  - link "Skip to content" [ref=e3] [cursor=pointer]:
+    - /url: "#main-content"
+  - banner [ref=e4]:
+    - button "Menu" [ref=e5] [cursor=pointer]
+    - link "The Beach Park Hadsan home" [ref=e10] [cursor=pointer]:
+      - /url: /
+    - link "Book" [ref=e11] [cursor=pointer]:
+      - /url: /booking/
+  - main [ref=e12]:
+    - generic [ref=e13]:
+      - generic [ref=e15]:
+        - img "Aerial view of The Beach Park shoreline and clear Cebu water" [ref=e17]
+        - generic [ref=e20]:
+          - heading "A better beach day." [level=1] [ref=e21]
+          - paragraph [ref=e22]: Come for the water. Stay for the moments.
+          - group "Online booking preview" [ref=e24]:
+            - generic [ref=e25]:
+              - generic [ref=e26]:
+                - generic [ref=e27]: Arrival
+                - generic [ref=e28]: Choose date
+              - generic [ref=e29]:
+                - generic [ref=e30]: Departure
+                - generic [ref=e31]: Choose date
+              - generic [ref=e32]:
+                - generic [ref=e33]: Guests
+                - generic [ref=e34]: 1 adult · 0 children
+        - generic [aria-hidden] [ref=e39]:
+          - generic [ref=e40]: Stay
+          - generic [ref=e41]: Swim
+          - generic [ref=e42]: Make waves
+      - region "The Beach Park experience" [ref=e43]:
+        - generic [ref=e45]:
+          - heading "Life, by Water." [level=2] [ref=e46]
+          - generic [ref=e47]: Set along the shores of Hadsan in Lapu-Lapu City, The Beach Park is a relaxed coastal escape for families, friends, and barkadas. Clear water, sandy shores, and tropical surroundings make room for easy days close to Cebu. Stay by the beach, unwind by the pool, or head out with Waterdog for something faster. From quiet afternoons to sunset gatherings, relaxation, adventure, and warm Cebuano hospitality come together here.
+          - generic [aria-hidden] [ref=e48]:
+            - paragraph [ref=e49]: Set along the shores of Hadsan in Lapu-Lapu City, The Beach Park is a relaxed coastal escape for families, friends, and barkadas. Clear water, sandy shores, and tropical surroundings make room for easy days close to Cebu.
+            - paragraph [ref=e50]: Stay by the beach, unwind by the pool, or head out with Waterdog for something faster. From quiet afternoons to sunset gatherings, relaxation, adventure, and warm Cebuano hospitality come together here.
+      - generic [ref=e51]:
+        - generic [ref=e52]:
+          - heading "Choose your day." [level=2] [ref=e53]:
+            - generic [ref=e263]: Choose your day.
+          - generic "Browse destinations" [ref=e56]:
+            - button "Previous destinations" [disabled] [ref=e57]
+            - button "Next destinations" [ref=e60] [cursor=pointer]
+        - generic "Ways to experience The Beach Park" [ref=e63]:
+          - link "Guest room with two wooden beds at The Beach Park Stay at The Beach Park Rooms for two or the whole barkada. See rooms" [ref=e64] [cursor=pointer]:
+            - /url: /stay/
+            - img "Guest room with two wooden beds at The Beach Park" [ref=e66]
+            - generic [ref=e67]:
+              - strong [ref=e68]: Stay at The Beach Park
+              - paragraph [ref=e69]: Rooms for two or the whole barkada.
+              - generic [ref=e70]: See rooms
+          - link "Guests enjoying the clear water along The Beach Park shore Beach & Pool Swim, float, and slow down by the water. Explore" [ref=e71] [cursor=pointer]:
+            - /url: /experiences/
+            - img "Guests enjoying the clear water along The Beach Park shore" [ref=e73]
+            - generic [ref=e74]:
+              - strong [ref=e75]: Beach & Pool
+              - paragraph [ref=e76]: Swim, float, and slow down by the water.
+              - generic [ref=e77]: Explore
+          - link "Family aboard a Waterdog speedboat on open water Waterdog Adventures Speed, spray, and open water. Explore" [ref=e78] [cursor=pointer]:
+            - /url: /adventures/
+            - img "Family aboard a Waterdog speedboat on open water" [ref=e80]
+            - generic [ref=e81]:
+              - strong [ref=e82]: Waterdog Adventures
+              - paragraph [ref=e83]: Speed, spray, and open water.
+              - generic [ref=e84]: Explore
+          - link "Blue pickleball court framed by trees at The Beach Park Pickleball A friendly game between swims. Ask about play" [ref=e85] [cursor=pointer]:
+            - /url: /explore/contact/
+            - img "Blue pickleball court framed by trees at The Beach Park" [ref=e87]
+            - generic [ref=e88]:
+              - strong [ref=e89]: Pickleball
+              - paragraph [ref=e90]: A friendly game between swims.
+              - generic [ref=e91]: Ask about play
+      - generic [ref=e92]:
+        - img "A real beach day at The Beach Park" [ref=e94]
+        - generic [ref=e96]:
+          - generic [ref=e97]:
+            - heading "Make it yours." [level=2] [ref=e98]:
+              - generic [ref=e265]: Make it yours.
+            - paragraph [ref=e101]: Choose your moments. We’ll set the order.
+          - list "Suggested Beach Park experiences" [ref=e102]:
+            - listitem [ref=e103]:
+              - button "Start Settle in by the shore" [ref=e104] [cursor=pointer]:
+                - generic [aria-hidden] [ref=e105]: Add
+                - strong [ref=e106]: Start
+                - generic [ref=e107]: Settle in by the shore
+            - listitem [ref=e108]:
+              - button "Cool off Take a swim" [ref=e109] [cursor=pointer]:
+                - generic [aria-hidden] [ref=e110]: Add
+                - strong [ref=e111]: Cool off
+                - generic [ref=e112]: Take a swim
+            - listitem [ref=e113]:
+              - button "Make waves Waterdog Adventures" [ref=e114] [cursor=pointer]:
+                - generic [aria-hidden] [ref=e115]: Add
+                - strong [ref=e116]: Make waves
+                - generic [ref=e117]: Waterdog Adventures
+            - listitem [ref=e118]:
+              - button "Slow down Sunset" [ref=e119] [cursor=pointer]:
+                - generic [aria-hidden] [ref=e120]: Add
+                - strong [ref=e121]: Slow down
+                - generic [ref=e122]: Sunset
+            - listitem [ref=e123]:
+              - button "One last stop Souvenir Shop" [ref=e124] [cursor=pointer]:
+                - generic [aria-hidden] [ref=e125]: Add
+                - strong [ref=e126]: One last stop
+                - generic [ref=e127]: Souvenir Shop
+          - generic [ref=e128]:
+            - generic [ref=e129]:
+              - strong [ref=e130]: Your day is open
+              - paragraph [ref=e131]: Choose a stop to begin.
+              - text: Hours and availability require confirmation.
+            - generic [ref=e132]:
+              - button "Reset" [disabled] [ref=e133]
+              - link "Stay overnight" [ref=e134] [cursor=pointer]:
+                - /url: /booking/
+      - generic [ref=e135]:
+        - generic [ref=e136]:
+          - heading "Stay by the water." [level=2] [ref=e137]:
+            - generic [ref=e267]: Stay by the water.
+          - paragraph [ref=e140]: Rooms for two, families, and barkadas.
+          - link "Explore rooms" [ref=e141] [cursor=pointer]:
+            - /url: /stay/
+          - generic [ref=e142]:
+            - generic "Choose a room photo" [ref=e143]:
+              - button "Show room photo 1" [pressed] [ref=e144] [cursor=pointer]
+              - button "Show room photo 2" [ref=e146] [cursor=pointer]
+              - button "Show room photo 3" [ref=e148] [cursor=pointer]
+            - generic [ref=e150]:
+              - button "Previous room photo" [ref=e151] [cursor=pointer]
+              - generic [ref=e154]: 1 / 3
+              - button "Next room photo" [ref=e155] [cursor=pointer]
+        - region "Room photo gallery" [ref=e158]:
+          - img "Family room with two wooden beds at The Beach Park" [ref=e160]
+      - generic [ref=e161]:
+        - img "Two guests riding the Waterdog jet ski" [ref=e164]
+        - tabpanel [ref=e165]:
+          - heading "Open water awaits." [level=2] [ref=e166]:
+            - generic [ref=e269]: Open water awaits.
+          - paragraph [ref=e169]: Fast water. Fresh spray.
+          - tablist "Choose a water activity" [ref=e170]:
+            - tab "Jet ski" [selected] [ref=e171] [cursor=pointer]
+            - tab "Kayak" [ref=e172] [cursor=pointer]
+            - tab "Banana boat" [ref=e173] [cursor=pointer]
+            - tab "Speedboat ride" [ref=e174] [cursor=pointer]
+          - link "Explore Waterdog" [ref=e175] [cursor=pointer]:
+            - /url: /adventures/
+      - generic [ref=e176]:
+        - generic [ref=e177]:
+          - heading "Remember the day." [level=2] [ref=e178]:
+            - generic [ref=e271]: Remember the day.
+          - paragraph [ref=e181]: A closer look at The Beach Park.
+          - link "View gallery" [ref=e182] [cursor=pointer]:
+            - /url: /explore/gallery/
+        - img "Children playing on the beach at The Beach Park" [ref=e184]
+        - img "A parent and child kayaking in the clear water off The Beach Park" [ref=e186]
+        - img "A Waterdog speedboat floating by The Beach Park shore" [ref=e188]
+        - img "Guests riding the Waterdog banana boat" [ref=e190]
+      - region [ref=e191]:
+        - generic [ref=e192]:
+          - generic [ref=e193]:
+            - generic [ref=e194]:
+              - paragraph [ref=e195]: Guest notes
+              - heading "In their own words." [level=2] [ref=e196]:
+                - generic [ref=e273]: In their
+                - generic [ref=e275]: own words.
+            - generic "Browse guest reviews" [ref=e276]:
+              - button "Previous reviews" [disabled] [ref=e277]
+              - button "Next reviews" [ref=e280] [cursor=pointer]
+          - generic "Google Maps guest reviews" [ref=e283]:
+            - article [ref=e284]:
+              - generic [ref=e285]:
+                - generic [aria-hidden] [ref=e286]: "01"
+                - generic [ref=e287]:
+                  - text: ★
+                  - generic [ref=e288]: 1 out of 5 stars
+                - generic [ref=e289]: 2 months ago
+              - blockquote [ref=e290]: “We came here for our first team building, hoping to create good memories and enjoy a relaxing beach experience. However, we were honestly disappointed because the place did not meet our expectations. The entrance fee of ₱180 per person already felt too expensive considering that the beach itself was not as beautiful as we expected. The view and overall atmosphere did not give the experience we were hoping for. We also rented a cottage worth ₱1,800, but sadly, it was not worth the price. The facilities and quality did not match the amount we paid. The place feels like it focuses more on quantity over quality. The prices are quite high, but the service, amenities, and overall experience do not justify the cost. We were expecting a better beach experience, especially since this was our first team building, but unfortunately, we left feeling disappointed. Hopefully, they can improve their facilities and provide better value for their guests in the future. As of now, we would not consider coming back again.”
+              - generic [ref=e291]:
+                - link "Marjorie Gonzales" [ref=e292] [cursor=pointer]:
+                  - /url: https://www.google.com/maps/contrib/102428218778807847591/reviews
+                - link "Read this review on Google Maps" [ref=e295] [cursor=pointer]:
+                  - /url: https://www.google.com/maps/reviews/data=!4m6!14m5!1m4!2m3!1sCi9DQUlRQUNvZENodHljRjlvT25sRWIxOUpPSFZzYXkxNmExUjJSbkpYVDFOSFVGRRAB!2m1!1s0x33a990b6506606b7:0xf2e0a1870f2cd598
+                  - text: Google Maps ↗
+            - article [ref=e296]:
+              - generic [ref=e297]:
+                - generic [aria-hidden] [ref=e298]: "02"
+                - generic [ref=e299]:
+                  - text: ★★★★★
+                  - generic [ref=e300]: 5 out of 5 stars
+                - generic [ref=e301]: 4 months ago
+              - blockquote [ref=e302]: “Great for family and quick swim when I. Cebu. Has a dirt path directly from highway. Units for transient rooms are spacious, needs repair for the shower bath tub. Often would experience rotational brownout, location is tide sensitive so check what time your visit to avoid low tide shoreline.”
+              - generic [ref=e303]:
+                - link "Robert Laguyo" [ref=e304] [cursor=pointer]:
+                  - /url: https://www.google.com/maps/contrib/106461091144690408191/reviews
+                - link "Read this review on Google Maps" [ref=e307] [cursor=pointer]:
+                  - /url: https://www.google.com/maps/reviews/data=!4m6!14m5!1m4!2m3!1sCi9DQUlRQUNvZENodHljRjlvT21GYWRpMUhXbTlTZG05RE9YUnBlRVpuUWpJelJuYxAB!2m1!1s0x33a990b6506606b7:0xf2e0a1870f2cd598
+                  - text: Google Maps ↗
+            - article [ref=e308]:
+              - generic [ref=e309]:
+                - generic [aria-hidden] [ref=e310]: "03"
+                - generic [ref=e311]:
+                  - text: ★★
+                  - generic [ref=e312]: 2 out of 5 stars
+                - generic [ref=e313]: 2 months ago
+              - blockquote [ref=e314]: “The area was so-so. The small alley leading to the location wasn't properly paved and cemented. The price was extremely expensive with their cottages at ₱1800 and ₱180 per head. Cottage 9 was a wreck. Gladly, it only rained lightly during our visit or else our food would be soaked. We brought a PWD with us and was informed at the admission that they wouldn't offer a discount to PWD as the price was already fixed for the locals. What the heck?! The place didn't bring relaxation as it was too crowded. The price didn't justify the service we received.”
+              - generic [ref=e315]:
+                - link "Carmelle Salde" [ref=e316] [cursor=pointer]:
+                  - /url: https://www.google.com/maps/contrib/113340686291042138334/reviews
+                - link "Read this review on Google Maps" [ref=e319] [cursor=pointer]:
+                  - /url: https://www.google.com/maps/reviews/data=!4m6!14m5!1m4!2m3!1sCi9DQUlRQUNvZENodHljRjlvT2pObFV6ZHROMWxVWXpOaVZGaHpNV1JQY3pabmQyYxAB!2m1!1s0x33a990b6506606b7:0xf2e0a1870f2cd598
+                  - text: Google Maps ↗
+            - article [ref=e320]:
+              - generic [ref=e321]:
+                - generic [aria-hidden] [ref=e322]: "04"
+                - generic [ref=e323]:
+                  - text: ★★★★★
+                  - generic [ref=e324]: 5 out of 5 stars
+                - generic [ref=e325]: 4 months ago
+              - blockquote [ref=e326]: “We had so much fun here! The place is very accessible if you are staying around Mactan or Lapu-Lapu. The beach is clean and safe for kids. They have AC rooms for day-use and will give you discounted price for entrance if you get an AC room. The AC was working which allowed yung kids na kasama namen na magnap. They also have barbecue place! Kayak was so much fun too! We loved our stay! 🌊🥰🫶”
+              - generic [ref=e327]:
+                - link "Evelyn Vilbar" [ref=e328] [cursor=pointer]:
+                  - /url: https://www.google.com/maps/contrib/109886738939641241454/reviews
+                - link "Read this review on Google Maps" [ref=e331] [cursor=pointer]:
+                  - /url: https://www.google.com/maps/reviews/data=!4m6!14m5!1m4!2m3!1sCi9DQUlRQUNvZENodHljRjlvT21RNVl6WlBVa1U0VFhWNlZWa3plR0YxT0ZZMGEzYxAB!2m1!1s0x33a990b6506606b7:0xf2e0a1870f2cd598
+                  - text: Google Maps ↗
+            - article [ref=e332]:
+              - generic [ref=e333]:
+                - generic [aria-hidden] [ref=e334]: "05"
+                - generic [ref=e335]:
+                  - text: ★★
+                  - generic [ref=e336]: 2 out of 5 stars
+                - generic [ref=e337]: 6 months ago
+              - blockquote [ref=e338]: “The Beach Park is a popular spot among locals. The entrance fee is 180 per person, and cottages cost 1,800. On weekdays, the atmosphere is nice and relaxing, making it a good place to enjoy the beach. However, weekends are a completely different experience—there are multiple loud speakers, live bands, and karaoke, which can be overwhelming, let’s say for a baby. Unfortunately, the beach itself is not well maintained. There is a noticeable amount of trash, including soft drink lids, small plastic wrappers, and disposable cutlery scattered across the shore. It’s disappointing to see this level of neglect, especially considering the number of visitors and the fees being collected. I strongly encourage management to improve their waste management system and prioritize regular beach cleanups. This place has great potential, but better maintenance is really needed.”
+              - generic [ref=e339]:
+                - link "Lisa W" [ref=e340] [cursor=pointer]:
+                  - /url: https://www.google.com/maps/contrib/101428745898964423636/reviews
+                - link "Read this review on Google Maps" [ref=e343] [cursor=pointer]:
+                  - /url: https://www.google.com/maps/reviews/data=!4m6!14m5!1m4!2m3!1sCi9DQUlRQUNvZENodHljRjlvT25KS01ETmZTWEZUZEZBekxUVkpVMUpwWmxjNVgwRRAB!2m1!1s0x33a990b6506606b7:0xf2e0a1870f2cd598
+                  - text: Google Maps ↗
+          - generic [ref=e203]:
+            - link "All reviews on Google Maps" [ref=e204] [cursor=pointer]:
+              - /url: https://maps.google.com/?cid=17501165753409000856&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA
+              - text: All reviews on Google Maps
+              - generic [aria-hidden] [ref=e205]: ↗
+            - paragraph [ref=e206]: Reviews are selected and ordered by Google Maps based on relevance.
+  - region [ref=e207]:
+    - img "Sunset over the water at The Beach Park Hadsan" [ref=e209]
+    - generic [ref=e211]:
+      - heading "Your beach day awaits." [level=2] [ref=e212]
+      - group "Online booking preview" [ref=e213]:
+        - generic [ref=e214]:
+          - generic [ref=e215]:
+            - generic [ref=e216]: Arrival
+            - generic [ref=e217]: Choose date
+          - generic [ref=e218]:
+            - generic [ref=e219]: Departure
+            - generic [ref=e220]: Choose date
+          - generic [ref=e221]:
+            - generic [ref=e222]: Guests
+            - generic [ref=e223]: 1 adult · 0 children
+  - contentinfo [ref=e228]:
+    - generic [ref=e229]:
+      - link "The Beach Park home" [ref=e230] [cursor=pointer]:
+        - /url: /
+      - navigation "Footer navigation" [ref=e231]:
+        - link "Stay" [ref=e232] [cursor=pointer]:
+          - /url: /stay/
+        - link "Rates" [ref=e233] [cursor=pointer]:
+          - /url: /rates/
+        - link "Adventures" [ref=e234] [cursor=pointer]:
+          - /url: /adventures/
+        - link "Experiences" [ref=e235] [cursor=pointer]:
+          - /url: /experiences/
+        - link "Offers" [ref=e236] [cursor=pointer]:
+          - /url: /offers/
+        - link "Explore" [ref=e237] [cursor=pointer]:
+          - /url: /explore/about/
+        - link "Gallery" [ref=e238] [cursor=pointer]:
+          - /url: /explore/gallery/
+        - link "Contact" [ref=e239] [cursor=pointer]:
+          - /url: /explore/contact/
+      - generic [ref=e240]:
+        - link "+63 917 303 0755" [ref=e241] [cursor=pointer]:
+          - /url: tel:+639173030755
+        - link "thebeachpark.reservations@gmail.com" [ref=e242] [cursor=pointer]:
+          - /url: mailto:thebeachpark.reservations@gmail.com
+        - link "Hadsan, Lapu-Lapu City, Cebu ↗" [ref=e243] [cursor=pointer]:
+          - /url: https://share.google/z2ZxNGa5HnjPQwSuq
+    - generic [aria-hidden]: The Beach Park
+    - generic [ref=e244]:
+      - generic [ref=e245]: © 2026 The Beach Park Hadsan
+      - generic [ref=e246]:
+        - link "Privacy Policy" [ref=e247] [cursor=pointer]:
+          - /url: /privacy/
+        - link "Terms & Conditions" [ref=e248] [cursor=pointer]:
+          - /url: /terms/
+  - complementary "Analytics preferences" [ref=e249]:
+    - generic [ref=e250]:
+      - generic [ref=e251]:
+        - strong [ref=e252]: Analytics preferences
+        - paragraph [ref=e253]:
+          - text: Essential storage remembers your choices. With your permission, anonymous analytics help us improve the website.
+          - link "Privacy details" [ref=e254] [cursor=pointer]:
+            - /url: /privacy/
+      - generic [ref=e255]:
+        - button "Essential only" [ref=e256]
+        - button "Allow analytics" [ref=e257]

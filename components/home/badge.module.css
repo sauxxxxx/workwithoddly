@@ -1,0 +1,42 @@
+.badge {
+  display: block;
+  width: clamp(5.5rem, 7.5vw, 7.25rem);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  transition: transform var(--d-base) var(--ease-out);
+}
+
+.badge:hover {
+  transform: scale(1.06);
+}
+
+.badge svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.badge text {
+  font-family: var(--f-ui);
+  font-size: 9.3px;
+  font-weight: 600;
+  letter-spacing: 0.115em;
+  fill: var(--charcoal);
+}
+
+.ring {
+  transform-origin: 60px 60px;
+  animation: turn 22s linear infinite;
+}
+
+@keyframes turn {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ring {
+    animation: none;
+  }
+}

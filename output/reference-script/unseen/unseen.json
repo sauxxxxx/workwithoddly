@@ -1,0 +1,246 @@
+{
+  "name": "unseen",
+  "url": "https://unseen.co/",
+  "loadMs": 6536,
+  "gateClicked": "ENTER WITHOUT AUDIO",
+  "fingerprint": {
+    "title": "Unseen Studio® – Brand, Digital & Motion",
+    "globals": {
+      "THREE": "143",
+      "gsap": false,
+      "ScrollTrigger": false,
+      "Lenis": false,
+      "LocomotiveScroll": false,
+      "barba": false,
+      "PIXI": false,
+      "Webflow": false,
+      "next": false,
+      "nuxt": false,
+      "vue": false,
+      "react": false,
+      "Howler": true
+    },
+    "htmlClasses": "asscroll-disabled home wp-singular page page-id-7 wp-embed-responsive wp-theme-unseen page-template-home-contact",
+    "canvases": [
+      {
+        "ctx": "webgl2",
+        "w": 1440,
+        "h": 900,
+        "pos": "static",
+        "z": "auto"
+      }
+    ],
+    "fonts": [
+      "Neue Montreal 400",
+      "Saol Display 400"
+    ],
+    "body": {
+      "font": "\"Neue Montreal\", system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Robot",
+      "size": "14.4px",
+      "weight": "400",
+      "color": "rgb(0, 0, 0)",
+      "bg": "rgba(0, 0, 0, 0)"
+    },
+    "biggestText": [
+      {
+        "t": "Home",
+        "px": 28.8,
+        "f": "\"Neue Montreal\""
+      },
+      {
+        "t": "01",
+        "px": 18.72,
+        "f": "\"Neue Montreal\""
+      },
+      {
+        "t": "02",
+        "px": 18.72,
+        "f": "\"Neue Montreal\""
+      },
+      {
+        "t": "03",
+        "px": 18.72,
+        "f": "\"Neue Montreal\""
+      },
+      {
+        "t": "04",
+        "px": 18.72,
+        "f": "\"Neue Montreal\""
+      },
+      {
+        "t": "Our 2025 Wrapped",
+        "px": 15.12,
+        "f": "\"Neue Montreal\""
+      },
+      {
+        "t": "Our 2025 Wrapped",
+        "px": 15.12,
+        "f": "\"Neue Montreal\""
+      },
+      {
+        "t": "Our 2025 Wrapped",
+        "px": 15.12,
+        "f": "\"Neue Montreal\""
+      }
+    ],
+    "scrollHeight": 900,
+    "bodyOverflow": "hidden",
+    "htmlOverflow": "visible",
+    "videos": 0,
+    "links": [
+      "Index\nIndex",
+      "Projects\nProjects",
+      "Contact\nContact",
+      "01\nIndex\nIndex",
+      "02\nProjects\nProjects",
+      "03\nContact\nContact",
+      "04\nWorld\nWorld",
+      "⮡ \nprojects@unseen.co",
+      "⮡ \n(+44) 0117 922 6892",
+      "⮡ \nTWITTER",
+      "⮡ \nINSTAGRAM",
+      "⮡ \nLINKEDIN",
+      "⮡ \nDRIBBBLE",
+      "⮡ \nBEHANCE",
+      "Our 2025 Wrapped\nOur 2025 Wrapped\nOur 2025 Wrapped",
+      "UNSEEN\nWORLD",
+      "View our work\nView our work"
+    ]
+  },
+  "libsByScriptSignature": {
+    "three": [
+      "theme.js?id=f53acf564ad675980cfd121b49ecafb3",
+      "328445b9-43c4-4e57-a088-cc32af5fdd07",
+      "4b7d30df-2c6a-4df4-a8a4-e2a63bf77495"
+    ],
+    "gsap": [
+      "theme.js?id=f53acf564ad675980cfd121b49ecafb3",
+      "vendor.js?id=4d3ac43b9e360f391febd63f910ddf0c"
+    ],
+    "scrolltrigger": [
+      "theme.js?id=f53acf564ad675980cfd121b49ecafb3",
+      "vendor.js?id=4d3ac43b9e360f391febd63f910ddf0c"
+    ],
+    "howler": [
+      "theme.js?id=f53acf564ad675980cfd121b49ecafb3"
+    ],
+    "spline": [
+      "theme.js?id=f53acf564ad675980cfd121b49ecafb3"
+    ],
+    "draco": [
+      "theme.js?id=f53acf564ad675980cfd121b49ecafb3",
+      "328445b9-43c4-4e57-a088-cc32af5fdd07"
+    ],
+    "basis": [
+      "theme.js?id=f53acf564ad675980cfd121b49ecafb3",
+      "4b7d30df-2c6a-4df4-a8a4-e2a63bf77495"
+    ],
+    "gltf": [
+      "theme.js?id=f53acf564ad675980cfd121b49ecafb3"
+    ],
+    "pixi": [
+      "js?id=G-SHZRDC7G64"
+    ]
+  },
+  "threeRevision": null,
+  "assets": {
+    "models": [
+      "room-1.glb",
+      "room-2.glb",
+      "chair.glb",
+      "rocks.glb",
+      "table-3.glb",
+      "land-group.glb",
+      "pillows.glb",
+      "grass-simple.glb",
+      "room-1.ktx2?v=1786625394974",
+      "room-2.ktx2?v=1786625394974",
+      "chair.ktx2?v=1786625394974",
+      "pillows.ktx2?v=1786625394974",
+      "rocks.ktx2?v=1786625394974",
+      "table.ktx2?v=1786625394974",
+      "pearl-matcap.ktx2?v=1786625394974",
+      "particles.ktx2?v=1786625394974",
+      "skymap-tile.ktx2?v=1786625394974",
+      "ao.ktx2?v=1786625394974",
+      "objectsData.glb?v=1786625394974",
+      "butterfly.glb?v=1786625394974",
+      "arch.ktx2?v=1786625394974",
+      "arch-dc.glb?v=1786625394974",
+      "floor-dc.glb?v=1786625394974",
+      "blue-1-819x1024.ktx2",
+      "rw-2-819x1024.ktx2",
+      "still-card-test-2-819x1024.ktx2"
+    ],
+    "videos": [
+      "audio.webm?v=1786625394974"
+    ],
+    "audio": [
+      "audio.webm?v=1786625394974"
+    ],
+    "fonts": [
+      "NeueMontreal-Regular.woff2",
+      "SaolDisplay-Light.woff2",
+      "SaolDisplay-LightItalic.woff2"
+    ],
+    "scriptCount": 19,
+    "hosts": [
+      "unseen.co",
+      "secure.insightful-cloud-365.com",
+      "tag.demandbase.com",
+      "www.googletagmanager.com",
+      "",
+      "www.google-analytics.com",
+      "api.company-target.com",
+      "a.usbrowserspeed.com",
+      "idx.liadm.com"
+    ]
+  },
+  "frames": [
+    {
+      "file": "unseen-01.png",
+      "scrollY": 0
+    },
+    {
+      "file": "unseen-02.png",
+      "scrollY": 0
+    },
+    {
+      "file": "unseen-03.png",
+      "scrollY": 0
+    },
+    {
+      "file": "unseen-04.png",
+      "scrollY": 0
+    },
+    {
+      "file": "unseen-05.png",
+      "scrollY": 0
+    },
+    {
+      "file": "unseen-06.png",
+      "scrollY": 0
+    },
+    {
+      "file": "unseen-07.png",
+      "scrollY": 0
+    },
+    {
+      "file": "unseen-08.png",
+      "scrollY": 0
+    },
+    {
+      "file": "unseen-09.png",
+      "scrollY": 0
+    },
+    {
+      "file": "unseen-10.png",
+      "scrollY": 0
+    },
+    {
+      "file": "unseen-11.png",
+      "scrollY": 0
+    }
+  ],
+  "errors": []
+}

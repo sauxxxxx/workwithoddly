@@ -1,0 +1,17 @@
+async(page)=>{
+ await page.evaluate(async()=>{
+  const pause=ms=>new Promise(resolve=>setTimeout(resolve,ms));
+  const move=(target,duration)=>new Promise(resolve=>{const from=scrollY,start=performance.now();const tick=now=>{const t=Math.min(1,(now-start)/duration);scrollTo({top:from+(target-from)*t*t*(3-2*t),behavior:'instant'});if(t<1)requestAnimationFrame(tick);else resolve();};requestAnimationFrame(tick);});
+  const section=document.getElementById('studio');
+  const top=scrollY+section.getBoundingClientRect().top;
+  const distance=section.offsetHeight-innerHeight;
+  document.documentElement.style.scrollBehavior='auto';
+  await pause(1200);await move(top,2800);await pause(1000);
+  await move(top+distance*.27,2400);await pause(400);
+  await move(top+distance*.49,3000);await pause(400);
+  await move(top+distance*.82,3200);await pause(2000);
+  await move(top+distance*.44,2500);await pause(400);
+  await move(top+distance*.86,2600);
+  await move(scrollY+document.getElementById('project-detail').getBoundingClientRect().top,2800);await pause(3000);
+ });
+}

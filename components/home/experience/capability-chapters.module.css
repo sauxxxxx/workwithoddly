@@ -1,0 +1,319 @@
+.chapter {
+  position: relative;
+  min-height: 112svh;
+  padding: 7rem var(--margin) 6rem;
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: 2vw;
+  align-content: center;
+  overflow: clip;
+}
+.kicker {
+  font-size: 0.6875rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+.chapter > .kicker {
+  position: absolute;
+  top: 5.5rem;
+  left: var(--margin);
+}
+.title {
+  font-size: clamp(4rem, 9.6vw, 10rem);
+  line-height: 0.9;
+  letter-spacing: -0.025em;
+}
+.title > span {
+  display: block;
+}
+.lead {
+  max-width: 34ch;
+  font-family: var(--f-brand);
+  font-size: clamp(1.125rem, 1.55vw, 1.5rem);
+  line-height: 1.6;
+  letter-spacing: -0.025em;
+  margin-top: 2.25rem;
+}
+.technologyHeading {
+  grid-column: 1 / span 7;
+  margin: 3rem 0 4rem;
+}
+.technologyServices {
+  grid-column: 1 / span 7;
+}
+.chapterLink {
+  position: absolute;
+  right: var(--margin);
+  bottom: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  min-height: 44px;
+  font-size: 0.6875rem;
+  text-decoration: none;
+}
+.knot {
+  width: 100%;
+  right: -38%;
+  top: -14%;
+}
+.twist {
+  width: 95%;
+  left: -34%;
+  top: -12%;
+}
+.loop {
+  width: 85%;
+  left: -23%;
+  top: -13%;
+  transform: rotate(30deg);
+}
+.automationHeading {
+  grid-column: 5/-1;
+  margin: 3.5rem 0 2.75rem;
+}
+.automationHeading .title {
+  font-size: clamp(4rem, 8.65vw, 9rem);
+}
+.workflow {
+  grid-column: 5/-1;
+  max-width: 52rem;
+  margin-bottom: 3rem;
+}
+.automationServices {
+  grid-column: 5/-1;
+}
+.creative {
+  min-height: 115svh;
+  align-content: center;
+}
+.artwork {
+  grid-column: 1 / span 5;
+  grid-row: 1 / span 2;
+  margin-top: 4.5rem;
+}
+.creativeHeading {
+  grid-column: 7/-1;
+  grid-row: 1;
+  margin-top: 4rem;
+  margin-bottom: 4rem;
+}
+.creativeHeading .title {
+  font-size: clamp(4rem, 8vw, 8.5rem);
+}
+.creativeServices {
+  grid-column: 7/-1;
+  grid-row: 2;
+  align-self: start;
+}
+.productStrip {
+  padding: 2rem var(--margin) 5rem;
+  display: grid;
+  grid-template-columns: 1fr 1.8fr;
+  gap: 8vw;
+  align-items: center;
+}
+.productStrip > div > p:nth-child(2) {
+  font-family: var(--f-brand);
+  font-size: clamp(1.5rem, 2.7vw, 2.75rem);
+  line-height: 1.25;
+  letter-spacing: -0.05em;
+  margin-top: 1.5rem;
+}
+.productStrip > div > a {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  min-height: 44px;
+  margin-top: 1.5rem;
+  font-size: 0.8125rem;
+  text-decoration: none;
+}
+.productShot {
+  display: block;
+  text-decoration: none;
+  transform: rotate(-2deg);
+}
+.productShot img {
+  width: 100%;
+  height: auto;
+  transition: transform 0.8s var(--ease-out);
+}
+.productShot:hover img {
+  transform: scale(1.02);
+}
+.productShot > span {
+  display: block;
+  margin-top: 1rem;
+  font-size: 0.625rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+@media (max-width: 1099px) {
+  .chapter {
+    min-height: 100svh;
+  }
+  .title {
+    font-size: 9.5vw;
+  }
+  .technologyServices {
+    grid-column: 1 / span 8;
+  }
+  .automationHeading,
+  .automationServices,
+  .workflow {
+    grid-column: 4/-1;
+  }
+  .automationHeading .title {
+    font-size: 9vw;
+  }
+  .artwork {
+    grid-column: 1 / span 5;
+  }
+  .creativeHeading,
+  .creativeServices {
+    grid-column: 7/-1;
+  }
+  .creativeHeading .title {
+    font-size: 8vw;
+  }
+}
+@media (max-width: 899px) {
+  .chapter {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    min-height: auto;
+    padding-top: 22rem;
+    padding-bottom: 6rem;
+  }
+  .chapter > .kicker {
+    top: 5.5rem;
+  }
+  .title,
+  .automationHeading .title,
+  .creativeHeading .title {
+    font-size: clamp(4.5rem, 13vw, 8rem);
+  }
+  .technologyHeading,
+  .automationHeading {
+    margin: 0 0 3rem;
+    max-width: 90%;
+  }
+  .lead {
+    max-width: 40ch;
+    font-size: 1.125rem;
+  }
+  .technologyServices,
+  .automationServices,
+  .workflow {
+    width: 100%;
+    max-width: none;
+  }
+  .knot {
+    width: 120%;
+    right: -53%;
+    top: -26%;
+  }
+  .twist {
+    width: 120%;
+    left: -55%;
+    top: -27%;
+  }
+  .loop {
+    width: 100%;
+    left: -22%;
+    top: -8%;
+  }
+  .creative {
+    padding-top: 7rem;
+  }
+  .artwork {
+    width: 65%;
+    margin: 1.5rem 0 4rem;
+  }
+  .creativeHeading {
+    margin: 0 0 2rem;
+    max-width: 90%;
+  }
+  .productStrip {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    padding-top: 1rem;
+    padding-bottom: 4rem;
+  }
+  .productShot {
+    max-width: 80%;
+    justify-self: end;
+  }
+}
+@media (max-width: 599px) {
+  .chapter {
+    padding-top: 21rem;
+    padding-bottom: 5rem;
+  }
+  .chapter > .kicker {
+    top: 5rem;
+    font-size: 0.625rem;
+  }
+  .title,
+  .automationHeading .title,
+  .creativeHeading .title {
+    font-size: 19vw;
+  }
+  .technologyHeading,
+  .automationHeading {
+    max-width: 100%;
+    margin-bottom: 2.5rem;
+  }
+  .knot {
+    width: 170%;
+    right: -65%;
+    top: -17%;
+  }
+  .twist {
+    width: 165%;
+    left: -84%;
+    top: -16%;
+  }
+  .lead {
+    margin-top: 1.75rem;
+    font-size: 1rem;
+    max-width: 34ch;
+  }
+  .workflow {
+    margin-bottom: 2.25rem;
+  }
+  .chapterLink {
+    bottom: 1rem;
+    font-size: 0.625rem;
+  }
+  .creative {
+    padding-top: 7rem;
+  }
+  .artwork {
+    width: 100%;
+    margin: 0.5rem 0 1rem;
+  }
+  .creativeHeading {
+    max-width: 100%;
+    margin-bottom: 2.5rem;
+  }
+  .loop {
+    width: 160%;
+    left: -54%;
+    top: -7%;
+  }
+  .productStrip {
+    gap: 2rem;
+    padding-bottom: 2rem;
+  }
+  .productStrip > div > p:nth-child(2) {
+    font-size: 1.6rem;
+  }
+  .productShot {
+    max-width: 100%;
+    transform: none;
+  }
+}

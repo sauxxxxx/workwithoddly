@@ -1,0 +1,248 @@
+{
+  "name": "lusion",
+  "url": "https://lusion.co/",
+  "loadMs": 4984,
+  "gateClicked": null,
+  "fingerprint": {
+    "title": "Lusion - Award Winning 3D and Interactive Web Studio",
+    "globals": {
+      "THREE": "158",
+      "gsap": false,
+      "ScrollTrigger": false,
+      "Lenis": false,
+      "LocomotiveScroll": false,
+      "barba": false,
+      "PIXI": false,
+      "Webflow": false,
+      "next": false,
+      "nuxt": false,
+      "vue": false,
+      "react": false,
+      "Howler": false
+    },
+    "htmlClasses": "is-desktop is-ready is-white-bg ",
+    "canvases": [
+      {
+        "ctx": "webgl2",
+        "w": 1440,
+        "h": 900,
+        "pos": "fixed",
+        "z": "auto"
+      },
+      {
+        "ctx": "none",
+        "w": 45,
+        "h": 45,
+        "pos": "static",
+        "z": "auto"
+      },
+      {
+        "ctx": "none",
+        "w": 0,
+        "h": 0,
+        "pos": "fixed",
+        "z": "100"
+      }
+    ],
+    "fonts": [
+      "Aeonik 400",
+      "Aeonik 500",
+      "IBMPlexMono 400",
+      "IBMPlexMono 500",
+      "LusionMono 400"
+    ],
+    "body": {
+      "font": "Aeonik",
+      "size": "16px",
+      "weight": "400",
+      "color": "rgb(240, 241, 250)",
+      "bg": "rgb(255, 255, 255)"
+    },
+    "biggestText": [
+      {
+        "t": "Bold",
+        "px": 144,
+        "f": "Aeonik"
+      },
+      {
+        "t": "Ideas,",
+        "px": 144,
+        "f": "Aeonik"
+      },
+      {
+        "t": "Brought",
+        "px": 144,
+        "f": "Aeonik"
+      },
+      {
+        "t": "to",
+        "px": 144,
+        "f": "Aeonik"
+      },
+      {
+        "t": "Life",
+        "px": 144,
+        "f": "Aeonik"
+      },
+      {
+        "t": "ABOUT US",
+        "px": 50.4,
+        "f": "Aeonik"
+      },
+      {
+        "t": "Subscribe",
+        "px": 48.6,
+        "f": "Aeonik"
+      },
+      {
+        "t": "to",
+        "px": 48.6,
+        "f": "Aeonik"
+      }
+    ],
+    "scrollHeight": 900,
+    "bodyOverflow": "hidden",
+    "htmlOverflow": "hidden",
+    "videos": 0,
+    "links": [
+      "HOME\nHOME",
+      "ABOUT US\nABOUT US",
+      "PROJECTS\nPROJECTS",
+      "LABS\nLABS",
+      "OUR APPROACH",
+      "CONCEPT • WEB • DESIGN • DEVELOPMENT • 3D • ANIMATION\nO\nO\nO\nO\nr\nr\nr\nr\ny\ny\ny\ny\nz\nz\nz\nz\no\no\no\no\nA\nA\nA\nA\nI\nI\nI\nI",
+      "CONCEPT • WEB • DESIGN • DEVELOPMENT • 3D • ANIMATION\nA\nA\nA\nA\nt\nt\nt\nt\nl\nl\nl\nl\na\na\na\na\ns\ns\ns\ns\nM\nM\nM\nM\no\no\no\no\nt\nt\nt\nt\ni\ni\ni\ni\no\no\no\no\nn\nn\nn\nn",
+      "WEB • DESIGN • DEVELOPMENT • 3D\nD\nD\nD\nD\ne\ne\ne\ne\nv\nv\nv\nv\ni\ni\ni\ni\nn\nn\nn\nn\nA\nA\nA\nA\nI\nI\nI\nI",
+      "WEB • DESIGN • DEVELOPMENT • 3D • ANIMATION\nO\nO\nO\nO\nf\nf\nf\nf\nT\nT\nT\nT\nh\nh\nh\nh\ne\ne\ne\ne\nO\nO\nO\nO\na\na\na\na\nk\nk\nk\nk",
+      "CONCEPT • WEB • DESIGN • DEVELOPMENT • 3D • ANIMATION\nE\nE\nE\nE\nv\nv\nv\nv\ne\ne\ne\ne\nr\nr\nr\nr\ns\ns\ns\ns\nw\nw\nw\nw\na\na\na\na\np\np\np\np",
+      "CONCEPT • 3D ILLUSTRATION • MOGRAPH • VIDEO\nP\nP\nP\nP\no\no\no\no\nr\nr\nr\nr\ns\ns\ns\ns\nc\nc\nc\nc\nh\nh\nh\nh\ne\ne\ne\ne\n:\n:\n:\n:\nD\nD\nD\nD\nr\nr\nr\nr\ne\ne\ne\ne\na\na\na\na\nm\nm\nm\nm\nM\nM\nM\nM\na\na\na\na\nc\nc\nc\nc\nh\nh\nh\nh\ni\ni\ni\ni\nn\nn\nn\nn\ne\ne\ne\ne",
+      "WEB • DESIGN • DEVELOPMENT • 3D\nS\nS\nS\nS\ny\ny\ny\ny\nn\nn\nn\nn\nt\nt\nt\nt\nh\nh\nh\nh\ne\ne\ne\ne\nt\nt\nt\nt\ni\ni\ni\ni\nc\nc\nc\nc\nH\nH\nH\nH\nu\nu\nu\nu\nm\nm\nm\nm\na\na\na\na\nn\nn\nn\nn",
+      "WEB • DESIGN • DEVELOPMENT • 3D\nM\nM\nM\nM\ne\ne\ne\ne\nt\nt\nt\nt\na\na\na\na\n:\n:\n:\n:\nS\nS\nS\nS\np\np\np\np\na\na\na\na\nt\nt\nt\nt\ni\ni\ni\ni\na\na\na\na\nl\nl\nl\nl\nF\nF\nF\nF\nu\nu\nu\nu\ns\ns\ns\ns\ni\ni\ni\ni\no\no\no\no\nn\nn\nn\nn",
+      "WEB • DESIGN • DEVELOPMENT • 3D • WEB3\nS\nS\nS\nS\np\np\np\np\na\na\na\na\na\na\na\na\nc\nc\nc\nc\ne\ne\ne\ne\n-\n-\n-\n-\nN\nN\nN\nN\nF\nF\nF\nF\nT\nT\nT\nT\nM\nM\nM\nM\na\na\na\na\nr\nr\nr\nr\nk\nk\nk\nk\ne\ne\ne\ne\nt\nt\nt\nt\np\np\np\np\nl\nl\nl\nl\na\na\na\na\nc\nc\nc\nc\ne\ne\ne\ne",
+      "WEB • DESIGN • DEVELOPMENT • 3D\nD\nD\nD\nD\nD\nD\nD\nD\nD\nD\nD\nD\n2\n2\n2\n2\n0\n0\n0\n0\n2\n2\n2\n2\n4\n4\n4\n4",
+      "CONCEPT • WEB • GAME DESIGN • 3D\nC\nC\nC\nC\nh\nh\nh\nh\no\no\no\no\no\no\no\no\nC\nC\nC\nC\nh\nh\nh\nh\no\no\no\no\no\no\no\no\nW\nW\nW\nW\no\no\no\no\nr\nr\nr\nr\nl\nl\nl\nl\nd\nd\nd\nd",
+      "AR • DEVELOPMENT • 3D\nS\nS\nS\nS\no\no\no\no\nd\nd\nd\nd\na\na\na\na\nE\nE\nE\nE\nx\nx\nx\nx\np\np\np\np\ne\ne\ne\ne\nr\nr\nr\nr\ni\ni\ni\ni\ne\ne\ne\ne\nn\nn\nn\nn\nc\nc\nc\nc\ne\ne\ne\ne",
+      "SEE ALL PROJECTS",
+      "Suite 2\n9 Marsh Street\nBristol, BS1 4AA\nUnited Kingdom",
+      "Twitter / X",
+      "Instagram",
+      "Linkedin",
+      "hello@lusion.co",
+      "business@lusion.co",
+      "R&D: labs.lusion.co"
+    ]
+  },
+  "libsByScriptSignature": {
+    "pixi": [
+      "js?id=G-W2XC5XK9QJ"
+    ],
+    "three": [
+      "hoisted.CUO_IjfL.js",
+      "player.module.js"
+    ],
+    "webgpu": [
+      "hoisted.CUO_IjfL.js"
+    ]
+  },
+  "threeRevision": "158",
+  "assets": {
+    "models": [
+      "matcap.exr"
+    ],
+    "videos": [
+      "desktop.mp4",
+      "desktop.mp4",
+      "desktop.mp4",
+      "1529299672-f98fa04e999fec05f09d355d7c11a516b04709848a9c2920a3a5d7dadd1",
+      "1529299672-f98fa04e999fec05f09d355d7c11a516b04709848a9c2920a3a5d7dadd1",
+      "playlist.m3u8?ext-subs=1&locale=en&omit=av1-hevc-opus&pathsig=8c953e4f",
+      "desktop.mp4"
+    ],
+    "audio": [
+      "cinematic_0.ogg",
+      "cinematic_3.ogg",
+      "generic.ogg",
+      "cinematic_2.ogg",
+      "generic_end.ogg",
+      "hover_0.ogg",
+      "click_0.ogg",
+      "focus_0.ogg",
+      "glass_broken.ogg",
+      "page_0.ogg",
+      "page_1.ogg",
+      "focus_2.ogg",
+      "focus_1.ogg",
+      "click_1.ogg",
+      "hover_1.ogg",
+      "hover_2.ogg"
+    ],
+    "fonts": [
+      "Aeonik-Regular.woff2",
+      "Aeonik-Medium.woff2",
+      "Aeonik-RegularItalic.woff2",
+      "IBMPlexMono-Regular.woff2",
+      "IBMPlexMono-Medium.woff2",
+      "LusionMono.woff2"
+    ],
+    "scriptCount": 11,
+    "hosts": [
+      "lusion.co",
+      "www.googletagmanager.com",
+      "www.google-analytics.com",
+      "lusion.dev",
+      "vimeo.com",
+      "f.vimeocdn.com",
+      "i.vimeocdn.com",
+      "player.vimeo.com",
+      "www.gstatic.com",
+      "vod-adaptive-ak.vimeocdn.com"
+    ]
+  },
+  "frames": [
+    {
+      "file": "lusion-01.png",
+      "scrollY": 0
+    },
+    {
+      "file": "lusion-02.png",
+      "scrollY": 0
+    },
+    {
+      "file": "lusion-03.png",
+      "scrollY": 0
+    },
+    {
+      "file": "lusion-04.png",
+      "scrollY": 0
+    },
+    {
+      "file": "lusion-05.png",
+      "scrollY": 0
+    },
+    {
+      "file": "lusion-06.png",
+      "scrollY": 0
+    },
+    {
+      "file": "lusion-07.png",
+      "scrollY": 0
+    },
+    {
+      "file": "lusion-08.png",
+      "scrollY": 0
+    },
+    {
+      "file": "lusion-09.png",
+      "scrollY": 0
+    },
+    {
+      "file": "lusion-10.png",
+      "scrollY": 0
+    },
+    {
+      "file": "lusion-11.png",
+      "scrollY": 0
+    }
+  ],
+  "errors": []
+}

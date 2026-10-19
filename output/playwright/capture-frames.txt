@@ -1,0 +1,29 @@
+async (page) => {
+  await page.setViewportSize({width:1440,height:900});
+  await page.emulateMedia({reducedMotion:'no-preference'});
+  await page.goto('http://127.0.0.1:3214/');
+  await page.evaluate(()=>{document.documentElement.style.scrollBehavior='auto'; window.scrollTo({top:0,behavior:'instant'});});
+  await page.waitForTimeout(1600);
+  await page.screenshot({path:'output/implementation/desktop-hero.webp'});
+  const scenes = ['studio','work','detail','technology','automation','creative','more-work','about','contact'];
+  for (const id of scenes) {
+    await page.evaluate(id=>{
+      const section = id==='detail' ? document.querySelector('[data-work-detail]') : document.getElementById(id);
+      window.scrollTo({top:scrollY+section.getBoundingClientRect().top,behavior:'instant'});
+    },id);
+    await page.waitForTimeout(850);
+    await page.screenshot({path:'output/implementation/desktop-'+id+'.webp'});
+  }
+  await page.setViewportSize({width:390,height:844});
+  await page.evaluate(()=>window.scrollTo({top:0,behavior:'instant'}));
+  await page.waitForTimeout(800);
+  await page.screenshot({path:'output/implementation/mobile-hero.webp'});
+  for (const id of scenes) {
+    await page.evaluate(id=>{
+      const section = id==='detail' ? document.querySelector('[data-work-detail]') : document.getElementById(id);
+      window.scrollTo({top:scrollY+section.getBoundingClientRect().top,behavior:'instant'});
+    },id);
+    await page.waitForTimeout(600);
+    await page.screenshot({path:'output/implementation/mobile-'+id+'.webp'});
+  }
+}

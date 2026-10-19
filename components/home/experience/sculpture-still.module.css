@@ -1,0 +1,16 @@
+.form {
+  position: absolute;
+  z-index: 1;
+  pointer-events: none;
+  max-width: none;
+  height: auto;
+  filter: drop-shadow(18px 24px 30px rgb(15 23 42 / 0.08));
+}
+@media (min-width: 900px) {
+  :global(
+      body:has([data-live-stage][data-ready="true"][data-hidden="false"] canvas)
+    )
+    .form:not(.always) {
+    visibility: hidden;
+  }
+}

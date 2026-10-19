@@ -1,0 +1,24 @@
+async (page) => {
+  await page.evaluate(async()=>{
+    const move = (target,duration) => new Promise(resolve=>{
+      const from=scrollY, started=performance.now();
+      const tick=now=>{
+        const t=Math.min(1,(now-started)/duration), eased=t*t*(3-2*t);
+        window.scrollTo({top:from+(target-from)*eased,behavior:'instant'});
+        if(t<1) requestAnimationFrame(tick); else resolve();
+      };
+      requestAnimationFrame(tick);
+    });
+    const at = selector => scrollY+document.querySelector(selector).getBoundingClientRect().top;
+    const pause=ms=>new Promise(resolve=>setTimeout(resolve,ms));
+    document.documentElement.style.scrollBehavior='auto';
+    await pause(1400);
+    for(const selector of ['#studio','#work','[data-work-detail]','#technology','#automation','#creative']){
+      await move(at(selector),3600);
+      await pause(selector==='[data-work-detail]'?2800:1500);
+    }
+    await move(at('#automation')+180,2000);
+    await pause(700);
+    await move(at('#creative')+130,2300);
+  });
+}

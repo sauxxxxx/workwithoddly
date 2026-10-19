@@ -1,0 +1,283 @@
+.about {
+  position: relative;
+  min-height: 110svh;
+  overflow: clip;
+  padding: 8rem var(--margin) 7rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 3rem;
+}
+.kicker {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.about > .kicker {
+  position: absolute;
+  top: 5.5rem;
+  left: var(--margin);
+}
+.aboutTitle {
+  font-size: clamp(4rem, 8.8vw, 9rem);
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+  max-width: 65%;
+}
+.aboutCopy {
+  max-width: 43%;
+  font-family: var(--f-brand);
+  font-size: clamp(1.125rem, 1.5vw, 1.5rem);
+  line-height: 1.65;
+  letter-spacing: -0.03em;
+}
+.forms {
+  position: absolute;
+  right: 0;
+  top: 16%;
+  width: 45%;
+  height: 75%;
+}
+.aboutKnot {
+  width: 105%;
+  right: -6%;
+  top: -10%;
+}
+.aboutTwist {
+  width: 100%;
+  left: -38%;
+  top: 20%;
+}
+.aboutLoop {
+  width: 120%;
+  right: -35%;
+  top: 10%;
+}
+.aboutFooter {
+  position: absolute;
+  left: var(--margin);
+  right: var(--margin);
+  bottom: 2rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+  font-size: 0.6875rem;
+}
+.aboutFooter a {
+  text-decoration: none;
+}
+.team {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  font-size: 0.875rem;
+}
+.team li {
+  display: grid;
+  gap: 0.25rem;
+}
+.team span {
+  font-size: 0.75rem;
+  color: var(--ink-soft);
+}
+.contact {
+  position: relative;
+  min-height: 110svh;
+  background: var(--charcoal);
+  color: var(--cream);
+  overflow: clip;
+  padding: 8rem var(--margin) 10rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 3rem;
+}
+.contact > .kicker {
+  position: absolute;
+  left: var(--margin);
+  top: 5.5rem;
+}
+.contactTitle {
+  font-size: clamp(5rem, 11.6vw, 12rem);
+  line-height: 0.9;
+  letter-spacing: -0.025em;
+  max-width: 75%;
+}
+.contactLoop {
+  width: 110%;
+  right: -45%;
+  top: -5%;
+}
+.contactAction > p {
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  margin-top: 1.5rem;
+}
+.footer {
+  position: absolute;
+  left: var(--margin);
+  right: var(--margin);
+  bottom: 2rem;
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 2rem;
+  font-size: 0.6875rem;
+  line-height: 1.6;
+}
+.wordmark {
+  width: 9rem;
+  height: auto;
+}
+.footer > nav {
+  display: flex;
+  gap: 1.5rem;
+}
+.footer a {
+  text-decoration: none;
+}
+.footer a:focus-visible,
+.aboutFooter a:focus-visible {
+  outline-offset: 8px;
+}
+.footer a:focus-visible {
+  outline-color: var(--cream);
+}
+@media (max-width: 899px) {
+  .about {
+    min-height: auto;
+    padding-top: 9rem;
+    padding-bottom: 7rem;
+    gap: 2.5rem;
+  }
+  .aboutTitle {
+    font-size: 13vw;
+    max-width: 90%;
+  }
+  .aboutCopy {
+    max-width: 70%;
+  }
+  .forms {
+    position: relative;
+    right: auto;
+    top: auto;
+    width: 70%;
+    height: 22rem;
+    align-self: end;
+    margin-top: -1rem;
+  }
+  .aboutKnot {
+    top: -35%;
+  }
+  .aboutTwist {
+    top: 0;
+  }
+  .aboutLoop {
+    top: -10%;
+  }
+  .aboutFooter {
+    font-size: 0.625rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  .contact {
+    min-height: 100svh;
+    padding-top: 12rem;
+  }
+  .contactTitle {
+    font-size: 15vw;
+    max-width: 90%;
+  }
+  .contactLoop {
+    width: 140%;
+    right: -85%;
+    top: -18%;
+  }
+}
+@media (max-width: 599px) {
+  .about {
+    padding-top: 10rem;
+    gap: 2rem;
+  }
+  .about > .kicker {
+    top: 5.5rem;
+    font-size: 0.625rem;
+  }
+  .aboutTitle {
+    font-size: 16.5vw;
+    max-width: 100%;
+    line-height: 0.93;
+  }
+  .aboutCopy {
+    max-width: 100%;
+    font-size: 1rem;
+  }
+  .forms {
+    width: 100%;
+    height: 16rem;
+    align-self: stretch;
+    margin-top: 0;
+  }
+  .aboutKnot {
+    width: 80%;
+    right: -1%;
+    top: -38%;
+  }
+  .aboutTwist {
+    width: 80%;
+    left: -23%;
+    top: 5%;
+  }
+  .aboutLoop {
+    width: 95%;
+    right: -26%;
+    top: 10%;
+  }
+  .aboutFooter {
+    bottom: 1.5rem;
+    gap: 1rem;
+  }
+  .aboutFooter > p:last-child {
+    width: 100%;
+  }
+  .contact {
+    padding-top: 16rem;
+    padding-bottom: 11rem;
+    gap: 2rem;
+    min-height: 105svh;
+  }
+  .contactTitle {
+    font-size: 20vw;
+    max-width: 100%;
+  }
+  .contactLoop {
+    width: 180%;
+    right: -100%;
+    top: -22%;
+  }
+  .contact > .kicker {
+    top: 5.5rem;
+    font-size: 0.625rem;
+  }
+  .contactAction > p {
+    font-size: 0.875rem;
+  }
+  .footer {
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    bottom: 1.5rem;
+  }
+  .footer > a {
+    width: 100%;
+  }
+  .wordmark {
+    width: 7rem;
+  }
+  .footer > nav {
+    gap: 1rem;
+  }
+  .footer > p {
+    font-size: 0.5625rem;
+  }
+}

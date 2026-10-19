@@ -1,0 +1,12 @@
+async(page)=>{
+ for(const [name,url] of [['oak','https://oftheoak.co.uk/'],['synthetic','https://synthetic-humans.ai/'],['choo','https://choochooworld.com/']]){
+  try{
+   await page.goto(url,{waitUntil:'domcontentloaded',timeout:25000});
+   await page.waitForTimeout(5000);
+   await page.screenshot({path:'output/playwright/reference-review/'+name+'-launch.png'});
+   await page.mouse.move(920,450);await page.mouse.wheel(0,900);
+   await page.waitForTimeout(2500);
+   await page.screenshot({path:'output/playwright/reference-review/'+name+'-scroll.png'});
+  }catch(error){await page.screenshot({path:'output/playwright/reference-review/'+name+'-unavailable.png'});}
+ }
+}
