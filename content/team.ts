@@ -18,9 +18,9 @@ export const team: TeamMember[] = [];
 
 /** The studio's people, on the About Us page. */
 export const people: TeamMember[] = [
-  { name: "Jenneth Estrada", role: null, portrait: null },
+  { name: "Jenneth Estrada", role: null, portrait: "/team/jenneth-estrada.webp" },
   { name: "Remar Ugsimar", role: "Full-stack developer", portrait: null },
-  { name: "Rolex Zhyronne Batican", role: "Full-stack developer, AI engineer & UI/UX designer", portrait: null },
+  { name: "Rolex Zhyronne Batican", role: "Full-stack developer, AI engineer & UI/UX designer", portrait: "/team/rolex-zhyronne-batican.webp" },
   { name: "Nathaniel Languido", role: null, portrait: null },
   { name: "Aaron Demol", role: null, portrait: null },
   { name: "John Reynan Montejo", role: null, portrait: null },
