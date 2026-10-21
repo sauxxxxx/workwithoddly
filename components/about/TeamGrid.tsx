@@ -7,7 +7,7 @@ const GROUNDS = ["lavender", "sage", "cream", "coral"] as const;
 const COLUMNS = 4;
 
 const pad = (n: number) => String(n).padStart(2, "0");
-/** First and last initial: "Rolex Zhyronne Batican" → "RB". */
+/** First and last initial: "Reynan Montejo" → "RM". */
 const initials = (name: string) => {
   const words = name.split(" ").filter(Boolean);
   return (words[0][0] + (words.length > 1 ? words[words.length - 1][0] : "")).toUpperCase();
