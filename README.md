@@ -28,18 +28,17 @@ The postbuild step adds equivalent dot-separated filenames for Next 16's nested 
 | 3D poses per scroll scene | `components/scene/choreography.ts` |
 | Procedural sculpture geometry | `components/scene/geometry.ts` |
 | Materials, lights, wires, render loop | `components/scene/Installation.tsx` |
-| Studio composition and first-project reveal | `components/home/experience/` |
+| Statement and Beach Park reveal | `components/home/sequence/` |
 | Reference breakdown and prototype status | `REFERENCE-STUDY.md` |
 | Reference script (Lusion, Noomo, Psychoactive, Unseen) | `output/reference-script/README.md` |
-| Project scenes (one word + one piece per project) | `components/home/scenes/` — word and piece per project in `content/projects.ts → art.word / art.sculpture` |
-| Project sculptures (stack, wave, chain, spring, lens, rosette) | `components/scene/geometry.ts → COMPOUNDS`, registered in `sculptures.ts` |
-| Coral ribbon threading the project scenes | `components/scene/Ribbon.tsx` |
+| Project stage (pinned; scenes change in place) | `components/home/stage/` — word and object per project in `content/projects.ts → art.word / art.sculpture` |
+| Project objects (gold coins, glass wave, sync arrows, clapperboard, magnifier, megaphone) and the plinth | `components/scene/objects.ts`, registered in `sculptures.ts` |
+| Finishes (chrome, gold, lacquer, glass, frosted) | `components/scene/materials.ts` |
 | Optional sound (off by default, synthesised) | `components/sound/` |
 | Services page (full service descriptions) | `app/services/` |
 | DOM scroll choreography | `components/home/HomeMotion.tsx` + `components/home/motion/` |
 | Shared smooth scroll clock | `components/motion/ScrollRuntime.tsx` |
 | WebGL-fallback stills | `public/stills/` |
-| Studio and chapter fallback renders | `public/art/` |
 | Complete page storyboard | `output/storyboard/index.html` |
 | Implemented page review and recordings | `output/implementation/index.html` |
 
@@ -53,7 +52,7 @@ The postbuild step adds equivalent dot-separated filenames for Next 16's nested 
 
 ## Replacing a project sculpture with a real 3D model
 
-Each project scene shows a code-generated clay piece until a modelled one is supplied:
+Each project scene shows a code-built object (chrome, gold, glass) until a modelled one is supplied:
 
 1. Export the model as `.glb` (Draco compression is fine; it is decoded locally from `public/draco/`).
 2. Put it in `public/models/`, e.g. `public/models/joyno-accounting.glb`.

@@ -2,7 +2,6 @@ import type { Metadata, Viewport } from "next";
 import { Archivo, Inter, Plus_Jakarta_Sans } from "next/font/google";
 import { SiteNav } from "@/components/nav/SiteNav";
 import { StageHost } from "@/components/scene/StageHost";
-import { RoomHost } from "@/components/scene/environment/RoomHost";
 import { site } from "@/content/site";
 import "./globals.css";
 import "lenis/dist/lenis.css";
@@ -41,7 +40,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#F8F6EF",
+  themeColor: "#E7E4F4",
   width: "device-width",
   initialScale: 1,
 };
@@ -55,7 +54,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </a>
         <SiteNav />
         <ScrollRuntime />
-        <RoomHost />
         <StageHost />
         <main id="main">{children}</main>
       </body>

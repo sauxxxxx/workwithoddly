@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { SculptureStill } from "./SculptureStill";
 import { LocalTime } from "../LocalTime";
 import { site } from "@/content/site";
 import { team } from "@/content/team";
@@ -30,11 +29,6 @@ export function StudioAbout() {
         Based in Cebu. Working across the things your customers see and the
         systems your team depends on.
       </p>
-      <div className={s.forms}>
-        <SculptureStill form="knot" className={s.aboutKnot} />
-        <SculptureStill form="twist" className={s.aboutTwist} />
-        <SculptureStill form="loop" className={s.aboutLoop} />
-      </div>
       {team.length > 0 && (
         <ul className={`${s.team} front`}>
           {team.map((person) => (

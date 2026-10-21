@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowUpRight } from "@/components/Icons";
-import { ServiceList } from "@/components/home/experience/ServiceList";
 import { disciplines } from "@/content/services";
 import { projectBySlug } from "@/content/projects";
+import { contactHref } from "@/content/site";
 import s from "./services.module.css";
 
 export const metadata: Metadata = {
@@ -12,17 +12,18 @@ export const metadata: Metadata = {
     "Technology, automation, and creative services from ODDLY®, a creative technology studio in Cebu, Philippines.",
 };
 
-/* The one place the full service descriptions live; the home page keeps to a word per scene. */
+/**
+ * Services, in the stage grammar: one complete frame per discipline. The word
+ * sits in the top third, the discipline's piece rests on the plinth, the
+ * services are listed at the right, and one action sits at the bottom.
+ */
 export default function Services() {
   return (
     <>
-      <header className={`${s.intro} front`} data-scene="away">
-        <p className={s.tag}>ODDLY® / Services</p>
+      <header className={s.intro} data-scene="away">
+        <p className={s.tag}>ODDLY® · Services</p>
         <h1 className={`${s.title} display`}>
-          Three ways
-          <br />
-          we work
-          <span className="dot" aria-hidden="true" />
+          Three ways we work<span className="dot" aria-hidden="true" />
         </h1>
         <nav className={s.jump} aria-label="Disciplines">
           {disciplines.map((d) => (
@@ -33,48 +34,57 @@ export default function Services() {
         </nav>
       </header>
 
-      {disciplines.map((d, i) => (
-        <section
-          key={d.id}
-          id={d.id}
-          className={s.discipline}
-          data-scene={`case-${d.object}`}
-          data-side={i % 2 ? "left" : "right"}
-          aria-labelledby={`${d.id}-title`}
-        >
-          <div className={`${s.head} front`}>
-            <p className={s.tag}>
-              <span>{String(i + 1).padStart(2, "0")}</span> {d.name}
-            </p>
-            <h2 id={`${d.id}-title`} className={`${s.word} display`}>
-              {d.name}
-            </h2>
-            <p className={s.lede}>{d.lede}</p>
-          </div>
-          <div className={`${s.list} front`}>
-            <ServiceList discipline={d} />
-            <p className={s.seen}>
-              In practice:{" "}
-              {d.projects.map((slug, j) => {
-                const p = projectBySlug(slug);
-                if (!p) return null;
-                return (
-                  <span key={slug}>
-                    {j > 0 && ", "}
-                    <Link href={`/work/${slug}/`}>{p.name}</Link>
-                  </span>
-                );
-              })}
-            </p>
-          </div>
-        </section>
-      ))}
+      {disciplines.map((d, i) => {
+        const work = d.projects.map((slug) => projectBySlug(slug)).filter((p) => !!p);
+        return (
+          <section
+            key={d.id}
+            id={d.id}
+            className={s.frame}
+            data-scene={`svc-${d.id}`}
+            data-scene-hold="0.5"
+            aria-labelledby={`${d.id}-title`}
+          >
+            <div className={`${s.layer} ${s.layerBack}`}>
+              <h2 id={`${d.id}-title`} className={`${s.word} display`} style={{ ["--chars" as string]: d.name.length }}>
+                {d.name}
+              </h2>
+            </div>
 
-      <section className={`${s.close} front`} data-scene="away">
-        <Link className={s.pill} href="/#contact">
-          Start a project <ArrowUpRight />
-        </Link>
-      </section>
+            <div className={`${s.layer} ${s.layerFront}`}>
+              <p className={s.index}>
+                <span>{String(i + 1).padStart(2, "0")}</span> / {String(disciplines.length).padStart(2, "0")}
+              </p>
+
+              <p className={s.lede}>{d.lede}</p>
+
+              <ul className={s.list} aria-label={`${d.name} services`}>
+                {d.services.map((svc) => (
+                  <li key={svc.name}>
+                    <strong>{svc.name}</strong>
+                    <span>{svc.description}</span>
+                  </li>
+                ))}
+              </ul>
+
+              <div className={s.bottom}>
+                <p className={s.seen}>
+                  In practice:{" "}
+                  {work.map((p, j) => (
+                    <span key={p.slug}>
+                      {j > 0 && ", "}
+                      <Link href={`/work/${p.slug}/`}>{p.name}</Link>
+                    </span>
+                  ))}
+                </p>
+                <a className={s.pill} href={contactHref}>
+                  Start a project <ArrowUpRight />
+                </a>
+              </div>
+            </div>
+          </section>
+        );
+      })}
     </>
   );
 }

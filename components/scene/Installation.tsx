@@ -7,10 +7,11 @@ import { Environment, Lightformer } from "@react-three/drei";
 import { CAMERA, DAMPING, OBJECT_IDS, choreography, type ObjectId, type Pose, type Scene } from "./choreography";
 import { HANGERS, LINKS, SCULPTURES } from "./sculptures";
 import { sceneIdAt, sceneProgress, track } from "./track";
-import { buildCompound, buildSculpture, makeGrainTexture, makeSpeckleTexture, type Quality } from "./geometry";
+import { buildCompound, buildSculpture, type Quality } from "./geometry";
+import { makeFinish } from "./materials";
+import { buildObject } from "./objects";
 import { addPortalTarget } from "./portal-geometry";
 import { journey, range } from "./journey";
-import { Ribbon } from "./Ribbon";
 import { StageDressing } from "./StageDressing";
 import { ModelPiece } from "./ModelPiece";
 
@@ -50,88 +51,48 @@ export function Installation({ quality, compact, reducedMotion, onFirstFrame }: 
   const { size } = useThree();
   const shadows = quality === "high";
 
-  /* ----- resources: one clay material grammar for every piece ----- */
+  /* ----- resources: polished strokes and designed objects ----- */
   const res = useMemo(() => {
-    const speckle = makeSpeckleTexture(quality === "high" ? 512 : 256);
-    const grain = makeGrainTexture(quality === "high" ? 512 : 256);
-    const textures: THREE.Texture[] = [speckle, grain];
-
+    const lite = quality !== "high";
     const pieces = SCULPTURES.map((spec) => {
+      if (spec.object) {
+        const obj = buildObject(spec.object, spec.size, quality, lite);
+        obj.group.traverse((o) => {
+          if ((o as THREE.Mesh).isMesh) {
+            o.castShadow = shadows;
+            o.receiveShadow = shadows;
+          }
+        });
+        return { spec, obj, built: null, material: null };
+      }
       const built = spec.compound
         ? buildCompound(spec.compound, spec, quality)
         : buildSculpture(spec.curve ?? "loop", spec, quality);
       if (spec.id === "loop") addPortalTarget(built.tube, size.width, size.height);
-      const map = speckle.clone();
-      const bump = grain.clone();
-      for (const t of [map, bump]) {
-        t.repeat.set(built.grainRepeat[0], built.grainRepeat[1]);
-        t.needsUpdate = true;
-        textures.push(t);
-      }
-      // Opening pieces stay matte clay; project pieces are glazed ceramic.
-      const material = spec.compound
-        ? new THREE.MeshPhysicalMaterial({
-            color: spec.colour,
-            map,
-            bumpMap: bump,
-            bumpScale: 0.35,
-            roughness: 0.38,
-            metalness: 0,
-            clearcoat: 0.8,
-            clearcoatRoughness: 0.2,
-            sheen: 0.3,
-            sheenColor: new THREE.Color("#ffffff"),
-          })
-        : new THREE.MeshStandardMaterial({
-            color: spec.colour,
-            map,
-            bumpMap: bump,
-            bumpScale: spec.radius < 0.1 ? 0.4 : 1.3,
-            roughness: 0.62,
-            metalness: 0,
-          });
-      return { spec, built, material };
-    });
-
-    // The ribbon: the same coral clay, grain laid along a very long stroke.
-    const ribbonMap = speckle.clone();
-    const ribbonBump = grain.clone();
-    for (const t of [ribbonMap, ribbonBump]) {
-      t.repeat.set(420, 1);
-      t.needsUpdate = true;
-      textures.push(t);
-    }
-    const ribbon = new THREE.MeshStandardMaterial({
-      color: "#FF7A59",
-      map: ribbonMap,
-      bumpMap: ribbonBump,
-      bumpScale: 0.8,
-      roughness: 0.62,
-      metalness: 0,
+      const material = makeFinish(spec.finish ?? { kind: "lacquer", colour: spec.colour }, lite);
+      return { spec, obj: null, built, material };
     });
 
     return {
       pieces,
-      speckle,
-      ribbon,
-      top: Object.fromEntries(pieces.map((p) => [p.spec.id, p.built.top])) as Record<ObjectId, number>,
-      textures,
+      top: Object.fromEntries(
+        pieces.map((p) => [p.spec.id, p.obj ? p.obj.top : (p.built?.top ?? 1)]),
+      ) as Record<ObjectId, number>,
       wireGeo: new THREE.CylinderGeometry(WIRE_RADIUS, WIRE_RADIUS, 1, 6, 1, true),
       wire: new THREE.MeshBasicMaterial({ color: CHARCOAL, transparent: true, opacity: 0 }),
     };
-  }, [quality, size.width, size.height]);
+  }, [quality, shadows, size.width, size.height]);
 
   useEffect(
     () => () => {
       for (const p of res.pieces) {
-        p.built.tube.dispose();
-        p.built.capGeometry?.dispose();
-        p.material.dispose();
+        p.obj?.dispose();
+        p.built?.tube.dispose();
+        p.built?.capGeometry?.dispose();
+        p.material?.dispose();
       }
-      res.textures.forEach((t) => t.dispose());
       res.wireGeo.dispose();
       res.wire.dispose();
-      res.ribbon.dispose();
     },
     [res],
   );
@@ -198,7 +159,18 @@ export function Installation({ quality, compact, reducedMotion, onFirstFrame }: 
       // Both ends out of frame: snap between them, never drag a piece (or its
       // shadow) through the page on a straight line between two exits.
       const jump = offscreen(pa) && offscreen(pb);
-      const u = jump ? (t < 0.5 ? 0 : 1) : t;
+      // A piece leaving clears the frame early; a piece arriving lands late,
+      // so two objects never cross on the way.
+      const leaving = !offscreen(pa) && offscreen(pb);
+      const arriving = offscreen(pa) && !offscreen(pb);
+      const clamp01 = (v: number) => Math.min(1, Math.max(0, v));
+      const u = jump
+        ? t < 0.5 ? 0 : 1
+        : leaving
+          ? clamp01(t / 0.55)
+          : arriving
+            ? clamp01((t - 0.4) / 0.6)
+            : t;
       const target: Live = {
         x: pa.x + (pb.x - pa.x) * u,
         y: pa.y + (pb.y - pa.y) * u,
@@ -344,32 +316,31 @@ export function Installation({ quality, compact, reducedMotion, onFirstFrame }: 
       <directionalLight position={[6, -1, 5]} intensity={0.45} color="#eef1ff" />
       <directionalLight position={[0, -6, 4]} intensity={0.35} color="#fff2e2" />
 
-      <Environment resolution={quality === "high" ? 256 : 64} frames={1}>
-        <Lightformer form="rect" intensity={2.6} position={[-2, 6, 3]} scale={[12, 5, 1]} rotation-x={Math.PI / 2} />
-        <Lightformer form="rect" intensity={1.6} position={[-8, 1, 3]} scale={[4, 9, 1]} rotation-y={Math.PI / 2} />
-        <Lightformer form="rect" intensity={0.8} color="#f3f1ec" position={[8, 0, 2]} scale={[4, 8, 1]} rotation-y={-Math.PI / 2} />
-        <Lightformer form="rect" intensity={0.7} color="#f8efe2" position={[0, -6, 0]} scale={[14, 4, 1]} rotation-x={-Math.PI / 2} />
+      {/* A studio for metal and glass: a lavender-grey room, long softbox
+          strips overhead and at the sides, one dark flag for contrast. */}
+      <Environment resolution={quality === "high" ? 512 : 128} frames={1}>
+        <color attach="background" args={["#b9b4d6"]} />
+        <Lightformer form="rect" intensity={4} position={[0, 7, 2]} scale={[14, 1.6, 1]} rotation-x={Math.PI / 2} />
+        <Lightformer form="rect" intensity={2.4} position={[-2, 5, -4]} scale={[12, 1, 1]} rotation-x={Math.PI / 2.4} />
+        <Lightformer form="rect" intensity={3} position={[-8, 1, 2]} scale={[2, 10, 1]} rotation-y={Math.PI / 2} />
+        <Lightformer form="rect" intensity={2.2} color="#ffe3d8" position={[8, 1, 1]} scale={[2, 9, 1]} rotation-y={-Math.PI / 2} />
+        <Lightformer form="rect" intensity={1.2} color="#f2efff" position={[0, -5, 2]} scale={[16, 3, 1]} rotation-x={-Math.PI / 2} />
+        <Lightformer form="rect" intensity={0} color="#1b2236" position={[0, 1, -8]} scale={[10, 6, 1]} />
+        <Lightformer form="ring" intensity={2.5} position={[4, 4, 6]} scale={2.2} />
       </Environment>
 
       {/* The page itself, catching soft shadows so the pieces float above it. */}
       {shadows && (
         <mesh position={[0, 0, -1.4]} receiveShadow>
           <planeGeometry args={[80, 60]} />
-          <shadowMaterial ref={shadowMat} transparent opacity={0.07} color="#0f172a" />
+          <shadowMaterial ref={shadowMat} transparent opacity={0.05} color="#2a2550" />
         </mesh>
       )}
 
-      <Ribbon material={res.ribbon} enabled={!compact && !reducedMotion} />
-      <StageDressing
-        quality={quality}
-        speckle={res.speckle}
-        enabled={!reducedMotion}
-        shadows={shadows}
-        compact={compact}
-      />
+      <StageDressing quality={quality} enabled={!reducedMotion} shadows={shadows} compact={compact} />
 
       <group ref={root}>
-        {res.pieces.map(({ spec, built, material }) => (
+        {res.pieces.map(({ spec, built, material, obj }) => (
           <group
             key={spec.id}
             ref={(g) => {
@@ -384,23 +355,33 @@ export function Installation({ quality, compact, reducedMotion, onFirstFrame }: 
               }}
             >
               {spec.model ? (
-                <Suspense fallback={<mesh geometry={built.tube} material={material} castShadow={shadows} receiveShadow={shadows} />}>
+                <Suspense fallback={obj ? <primitive object={obj.group} /> : null}>
                   <ModelPiece url={spec.model} size={spec.size} shadows={shadows} />
                 </Suspense>
-              ) : (
-                <mesh geometry={built.tube} material={material} castShadow={shadows} receiveShadow={shadows} onUpdate={mesh => mesh.updateMorphTargets()} />
-              )}
-              {built.capGeometry &&
-                built.caps.map((c, i) => (
+              ) : obj ? (
+                <primitive object={obj.group} />
+              ) : built && material ? (
+                <>
                   <mesh
-                    key={i}
-                    geometry={built.capGeometry as THREE.SphereGeometry}
+                    geometry={built.tube}
                     material={material}
-                    position={c}
                     castShadow={shadows}
                     receiveShadow={shadows}
+                    onUpdate={(mesh) => mesh.updateMorphTargets()}
                   />
-                ))}
+                  {built.capGeometry &&
+                    built.caps.map((c, i) => (
+                      <mesh
+                        key={i}
+                        geometry={built.capGeometry as THREE.SphereGeometry}
+                        material={material}
+                        position={c}
+                        castShadow={shadows}
+                        receiveShadow={shadows}
+                      />
+                    ))}
+                </>
+              ) : null}
             </group>
           </group>
         ))}

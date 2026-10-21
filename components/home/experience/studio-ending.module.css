@@ -20,10 +20,8 @@
   left: var(--margin);
 }
 .aboutTitle {
-  font-size: clamp(4rem, 8.8vw, 9rem);
-  line-height: 0.9;
-  letter-spacing: -0.02em;
-  max-width: 65%;
+  font-size: min(6.2vw, 12svh);
+  max-width: 62%;
 }
 .aboutCopy {
   max-width: 43%;
@@ -84,8 +82,6 @@
 .contact {
   position: relative;
   min-height: 110svh;
-  background: var(--charcoal);
-  color: var(--cream);
   overflow: clip;
   padding: 8rem var(--margin) 10rem;
   display: flex;
@@ -99,10 +95,8 @@
   top: 5.5rem;
 }
 .contactTitle {
-  font-size: clamp(5rem, 11.6vw, 12rem);
-  line-height: 0.9;
-  letter-spacing: -0.025em;
-  max-width: 75%;
+  font-size: min(7.4vw, 14svh);
+  max-width: 70%;
 }
 .contactLoop {
   width: 110%;
@@ -141,9 +135,7 @@
 .aboutFooter a:focus-visible {
   outline-offset: 8px;
 }
-.footer a:focus-visible {
-  outline-color: var(--cream);
-}
+
 @media (max-width: 899px) {
   .about {
     min-height: auto;
@@ -152,8 +144,8 @@
     gap: 2.5rem;
   }
   .aboutTitle {
-    font-size: 13vw;
-    max-width: 90%;
+    font-size: 8.4vw;
+    max-width: 100%;
   }
   .aboutCopy {
     max-width: 70%;
@@ -186,8 +178,8 @@
     padding-top: 12rem;
   }
   .contactTitle {
-    font-size: 15vw;
-    max-width: 90%;
+    font-size: 9.5vw;
+    max-width: 100%;
   }
   .contactLoop {
     width: 140%;
@@ -205,9 +197,8 @@
     font-size: 0.625rem;
   }
   .aboutTitle {
-    font-size: 16.5vw;
+    font-size: 10vw;
     max-width: 100%;
-    line-height: 0.93;
   }
   .aboutCopy {
     max-width: 100%;
@@ -248,7 +239,7 @@
     min-height: 105svh;
   }
   .contactTitle {
-    font-size: 20vw;
+    font-size: 11vw;
     max-width: 100%;
   }
   .contactLoop {

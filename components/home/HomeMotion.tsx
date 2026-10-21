@@ -6,7 +6,6 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { openingMotion } from "./motion/opening-motion";
 import { chapterMotion } from "./motion/chapter-motion";
 import { sequenceMotion } from "./motion/sequence-motion";
-import { projectMotion } from "./motion/project-motion";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -20,7 +19,6 @@ export function HomeMotion() {
       openingMotion(compact);
       const cleanup = sequenceMotion(compact);
       chapterMotion(compact);
-      projectMotion(compact);
       return cleanup;
     };
     mm.add(

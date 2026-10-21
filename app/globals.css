@@ -9,12 +9,12 @@
   --sage: #7ba894;
   --cream: #f8f6ef;
 
-  /* Roles */
-  --ground: var(--cream);
-  --ground-deep: #efece2;           /* a half-step into the paper, for quiet fields */
+  /* Roles — a pale lavender ground (from brand lavender), charcoal ink */
+  --ground: #e7e4f4;
+  --ground-deep: #dcd8ee;           /* a half-step deeper, for quiet fields */
   --ink: var(--charcoal);
-  --ink-soft: rgb(15 23 42 / 0.72); /* 7.9:1 on cream */
-  --ink-mute: rgb(15 23 42 / 0.62); /* 5.6:1 on cream — the floor for small text */
+  --ink-soft: rgb(15 23 42 / 0.74); /* ≈7.4:1 on the ground */
+  --ink-mute: rgb(15 23 42 / 0.64); /* ≈5.3:1 — the floor for small text */
   --rule: rgb(15 23 42 / 0.16);
   --rule-strong: rgb(15 23 42 / 0.9);
   --signal: var(--coral);
@@ -25,7 +25,7 @@
   --f-ui: var(--font-inter), system-ui, sans-serif;
 
   /* Type scale — display sizes are viewport-bound on purpose */
-  --t-hero: min(18.5vh, 12.8vw);
+  --t-hero: min(15.5vh, 8.6vw);
   --t-display: clamp(3.5rem, 10vw, 9.5rem);
   --t-display-s: clamp(2.75rem, 6.4vw, 6rem);
   --t-statement: clamp(1.9rem, 3.9vw, 4rem);
@@ -113,8 +113,8 @@ body {
   min-height: 100svh;
 }
 
-/* The studio sweep: a soft pool of light on the cream, fixed to the viewport
-   like a lit backdrop behind the installation. */
+/* A flat, high-key lavender ground with three soft blooms of light, fixed to
+   the viewport. No vignette, no folds, no dark edges. */
 body::before {
   content: "";
   position: fixed;
@@ -122,8 +122,10 @@ body::before {
   z-index: -1;
   pointer-events: none;
   background:
-    radial-gradient(ellipse 70% 62% at 50% 44%, #fdfcf8 0%, rgb(253 252 248 / 0) 70%),
-    radial-gradient(ellipse 120% 100% at 50% 40%, var(--cream) 40%, #ece8de 100%);
+    radial-gradient(42% 46% at 18% 14%, rgb(255 255 255 / 0.75), rgb(255 255 255 / 0) 70%),
+    radial-gradient(38% 44% at 86% 58%, rgb(255 122 89 / 0.11), rgb(255 122 89 / 0) 70%),
+    radial-gradient(48% 40% at 40% 100%, rgb(167 139 250 / 0.16), rgb(167 139 250 / 0) 70%),
+    var(--ground);
 }
 
 ::selection {
@@ -220,15 +222,15 @@ button {
 
 /* ---------- Shared type voices ---------- */
 
+/* The one display voice: thin, wide, uppercase. Scale comes from size, not weight. */
 .display {
   font-family: var(--f-display);
-  font-weight: 900;
-  font-variation-settings: "wdth" 62;
-  font-stretch: 62%;
+  font-weight: 300;
+  font-variation-settings: "wdth" 112;
+  font-stretch: 112%;
   text-transform: uppercase;
-  line-height: 0.84;
-  letter-spacing: -0.01em;
-  word-spacing: 0.08em;
+  line-height: 1;
+  letter-spacing: 0.01em;
 }
 
 .brand {

@@ -167,7 +167,7 @@
   position: fixed;
   inset: 0;
   z-index: 1;
-  background: var(--cream);
+  background: var(--ground);
   overflow-y: auto;
 }
 
@@ -195,11 +195,11 @@
 .menuPrimary a {
   display: block;
   font-family: var(--f-display);
-  font-weight: 900;
-  font-variation-settings: "wdth" 62;
+  font-weight: 300;
+  font-variation-settings: "wdth" 112;
   text-transform: uppercase;
-  font-size: clamp(3.5rem, 17vw, 8rem);
-  line-height: 0.9;
+  font-size: clamp(2.5rem, 11vw, 6.5rem);
+  line-height: 1.05;
   text-decoration: none;
 }
 

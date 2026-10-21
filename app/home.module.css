@@ -51,11 +51,11 @@
   flex-direction: column;
   align-items: center;
   font-family: var(--f-display);
-  font-weight: 900;
+  font-weight: 300;
   text-transform: uppercase;
   font-size: var(--t-hero);
-  line-height: 0.86;
-  letter-spacing: -0.01em;
+  line-height: 1;
+  letter-spacing: 0.01em;
   text-align: center;
   white-space: nowrap;
 }
@@ -64,7 +64,7 @@
   display: block;
   overflow: hidden;
   padding-top: 0.05em;
-  font-variation-settings: "wdth" var(--w, 62);
+  font-variation-settings: "wdth" 112;
   will-change: transform;
 }
 
@@ -314,7 +314,7 @@
   .aboutHeading, .aboutBody, .facts { grid-column: 1; grid-row: auto; }
   .facts { margin-top: 0; }
   .closingText h2 { font-size: clamp(2.75rem, 14.5vw, 6rem); white-space: normal; }
-  .heroTitle { font-size: min(17vw, 14vh); }
+  .heroTitle { font-size: min(9.6vw, 8vh); }
 }
 
 @media (max-width: 599px) {

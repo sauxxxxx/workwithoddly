@@ -1,4 +1,6 @@
 import type { CompoundName, CurveName } from "./geometry";
+import type { Finish } from "./materials";
+import type { ObjectName } from "./objects";
 
 /**
  * The ODDLY installation: one family of clay strokes in the brand palette.
@@ -8,8 +10,12 @@ export type SculptureSpec = {
   id: ObjectId;
   /** A single stroke along a named curve… */
   curve?: CurveName;
-  /** …or a compound piece fused from several strokes (the project sculptures). */
+  /** …or a compound piece fused from several strokes… */
   compound?: CompoundName;
+  /** …or a designed project object (components/scene/objects.ts). */
+  object?: ObjectName;
+  /** Surface for stroke pieces: lacquer, glass, chrome… */
+  finish?: Finish;
   colour: string;
   size: number;
   radius: number;
@@ -41,19 +47,20 @@ export type ObjectId =
   | "rosette";
 
 export const SCULPTURES: SculptureSpec[] = [
-  { id: "loop", curve: "loop", colour: "#FF7A59", size: 3.3, radius: 0.27, closed: true, spin: [0, 0.00042, 0], phone: true },
-  { id: "twist", curve: "twist", colour: "#A78BFA", size: 2.5, radius: 0.4, closed: true, spin: [0, 0, 0.0006], phone: true },
-  { id: "knot", curve: "knot", colour: "#7BA894", size: 2.6, radius: 0.3, closed: true, spin: [0.0003, 0.0004, 0], phone: true },
-  { id: "coil", curve: "coil", colour: "#D9D3C9", size: 3.6, radius: 0.29, closed: false, spin: [0.00025, 0, 0], phone: true },
-  { id: "scribbleA", curve: "scribble", colour: "#CFC8BD", size: 1.5, radius: 0.07, closed: false, spin: [0, 0, 0], phone: false },
-  { id: "scribbleB", curve: "scribble", colour: "#1E2638", size: 1.3, radius: 0.062, closed: false, spin: [0, 0, 0], phone: false },
-  /* Project sculptures — one per project scene (see content/projects.ts → art.sculpture). */
-  { id: "stack", compound: "stack", colour: "#FF7A59", size: 2.5, radius: 0.27, closed: true, spin: [0, 0.0005, 0], phone: true },
-  { id: "wave", compound: "wave", colour: "#7BA894", size: 3.1, radius: 0.27, closed: false, spin: [0, 0.0003, 0], phone: true },
-  { id: "chain", compound: "chain", colour: "#A78BFA", size: 3.4, radius: 0.19, closed: true, spin: [0.0004, 0, 0], phone: true },
-  { id: "spring", compound: "spring", colour: "#FF7A59", size: 2.8, radius: 0.17, closed: false, spin: [0, 0.0007, 0], phone: true },
-  { id: "lens", compound: "lens", colour: "#D9D3C9", size: 2.8, radius: 0.2, closed: true, spin: [0, 0, 0.0003], phone: true },
-  { id: "rosette", compound: "rosette", colour: "#A78BFA", size: 2.7, radius: 0.2, closed: true, spin: [0, 0, 0.0005], phone: true },
+  /* The opening family: polished strokes. */
+  { id: "loop", curve: "loop", colour: "#FF7A59", finish: { kind: "lacquer", colour: "#FF7A59" }, size: 3.3, radius: 0.27, closed: true, spin: [0, 0.00042, 0], phone: true },
+  { id: "twist", curve: "twist", colour: "#A78BFA", finish: { kind: "glass", colour: "#A78BFA", opacity: 0.78 }, size: 2.5, radius: 0.4, closed: true, spin: [0, 0, 0.0006], phone: true },
+  { id: "knot", curve: "knot", colour: "#7BA894", finish: { kind: "lacquer", colour: "#7BA894" }, size: 2.6, radius: 0.3, closed: true, spin: [0.0003, 0.0004, 0], phone: true },
+  { id: "coil", curve: "coil", colour: "#F3F1FA", finish: { kind: "frosted", colour: "#F3F1FA" }, size: 3.6, radius: 0.29, closed: false, spin: [0.00025, 0, 0], phone: true },
+  { id: "scribbleA", curve: "scribble", colour: "#E9EBF2", finish: { kind: "chrome" }, size: 1.5, radius: 0.07, closed: false, spin: [0, 0, 0], phone: false },
+  { id: "scribbleB", curve: "scribble", colour: "#1E2638", finish: { kind: "lacquer", colour: "#1E2638" }, size: 1.3, radius: 0.062, closed: false, spin: [0, 0, 0], phone: false },
+  /* Project objects — one per project (see content/projects.ts → art.sculpture). */
+  { id: "stack", object: "coins", colour: "#E3B54A", size: 2.3, radius: 0, closed: true, spin: [0, 0.0005, 0], phone: true },
+  { id: "wave", object: "wave", colour: "#6FD0D3", size: 2.9, radius: 0, closed: true, spin: [0, 0.0003, 0], phone: true },
+  { id: "chain", object: "sync", colour: "#A78BFA", size: 2.5, radius: 0, closed: true, spin: [0, 0, 0.0006], phone: true },
+  { id: "spring", object: "clapper", colour: "#FF7A59", size: 2.6, radius: 0, closed: true, spin: [0, 0.0004, 0], phone: true },
+  { id: "lens", object: "magnifier", colour: "#E9EBF2", size: 2.6, radius: 0, closed: true, spin: [0, 0.0003, 0], phone: true },
+  { id: "rosette", object: "megaphone", colour: "#FF7A59", size: 2.6, radius: 0, closed: true, spin: [0, 0.0004, 0], phone: true },
 ];
 
 export const OBJECT_IDS = SCULPTURES.map((s) => s.id);

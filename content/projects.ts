@@ -94,7 +94,7 @@ export const projects: Project[] = [
         { src: "/work/the-beach-park-hadsan/mobile.webp", alt: "The Beach Park website — mobile homepage", ratio: "390/844" },
       ],
     },
-    art: { ground: "sage", ink: "charcoal", accent: "cream", layout: "panorama" },
+    art: { ground: "sage", ink: "charcoal", accent: "cream", layout: "panorama", word: "EXPERIENCE" },
   },
   {
     slug: "casatoon",

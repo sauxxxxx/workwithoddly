@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { Wordmark } from "@/components/Wordmark";
 import { site } from "@/content/site";
-import { SculptureStill } from "./SculptureStill";
 import { ContactBrief } from "./ContactBrief";
 import s from "./studio-ending.module.css";
 
@@ -12,7 +11,6 @@ export function ContactSection() {
       className={s.contact}
       data-scene="closing"
       data-scene-hold="0.7"
-      data-nav-theme="dark"
       aria-labelledby="contact-title"
     >
       <p className={`${s.kicker} front`}>Have something in mind?</p>
@@ -26,7 +24,6 @@ export function ContactSection() {
         it Oddly
         <span className="dot" aria-hidden="true" />
       </h2>
-      <SculptureStill form="loop" className={s.contactLoop} />
       <div className={`${s.contactAction} front`}>
         <ContactBrief />
         <p>

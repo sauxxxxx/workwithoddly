@@ -2,7 +2,7 @@ import { AppIcon } from "@/components/AppIcon";
 import { ScrollBadge } from "@/components/home/ScrollBadge";
 import { HomeMotion } from "@/components/home/HomeMotion";
 import { PerspectiveSequence } from "@/components/home/sequence/PerspectiveSequence";
-import { ProjectScenes } from "@/components/home/scenes/ProjectScenes";
+import { ProjectStage } from "@/components/home/stage/ProjectStage";
 import { StudioAbout } from "@/components/home/experience/StudioAbout";
 import { ContactSection } from "@/components/home/experience/ContactSection";
 import { site } from "@/content/site";
@@ -47,7 +47,7 @@ export default function Home() {
         </div>
       </section>
       <PerspectiveSequence />
-      <ProjectScenes />
+      <ProjectStage />
       <StudioAbout />
       <ContactSection />
     </>

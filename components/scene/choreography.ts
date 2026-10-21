@@ -148,9 +148,10 @@ const desktop: Record<string, Scene> = {
   "p-lens": D({ lens: P(0.0, -0.1, 1.2, 0.25, 0.45, -0.25, 0.9) }, { turn: { lens: [0.15, 0.9, 0.15] } }),
   "p-rosette": D({ rosette: P(0.0, -0.1, 1.2, 0.5, 0.35, 0.1, 0.95) }, { turn: { rosette: [0.3, 0.6, 1.0] } }),
   /* Case studies — the project's piece frames the title. */
-  "case-loop": D({ loop: P(0.8, 0.3, 0.6, 0.5, -0.4, 0.9, 0.95) }),
-  "case-knot": D({ knot: P(0.8, 0.3, 0.6, 0.5, 0.7, 0.5, 0.95) }),
-  "case-twist": D({ twist: P(0.8, 0.3, 0.6, 0.6, -0.4, 0.2, 0.95) }),
+  /* Case studies and services: the piece rests on the plinth, as in the stage. */
+  "case-loop": D({ loop: P(0.0, -0.17, 1.2, 0.5, -0.4, 0.4, 0.62) }, { turn: { loop: [0.1, 0.8, 0] } }),
+  "case-knot": D({ knot: P(0.0, -0.17, 1.2, 0.5, 0.6, 0.2, 0.62) }, { turn: { knot: [0.1, 0.8, 0] } }),
+  "case-twist": D({ twist: P(0.0, -0.17, 1.2, 0.45, 0.35, 0.3, 0.7) }, { turn: { twist: [0.1, 0.8, 0] } }),
   away: D({}),
 };
 
@@ -194,11 +195,24 @@ const mobile: Record<string, Scene> = {
   "p-spring": M({ spring: P(0.0, -0.02, 0.6, 0.1, 0.0, 0.12, 0.5) }, { turn: { spring: [0.05, 1.6, 0] } }),
   "p-lens": M({ lens: P(0.0, -0.02, 0.6, 0.25, 0.45, -0.25, 0.46) }, { turn: { lens: [0.15, 0.9, 0.15] } }),
   "p-rosette": M({ rosette: P(0.0, -0.02, 0.6, 0.5, 0.35, 0.1, 0.5) }, { turn: { rosette: [0.3, 0.6, 1.0] } }),
-  "case-loop": M({ loop: P(0.74, 0.7, 0.4, 0.5, -0.4, 0.9, 0.5) }),
-  "case-knot": M({ knot: P(0.74, 0.7, 0.4, 0.5, 0.7, 0.5, 0.45) }),
-  "case-twist": M({ twist: P(0.74, 0.7, 0.4, 0.6, -0.4, 0.2, 0.45) }),
+  "case-loop": M({ loop: P(0.0, -0.02, 0.6, 0.5, -0.4, 0.4, 0.34) }),
+  "case-knot": M({ knot: P(0.0, -0.02, 0.6, 0.5, 0.6, 0.2, 0.34) }),
+  "case-twist": M({ twist: P(0.0, -0.02, 0.6, 0.45, 0.35, 0.3, 0.38) }),
   away: M({}),
 };
+
+/* Each project object holds the same pose on its case study as in the stage. */
+for (const piece of ["stack", "wave", "chain", "spring", "lens", "rosette"]) {
+  desktop[`case-${piece}`] = desktop[`p-${piece}`];
+  mobile[`case-${piece}`] = mobile[`p-${piece}`];
+}
+/* The services page: one frame per discipline, each with its family piece. */
+desktop["svc-technology"] = desktop["case-knot"];
+desktop["svc-automation"] = desktop["case-twist"];
+desktop["svc-creative"] = desktop["case-loop"];
+mobile["svc-technology"] = mobile["case-knot"];
+mobile["svc-automation"] = mobile["case-twist"];
+mobile["svc-creative"] = mobile["case-loop"];
 
 export const choreography = { desktop, mobile };
 
