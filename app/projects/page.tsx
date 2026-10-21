@@ -1,14 +1,16 @@
 import type { Metadata } from "next";
+import { pageMeta } from "@/components/seo/meta";
 import { ArrowDown } from "@/components/Icons";
 import { NextPage } from "@/components/nav/NextPage";
 import { ProjectGrid } from "@/components/projects/ProjectGrid";
 import { projects } from "@/content/projects";
 import s from "./projects.module.css";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
   title: "Projects",
   description: "Software, websites and apps built by ODDLY®, a creative technology studio in Cebu, Philippines.",
-};
+  path: "/projects/",
+});
 
 /** Every project: one giant word with its count, the filters, then the grid. */
 export default function Projects() {

@@ -13,7 +13,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const p = projectBySlug(slug);
   if (!p) return {};
-  return { title: p.name, robots: { index: false } };
+  // The project's own page is the one to index.
+  return { title: p.name, alternates: { canonical: `/projects/${p.slug}/` } };
 }
 
 /** Project pages moved to /projects/<slug>/; older links (the home stage among them) land here. */

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMeta } from "@/components/seo/meta";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Plate } from "@/components/Plate";
@@ -9,6 +10,7 @@ import { ProjectReel } from "@/components/projects/ProjectReel";
 import { tagLine } from "@/components/projects/ProjectCard";
 import { nextProject, projectBySlug, projects, type Media } from "@/content/projects";
 import { contactHref } from "@/content/site";
+import { JsonLd, absolute } from "@/components/seo/JsonLd";
 import s from "./project.module.css";
 
 export const dynamicParams = false;
@@ -21,7 +23,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const p = projectBySlug(slug);
   if (!p) return {};
-  return { title: p.name, description: p.summary ?? p.overview };
+  return pageMeta({ title: `${p.name}: ${p.headline ?? p.category}`, description: p.summary ?? p.overview, path: `/projects/${p.slug}/` });
 }
 
 const width = (m: Media) => Number(m.ratio.split("/")[0]);
@@ -62,8 +64,37 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
     { label: "Built with", value: p.stack?.length ? p.stack.join(", ") : null },
   ].filter((f): f is { label: string; value: string } => !!f.value);
 
+  const url = absolute(`/projects/${p.slug}/`);
+  const structured = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "CreativeWork",
+        "@id": `${url}#work`,
+        name: p.name,
+        headline: p.headline ?? p.category,
+        description: p.summary ?? p.overview,
+        url,
+        ...(reel?.kind !== "video" && reel?.src && { image: absolute(reel.src) }),
+        ...(p.stack?.length && { keywords: p.stack.join(", ") }),
+        ...(p.year && { dateCreated: p.year }),
+        creator: { "@id": absolute("/#studio") },
+        ...(p.url && { sameAs: p.url }),
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Home", item: absolute("/") },
+          { "@type": "ListItem", position: 2, name: "Projects", item: absolute("/projects/") },
+          { "@type": "ListItem", position: 3, name: p.name, item: url },
+        ],
+      },
+    ],
+  };
+
   return (
     <article className={s.page} data-scene="away">
+      <JsonLd data={structured} />
       {/* ── The name ── */}
       <header className={s.hero} aria-labelledby="project-title">
         <div className={s.top} data-enter>

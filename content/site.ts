@@ -5,6 +5,13 @@
 export const site = {
   name: "ODDLY",
   legalName: "ODDLY®",
+  /** The production address: canonical URLs, the sitemap and social previews all build on it. */
+  url: "https://workwithoddly.com",
+  /**
+   * Google Search Console's HTML-tag verification token (the `content` value of
+   * the meta tag it gives you). Not needed when the domain is verified by DNS.
+   */
+  googleSiteVerification: null as string | null,
   positioning: "Creative Technology Studio",
   statement: ["Different by design.", "Built for better."],
   location: { city: "Cebu", country: "Philippines", timeZone: "Asia/Manila" },

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMeta } from "@/components/seo/meta";
 import Link from "next/link";
 import { ArrowUpRight } from "@/components/Icons";
 import { disciplines } from "@/content/services";
@@ -7,11 +8,12 @@ import { contactHref } from "@/content/site";
 import { NextPage } from "@/components/nav/NextPage";
 import s from "./services.module.css";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
   title: "Services",
   description:
     "Technology, automation, and creative services from ODDLY®, a creative technology studio in Cebu, Philippines.",
-};
+  path: "/services/",
+});
 
 /**
  * Services, in the stage grammar: one complete frame per discipline. The word

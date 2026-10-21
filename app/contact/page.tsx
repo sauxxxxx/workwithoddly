@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMeta } from "@/components/seo/meta";
 import Link from "next/link";
 import { ContactBrief } from "@/components/home/experience/ContactBrief";
 import { LocalTime } from "@/components/home/LocalTime";
@@ -7,10 +8,11 @@ import { Wordmark } from "@/components/Wordmark";
 import { hasContactEmail, site } from "@/content/site";
 import s from "./contact.module.css";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
   title: "Contact",
-  description: `Start a project with ${site.legalName}, a creative technology studio in ${site.location.city}, ${site.location.country}.`,
-};
+  description: `Start a project with ${site.legalName}, a creative technology studio in ${site.location.city}, ${site.location.country}. Email ${site.contact.email}.`,
+  path: "/contact/",
+});
 
 /** The invitation, how to reach us, and back to the start. */
 export default function Contact() {

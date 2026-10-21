@@ -8,6 +8,8 @@ import "lenis/dist/lenis.css";
 import { ScrollRuntime } from "@/components/motion/ScrollRuntime";
 import { LogoReveal } from "@/components/intro/LogoReveal";
 import { PageTransition } from "@/components/motion/PageTransition";
+import { JsonLd, studio } from "@/components/seo/JsonLd";
+import { ogImage, ogShared } from "@/components/seo/meta";
 
 /* Decides before first paint whether the entrance reveal plays: first visit of
    the session, home page, motion allowed. A failsafe releases the page if the
@@ -34,16 +36,23 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(site.url),
   title: {
     default: `${site.legalName} — ${site.positioning}, ${site.location.city}`,
     template: `%s — ${site.legalName}`,
   },
   description: site.description,
+  applicationName: site.name,
+  alternates: { canonical: "/" },
+  robots: { index: true, follow: true, googleBot: { index: true, follow: true, "max-image-preview": "large" } },
   openGraph: {
+    ...ogShared,
     title: `${site.legalName} — ${site.positioning}`,
     description: site.description,
-    type: "website",
+    url: "/",
   },
+  twitter: { card: "summary_large_image", images: [ogImage.url] },
+  ...(site.googleSiteVerification && { verification: { google: site.googleSiteVerification } }),
 };
 
 export const viewport: Viewport = {
@@ -68,6 +77,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <StageHost />
         <main id="main">{children}</main>
         <PageTransition />
+        <JsonLd data={studio} />
       </body>
     </html>
   );

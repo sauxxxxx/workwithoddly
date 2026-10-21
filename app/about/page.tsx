@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMeta } from "@/components/seo/meta";
 import Link from "next/link";
 import { ArrowUpRight } from "@/components/Icons";
 import { TeamGrid } from "@/components/about/TeamGrid";
@@ -9,10 +10,11 @@ import { site } from "@/content/site";
 import { people } from "@/content/team";
 import s from "./about.module.css";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
   title: "About us",
-  description: site.description,
-};
+  description: `Meet the team behind ${site.legalName}, a creative technology studio in ${site.location.city}, ${site.location.country}: one studio for technology, automation and creative work.`,
+  path: "/about/",
+});
 
 const pad = (n: number) => String(n).padStart(2, "0");
 
