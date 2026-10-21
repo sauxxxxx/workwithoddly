@@ -106,19 +106,12 @@
   color: color-mix(in oklab, var(--ground) 45%, var(--charcoal));
 }
 
-/* ── Under it: index, name, role ── */
-
-.index {
-  padding-top: var(--s-3);
-  border-top: var(--line);
-  font-size: 0.6875rem;
-  font-weight: 600;
-  letter-spacing: 0.14em;
-  color: var(--coral);
-}
+/* ── Under it: a hairline, the name, the role ── */
 
 .name {
-  margin: var(--s-2) 0 0;
+  margin: 0;
+  padding-top: var(--s-3);
+  border-top: var(--line);
   font-family: var(--f-brand);
   font-size: clamp(1.25rem, 1.7vw, 1.6rem);
   font-weight: 500;

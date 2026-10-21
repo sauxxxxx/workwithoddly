@@ -6,7 +6,6 @@ import s from "./team-grid.module.css";
 const GROUNDS = ["lavender", "sage", "cream", "coral"] as const;
 const COLUMNS = 4;
 
-const pad = (n: number) => String(n).padStart(2, "0");
 /** First and last initial: "Reynan Montejo" → "RM". */
 const initials = (name: string) => {
   const words = name.split(" ").filter(Boolean);
@@ -53,9 +52,6 @@ export function TeamGrid({ people }: { people: TeamMember[] }) {
                   </>
                 )}
               </figure>
-              <p className={s.index}>
-                {pad(i + 1)} / {pad(people.length)}
-              </p>
               <h3 className={s.name}>
                 <ScrambleText text={person.name} />
               </h3>
