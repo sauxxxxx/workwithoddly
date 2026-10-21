@@ -84,82 +84,147 @@
   visibility: hidden;
 }
 
-/* ---------- 2. The first project ---------- */
+/* ---------- 2. The first project: a reel card that grows to the screen ---------- */
 
+/* The card frame is four numbers on the project layer, so the card's clip,
+   the marks and the caption all follow the same rectangle. */
 .project {
-  position: absolute;
-  inset: 0;
-}
-
-/* Full-size from the start; GSAP clips it to the loop's frame, then opens it. */
-.window {
   --ct: 0px;
   --cs: 0px;
   --cb: 0px;
   --cr: 14px;
   position: absolute;
-  inset: 12px;
-  clip-path: inset(var(--ct) var(--cs) var(--cb) var(--cs) round var(--cr));
-  overflow: hidden;
-  border-radius: 14px;
-  background: #e9e4d9;
-  box-shadow: 0 40px 70px -40px rgb(15 23 42 / 0.45);
+  inset: 0;
 }
 
-.window video {
+/* Full-size from the start; GSAP clips it to the card frame, then opens it. */
+.card {
+  position: absolute;
+  inset: 12px;
+  overflow: hidden;
+  background: #cfe3e2;
+  clip-path: inset(var(--ct) var(--cs) var(--cb) var(--cs) round var(--cr));
+  /* It arrives bent like a sheet tipping toward you (`--bend`, 1 → 0, from
+     GSAP) and leans with the scroll (`--speed`, from ScrollRuntime) until it
+     fills the screen (`--give`). Turned about the card's own centre. */
+  --bend: 0;
+  --give: 1;
+  transform-origin: 50% 47%;
+  transform: perspective(1300px)
+    rotateX(calc(var(--bend) * 30deg + var(--speed, 0) * var(--give) * -7deg))
+    rotateY(calc(var(--bend) * -9deg))
+    rotateZ(calc(var(--bend) * -4deg))
+    skewY(calc(var(--bend) * -3deg + var(--speed, 0) * var(--give) * 1.4deg));
+}
+
+.media {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  /* Crop the site's own menu bar off the top; keep its headline in view. */
-  object-position: 50% 64%;
 }
 
-/* A soft floor of shade so the copy can sit on the image. */
-.shade {
+/* The title sits on the footage, split around the play pill. */
+.reelTitle {
   position: absolute;
-  z-index: 1;
   inset: 0;
-  background: linear-gradient(to top, rgb(15 23 42 / 0.5), rgb(15 23 42 / 0.18) 16%, rgb(15 23 42 / 0) 30%);
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: min(2.4vw, 2rem);
+  margin: 0;
   pointer-events: none;
 }
 
-.playToggle {
-  position: absolute;
-  z-index: 2;
-  top: calc(var(--nav-h) + var(--s-2));
-  left: var(--s-5);
-  padding: 0.4rem 0.85rem;
-  border: 1px solid rgb(248 246 239 / 0.7);
-  border-radius: 999px;
-  background: rgb(15 23 42 / 0.35);
+.reelWord {
+  font-family: var(--f-display);
+  font-weight: 300;
+  font-variation-settings: "wdth" 112;
+  font-stretch: 112%;
+  text-transform: uppercase;
+  font-size: min(7.4vw, 12svh);
+  line-height: 1;
+  letter-spacing: 0.01em;
   color: var(--cream);
-  font-size: var(--t-micro);
-  font-weight: 600;
-  backdrop-filter: blur(6px);
+  white-space: nowrap;
+  text-shadow: 0 2px 30px rgb(15 23 42 / 0.25);
 }
 
-.playToggle:hover {
+.playPill {
+  pointer-events: auto;
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: min(9.5vw, 8.5rem);
+  height: min(5.4vw, 4.75rem);
+  border: 0;
+  border-radius: 999px;
   background: var(--cream);
   color: var(--charcoal);
+  cursor: pointer;
+  scale: var(--pop, 1);
+  transition: transform var(--d-base) var(--ease-out), background-color var(--d-fast) linear;
 }
 
-/* One quiet row of copy, as in the project scenes. */
-.meta {
+.playPill:hover {
+  background: var(--coral);
+  transform: scale(1.06);
+}
+
+.glyph {
+  width: 28%;
+  height: auto;
+  max-width: 1.6rem;
+}
+
+/* Follows the card's visible frame (the card is clipped to it). */
+.reelBack {
+  pointer-events: auto;
   position: absolute;
-  left: calc(var(--margin) + 12px);
-  right: calc(var(--margin) + 12px);
-  bottom: calc(var(--s-6) + 12px);
+  z-index: 3;
+  top: calc(var(--ct) + 1rem);
+  right: calc(var(--cs) + 1rem);
   display: grid;
-  /* Category left; name and action right. The bottom centre is left to the
-     site itself (its booking bar sits there). */
-  grid-template-columns: 1fr auto;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border: 0;
+  border-radius: 50%;
+  background: var(--cream);
+  color: var(--charcoal);
+  cursor: pointer;
+}
+
+.reelBack .glyph {
+  width: 1rem;
+}
+
+/* A soft floor of shade so the full-screen row can sit on the footage. */
+.shade {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(to top, rgb(15 23 42 / 0.5), rgb(15 23 42 / 0) 30%);
+  pointer-events: none;
+  opacity: 0;
+}
+
+/* The row shown once the footage fills the screen. */
+.fullMeta {
+  position: absolute;
+  z-index: 3;
+  left: var(--margin);
+  right: var(--margin);
+  bottom: var(--s-6);
+  display: flex;
   align-items: end;
-  gap: var(--s-3) var(--s-5);
+  justify-content: space-between;
+  gap: var(--s-5);
   color: var(--cream);
   font-size: var(--t-small);
-  line-height: 1.45;
+  opacity: 0;
 }
 
 .tags {
@@ -169,7 +234,7 @@
 }
 
 .tags span {
-  color: rgb(248 246 239 / 0.85);
+  color: rgb(248 246 239 / 0.88);
 }
 
 .tags .chip {
@@ -183,69 +248,102 @@
   display: inline-flex;
   align-items: center;
   gap: var(--s-2);
-  padding: 0.7rem 1.15rem;
+  padding: 0.75rem 1.2rem;
   border-radius: 999px;
   background: var(--cream);
   color: var(--charcoal);
+  font-size: 0.8125rem;
   font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
   text-decoration: none;
-  transition: background-color var(--d-fast) linear, transform var(--d-base) var(--ease-out);
+  transition: background-color var(--d-fast) linear;
 }
 
 .pill:hover {
   background: var(--coral);
-  transform: scale(1.04);
 }
 
-.meta .tags {
-  grid-column: 1;
-  grid-row: 2;
+/* Registration marks along the card's bottom edge, Lusion-fashion, in ODDLY ink. */
+.marks {
+  position: absolute;
+  left: calc(12px + var(--cs) - 0.4rem);
+  right: calc(12px + var(--cs) - 0.4rem);
+  top: calc(100% - 12px - var(--cb) + 0.9rem);
+  display: flex;
+  justify-content: space-between;
+  pointer-events: none;
 }
 
-.meta .about {
-  grid-column: 2;
-  grid-row: 1;
+.marks span {
+  position: relative;
+  width: 0.8rem;
+  height: 0.8rem;
 }
 
-.meta .pill {
-  grid-column: 2;
-  grid-row: 2;
-  justify-self: end;
+.marks span::before,
+.marks span::after {
+  content: "";
+  position: absolute;
+  background: var(--charcoal);
 }
 
-.about {
-  justify-self: end;
-  display: grid;
-  gap: var(--s-1);
-  text-align: right;
+.marks span::before {
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 1px;
 }
 
-.about strong {
+.marks span::after {
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+}
+
+.caption {
+  position: absolute;
+  left: calc(12px + var(--cs));
+  right: calc(12px + var(--cs));
+  top: calc(100% - 12px - var(--cb) + 2.6rem);
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: var(--s-5);
+}
+
+.captionTags {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.captionName {
+  margin-top: var(--s-1);
   font-family: var(--f-brand);
-  font-weight: 700;
+  font-size: clamp(1.25rem, 1.8vw, 1.75rem);
+  font-weight: 500;
+  letter-spacing: -0.02em;
 }
 
-.about span {
-  color: rgb(248 246 239 / 0.85);
-  font-size: var(--t-micro);
+.captionLink {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding-bottom: 0.2rem;
+  border-bottom: 1.5px solid var(--coral);
 }
 
 .progress {
   display: none;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: rgb(15 23 42 / 0.08);
-}
-
-.progress > span {
-  display: block;
-  height: 100%;
-  background: var(--charcoal);
-  transform-origin: left;
-  transform: scaleX(0);
 }
 
 .workAnchor {
@@ -279,7 +377,6 @@
     min-height: 88svh;
   }
 
-  /* The front copy of the middle line only exists for the live layering. */
   .front .story {
     display: none;
   }
@@ -290,68 +387,26 @@
     padding: 0 var(--margin) var(--s-8);
   }
 
-  .window video {
-    object-position: 50% 0%;
-  }
-
-  .window {
+  .card {
     position: relative;
     inset: auto;
-    aspect-ratio: 1280 / 888;
+    aspect-ratio: 4 / 3;
+    border-radius: 18px;
     clip-path: none !important;
   }
 
-  .shade {
+  .fullMeta,
+  .shade,
+  .marks {
     display: none;
   }
 
-  .playToggle {
-    top: var(--s-3);
-    left: var(--s-3);
-  }
-
-  .meta {
+  .caption {
     position: relative;
     inset: auto;
-    margin-top: var(--s-5);
-    grid-template-columns: 1fr;
-    gap: var(--s-4);
-    color: var(--ink);
+    margin-top: var(--s-4);
     opacity: 1 !important;
     transform: none !important;
-  }
-
-  .tags span,
-  .about span {
-    color: var(--ink-soft);
-  }
-
-  .tags .chip {
-    border-color: var(--rule-strong);
-    color: var(--ink);
-  }
-
-  .meta .tags,
-  .meta .about,
-  .meta .pill {
-    grid-column: auto;
-    grid-row: auto;
-  }
-
-  .about {
-    justify-self: start;
-    text-align: left;
-    order: -1;
-  }
-
-  .pill {
-    justify-self: start;
-    background: var(--charcoal);
-    color: var(--cream);
-  }
-
-  .progress {
-    display: none;
   }
 
   .workAnchor {
@@ -364,8 +419,40 @@
     font-size: min(9.6vw, 8svh);
   }
 
+  .reelWord {
+    font-size: 6.4vw;
+  }
+
+  .reelTitle {
+    gap: 0.6rem;
+  }
+
+  .playPill {
+    flex: none;
+    width: 3.4rem;
+    height: 2.1rem;
+  }
+
+  .glyph {
+    width: 0.9rem;
+  }
+
+  .caption {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
   .fallbackForm {
     width: 90vw;
     translate: -50% -50%;
   }
+}
+
+.reelTitle[hidden] {
+  display: none;
+}
+
+/* The site-wide `video { display: block }` would override the hidden attribute. */
+.media[hidden] {
+  display: none;
 }

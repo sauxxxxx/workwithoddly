@@ -1,0 +1,125 @@
+/* About us: the statement, the three disciplines, the people, the place. */
+
+.page {
+  position: relative;
+  z-index: var(--z-front);
+}
+
+.hero {
+  display: grid;
+  gap: var(--s-6);
+  padding: calc(var(--nav-h) + var(--s-9)) var(--margin) var(--section-pad);
+}
+
+.tag,
+.label {
+  margin: 0;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.title {
+  margin: 0;
+  font-size: min(11.5vw, 19svh);
+  line-height: 0.9;
+}
+
+.lede {
+  max-width: 44rem;
+  justify-self: end;
+  font-family: var(--f-brand);
+  font-size: var(--t-lead);
+  line-height: 1.4;
+  letter-spacing: -0.015em;
+}
+
+/* ═════════ What we do ═════════ */
+
+.what {
+  display: grid;
+  gap: var(--s-5);
+  padding: 0 var(--margin) var(--section-pad);
+}
+
+.disciplines {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.disciplines a {
+  display: grid;
+  grid-template-columns: 3rem minmax(0, 1.2fr) minmax(0, 1fr) auto;
+  align-items: center;
+  gap: var(--gutter);
+  padding: var(--s-6) 0;
+  border-top: var(--line);
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.disciplines li:last-child a {
+  border-bottom: var(--line);
+}
+
+.num {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  color: var(--coral);
+}
+
+.discipline {
+  /* Sized so the longest name ("Automation") stays in its column. */
+  font-size: clamp(2.25rem, 4.4vw, 4.5rem);
+  transition: translate var(--d-base) var(--ease-out);
+}
+
+.disciplines a:hover .discipline {
+  translate: 0.3em 0;
+}
+
+.disciplineLede {
+  color: var(--ink-soft);
+  line-height: 1.5;
+}
+
+.disciplines :global(.arrow) {
+  width: 1.4rem;
+  height: 1.4rem;
+}
+
+/* ═════════ The place ═════════ */
+
+.place {
+  display: grid;
+  justify-items: center;
+  gap: var(--s-3);
+  padding: var(--s-8) var(--margin) var(--section-pad);
+  text-align: center;
+  color: var(--ink-soft);
+}
+
+.city {
+  margin: 0;
+  font-size: min(24vw, 34svh);
+  line-height: 0.85;
+  color: var(--ink);
+}
+
+@media (max-width: 899px) {
+  .lede {
+    justify-self: start;
+  }
+
+  .disciplines a {
+    grid-template-columns: 2.5rem 1fr auto;
+  }
+
+  .disciplineLede {
+    grid-column: 2 / -1;
+  }
+}

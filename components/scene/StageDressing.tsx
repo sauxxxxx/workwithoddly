@@ -5,6 +5,7 @@ import * as THREE from "three";
 import { useFrame, useThree } from "@react-three/fiber";
 import { CAMERA } from "./choreography";
 import { sceneIdAt, track } from "./track";
+import { GROW, TRAVEL, stageTravel } from "./travel";
 import { makeAsterisk, makeCube, makeStar, type Quality } from "./geometry";
 import { makeFinish, type Finish } from "./materials";
 import { buildPlinth } from "./objects";
@@ -91,10 +92,15 @@ export function StageDressing({
     if (p) {
       const hh = halfH(PLINTH.z);
       const py = compact ? -0.16 : PLINTH.y;
+      // Between projects it travels with the scenes: out with the leaving one,
+      // then in from above under the next (travel.ts).
+      const travel = enabled ? stageTravel() : null;
+      const ride = travel ? (travel.t < 0.5 ? -travel.leave : travel.arrive) * TRAVEL : 0;
+      const grow = travel && travel.t < 0.5 ? 1 + GROW * travel.leave : 1;
       // The plinth rises into place as the stage begins and sinks away after.
-      p.position.set(PLINTH.x * hh * aspect, (py - (1 - w) * 0.9) * hh, PLINTH.z);
+      p.position.set(PLINTH.x * hh * aspect, (py - (1 - w) * 0.9 + ride) * hh, PLINTH.z);
       p.rotation.set(PLINTH.tilt, Math.sin(time * 0.2) * 0.05, 0);
-      p.scale.setScalar(PLINTH.s * (compact ? 0.55 : 1) * (hh / halfH(0)));
+      p.scale.setScalar(PLINTH.s * (compact ? 0.55 : 1) * (hh / halfH(0)) * grow);
       p.visible = w > 0.01;
     }
 

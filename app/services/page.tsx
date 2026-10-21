@@ -4,6 +4,7 @@ import { ArrowUpRight } from "@/components/Icons";
 import { disciplines } from "@/content/services";
 import { projectBySlug } from "@/content/projects";
 import { contactHref } from "@/content/site";
+import { NextPage } from "@/components/nav/NextPage";
 import s from "./services.module.css";
 
 export const metadata: Metadata = {
@@ -21,11 +22,13 @@ export default function Services() {
   return (
     <>
       <header className={s.intro} data-scene="away">
-        <p className={s.tag}>ODDLY® · Services</p>
-        <h1 className={`${s.title} display`}>
+        <p className={s.tag} data-enter>
+          ODDLY® · Services
+        </p>
+        <h1 className={`${s.title} display`} data-enter="word">
           Three ways we work<span className="dot" aria-hidden="true" />
         </h1>
-        <nav className={s.jump} aria-label="Disciplines">
+        <nav className={s.jump} aria-label="Disciplines" data-enter>
           {disciplines.map((d) => (
             <a key={d.id} href={`#${d.id}`}>
               {d.name}
@@ -73,7 +76,7 @@ export default function Services() {
                   {work.map((p, j) => (
                     <span key={p.slug}>
                       {j > 0 && ", "}
-                      <Link href={`/work/${p.slug}/`}>{p.name}</Link>
+                      <Link href={`/projects/${p.slug}/`}>{p.name}</Link>
                     </span>
                   ))}
                 </p>
@@ -85,6 +88,7 @@ export default function Services() {
           </section>
         );
       })}
+      <NextPage href="/projects/" label="Projects" />
     </>
   );
 }

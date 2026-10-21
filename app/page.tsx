@@ -5,6 +5,7 @@ import { PerspectiveSequence } from "@/components/home/sequence/PerspectiveSeque
 import { ProjectStage } from "@/components/home/stage/ProjectStage";
 import { StudioAbout } from "@/components/home/experience/StudioAbout";
 import { ContactSection } from "@/components/home/experience/ContactSection";
+import { NextPage } from "@/components/nav/NextPage";
 import { site } from "@/content/site";
 import s from "./home.module.css";
 
@@ -50,6 +51,7 @@ export default function Home() {
       <ProjectStage />
       <StudioAbout />
       <ContactSection />
+      <NextPage href="/projects/" label="Projects" />
     </>
   );
 }

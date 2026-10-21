@@ -1,8 +1,8 @@
-/* The project stage: one pinned frame; scenes change in place. */
+/* The project stage: one pinned frame; each scene travels through it in turn. */
 
 .stage {
   position: relative;
-  height: calc(var(--n) * 110svh + 60svh);
+  height: calc(var(--n) * 120svh + 60svh);
 }
 
 /* Invisible scroll markers, one per scene, driving the 3D through the track. */
@@ -10,8 +10,8 @@
   position: absolute;
   left: 0;
   width: 1px;
-  top: calc(var(--i) * 110svh);
-  height: 110svh;
+  top: calc(var(--i) * 120svh);
+  height: 120svh;
   pointer-events: none;
   scroll-margin-top: 0;
 }
@@ -57,6 +57,7 @@
   white-space: nowrap;
   font-size: min(calc(90vw / (var(--chars) * 0.72)), 19svh);
   color: var(--charcoal);
+  will-change: transform;
 }
 
 /* The front copy shows only the right half, so the object sits between the letters. */

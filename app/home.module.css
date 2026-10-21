@@ -87,6 +87,23 @@
   }
 }
 
+/* The headline and badge wait for the entrance reveal to open the page. */
+:global(html[data-intro="play"]) .heroLine > span {
+  animation-play-state: paused;
+}
+
+:global(html[data-intro="play"]) .heroBadge,
+:global(html[data-intro="play"]) .heroTag,
+:global(html[data-intro="play"]) .heroFoot {
+  opacity: 0;
+}
+
+.heroTag,
+.heroFoot,
+.heroBadge {
+  transition: opacity 600ms var(--ease-out) 150ms;
+}
+
 .heroBadge {
   position: absolute;
   right: var(--margin);
@@ -309,7 +326,24 @@
 /* ═════════ Tablet and phone ═════════ */
 
 @media (max-width: 899px) {
-  .heroBadge { bottom: var(--s-5); }
+  /* The headline and badge wait for the entrance reveal to open the page. */
+:global(html[data-intro="play"]) .heroLine > span {
+  animation-play-state: paused;
+}
+
+:global(html[data-intro="play"]) .heroBadge,
+:global(html[data-intro="play"]) .heroTag,
+:global(html[data-intro="play"]) .heroFoot {
+  opacity: 0;
+}
+
+.heroTag,
+.heroFoot,
+.heroBadge {
+  transition: opacity 600ms var(--ease-out) 150ms;
+}
+
+.heroBadge { bottom: var(--s-5); }
   .about { grid-template-columns: minmax(0, 1fr); gap: var(--s-6); }
   .aboutHeading, .aboutBody, .facts { grid-column: 1; grid-row: auto; }
   .facts { margin-top: 0; }

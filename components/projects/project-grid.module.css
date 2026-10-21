@@ -1,0 +1,81 @@
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2);
+  margin-bottom: var(--s-7);
+}
+
+.filter {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.3rem;
+  padding: 0.55rem 1.05rem;
+  border: 1px solid var(--rule-strong);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+  font-size: var(--t-small);
+  cursor: pointer;
+  transition: background-color var(--d-fast) linear, color var(--d-fast) linear;
+}
+
+.filter sup {
+  font-size: 0.65em;
+  color: var(--ink-mute);
+}
+
+.filter:hover,
+.filter[aria-pressed="true"] {
+  background: var(--charcoal);
+  color: var(--cream);
+}
+
+.filter:hover sup,
+.filter[aria-pressed="true"] sup {
+  color: rgb(248 246 239 / 0.7);
+}
+
+/* Two to a row; the right column sits a little lower, Lusion-fashion. */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--s-8) var(--gutter);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.grid li:nth-child(even) {
+  translate: 0 var(--s-9);
+}
+
+/* Each re-deal rises in, one after another. */
+.grid li {
+  animation: deal 700ms var(--ease-out) both;
+  animation-delay: calc(min(var(--i), 8) * 60ms);
+}
+
+@keyframes deal {
+  from {
+    opacity: 0;
+    transform: translateY(2.5rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .grid li {
+    animation: none;
+  }
+}
+
+@media (max-width: 899px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: var(--s-7);
+  }
+
+  .grid li:nth-child(even) {
+    translate: none;
+  }
+}

@@ -6,6 +6,8 @@ import { ArrowUpRight } from "@/components/Icons";
 import { projects, type Project } from "@/content/projects";
 import { disciplineById } from "@/content/services";
 import { sceneIdAt, track } from "@/components/scene/track";
+import { GROW, TRAVEL, stageTravel } from "@/components/scene/travel";
+import { ScrambleText } from "@/components/motion/ScrambleText";
 import s from "./stage.module.css";
 
 /* Scene order follows the disciplines: technology, automation, creative. */
@@ -32,7 +34,10 @@ export function ProjectStage() {
     if (!el) return;
     const ids = scenes.map((p) => `p-${p.art.sculpture}`);
     const layers = ids.map((id) => Array.from(el.querySelectorAll<HTMLElement>(`[data-stage-scene="${id}"]`)));
+    const travelling = layers.map((nodes) => nodes.flatMap((n) => Array.from(n.querySelectorAll<HTMLElement>("[data-travel]"))));
+    const settling = layers.map((nodes) => nodes.flatMap((n) => Array.from(n.querySelectorAll<HTMLElement>("[data-settle]"))));
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const clamp = (v: number) => Math.min(1, Math.max(0, v));
     let raf = 0;
     let last = "";
 
@@ -41,12 +46,35 @@ export function ProjectStage() {
       const from = sceneIdAt(track.from);
       const to = sceneIdAt(track.to);
       const t = track.t;
-      const key = `${from}|${to}|${t.toFixed(3)}`;
+      const vh = window.innerHeight;
+      const key = `${from}|${to}|${t.toFixed(4)}|${vh}`;
       if (key === last) return;
       last = key;
+      const travel = reduced.matches ? null : stageTravel();
       ids.forEach((id, i) => {
-        // The leaving scene clears in the first half, the next arrives in the second.
-        const clamp = (v: number) => Math.min(1, Math.max(0, v));
+        if (travel && (from === id || to === id)) {
+          // Project to project: the word travels with its sculpture (travel.ts);
+          // the copy fades where it stands, and the next scene's copy waits
+          // until its scene has all but settled.
+          const leaving = from === id;
+          const y = (leaving ? travel.leave : -travel.arrive) * (TRAVEL / 2) * vh;
+          const scale = leaving ? 1 + GROW * travel.leave : 1;
+          const shown = leaving ? 1 - clamp(t / 0.15) : clamp((t - 0.9) / 0.1);
+          for (const node of layers[i]) {
+            node.style.opacity = "1";
+            node.style.transform = "";
+            node.style.filter = "";
+            node.dataset.active = String(shown > 0.5);
+          }
+          for (const node of travelling[i]) node.style.transform = `translate3d(0, ${y.toFixed(1)}px, 0) scale(${scale.toFixed(4)})`;
+          for (const node of settling[i]) {
+            node.style.opacity = String(shown);
+            node.style.transform = `translate3d(0, ${((1 - shown) * 14).toFixed(1)}px, 0)`;
+          }
+          return;
+        }
+        // Into and out of the stage: the leaving scene clears in the first
+        // half, the next arrives in the second.
         const w = from === id && to === id ? 1 : from === id ? 1 - clamp(t / 0.5) : to === id ? clamp((t - 0.5) / 0.5) : 0;
         // Leaving rises out; arriving rises in from below.
         const dir = from === id && to !== id ? -1 : 1;
@@ -57,6 +85,11 @@ export function ProjectStage() {
           node.style.transform = `translate3d(0, ${y.toFixed(1)}px, 0)`;
           node.style.filter = blur > 0.05 ? `blur(${blur.toFixed(2)}px)` : "";
           node.dataset.active = String(w > 0.5);
+        }
+        for (const node of travelling[i]) node.style.transform = "";
+        for (const node of settling[i]) {
+          node.style.opacity = "";
+          node.style.transform = "";
         }
       });
     };
@@ -90,7 +123,7 @@ export function ProjectStage() {
             className={s.marker}
             style={{ ["--i" as string]: i }}
             data-scene={`p-${p.art.sculpture}`}
-            data-scene-hold="0.75"
+            data-scene-hold="1"
             data-stage-marker
           />
         );
@@ -100,7 +133,7 @@ export function ProjectStage() {
       <div className={`${s.frame} ${s.back}`}>
         {scenes.map((p) => (
           <div key={p.slug} className={s.layer} data-stage-scene={`p-${p.art.sculpture}`}>
-            <h2 id={`stage-${p.slug}`} className={`${s.word} display`} style={{ ["--chars" as string]: p.art.word?.length }}>
+            <h2 id={`stage-${p.slug}`} className={`${s.word} display`} style={{ ["--chars" as string]: p.art.word?.length }} data-travel>
               {p.art.word}
             </h2>
           </div>
@@ -114,17 +147,18 @@ export function ProjectStage() {
 
           return (
             <div key={p.slug} className={s.layer} data-stage-scene={`p-${p.art.sculpture}`} aria-labelledby={`stage-${p.slug}`}>
-              <p className={s.index}>
+              <p className={s.index} data-settle>
                 <span>{String(i + 1).padStart(2, "0")}</span> / {String(scenes.length).padStart(2, "0")} · {lead.name}
               </p>
               <span
                 className={`${s.word} ${s.wordFront} display`}
                 style={{ ["--chars" as string]: p.art.word?.length }}
                 aria-hidden="true"
+                data-travel
               >
                 {p.art.word}
               </span>
-              <div className={s.meta}>
+              <div className={s.meta} data-settle>
                 <p className={s.tags}>
                   <span className={s.chip}>{cap(p.disciplines[0])}</span>
                   <span>{p.category}</span>
@@ -133,7 +167,9 @@ export function ProjectStage() {
                   View project <ArrowUpRight />
                 </Link>
                 <div className={s.about}>
-                  <p className={s.name}>{p.name}</p>
+                  <p className={s.name}>
+                    <ScrambleText text={p.name} />
+                  </p>
                   <p>{p.overview}</p>
                   <p className={s.role}>{p.role.join(" · ")}</p>
                 </div>

@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import Lenis from "lenis";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { smooth } from "./smooth";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -37,13 +38,41 @@ export function ScrollRuntime() {
           attributeFilter: ["style"],
         });
         lock();
+        smooth.lenis = scroll;
         return () => {
+          if (smooth.lenis === scroll) smooth.lenis = null;
           observer.disconnect();
           gsap.ticker.remove(tick);
           scroll.destroy();
         };
       },
     );
+    // Scroll speed as `--speed` on the root (about ±1 at a brisk scroll, 0 at
+    // rest): cards marked `data-speed-tilt` lean with it, the reel card bends.
+    motion.add("(prefers-reduced-motion: no-preference)", () => {
+      const root = document.documentElement;
+      let raf = 0;
+      let prev = window.scrollY;
+      let speed = 0;
+      let written = "";
+      const frame = () => {
+        raf = requestAnimationFrame(frame);
+        const y = window.scrollY;
+        const raw = Math.max(-1.5, Math.min(1.5, (y - prev) / 40));
+        prev = y;
+        speed += (raw - speed) * 0.12;
+        const value = Math.abs(speed) < 0.004 ? "0" : speed.toFixed(3);
+        if (value !== written) {
+          written = value;
+          root.style.setProperty("--speed", value);
+        }
+      };
+      raf = requestAnimationFrame(frame);
+      return () => {
+        cancelAnimationFrame(raf);
+        root.style.removeProperty("--speed");
+      };
+    });
     return () => motion.revert();
   }, [pathname]);
   return null;

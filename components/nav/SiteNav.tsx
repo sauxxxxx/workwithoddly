@@ -107,7 +107,7 @@ export function SiteNav() {
       data-open={open}
       data-dark={darkSurface}
     >
-      <Link href="/" className={styles.logo} aria-label="ODDLY — home">
+      <Link href="/" className={styles.logo} aria-label="ODDLY — home" data-nav-logo>
         <AppIcon className={styles.icon} />
         <Wordmark className={styles.wordmark} />
       </Link>
@@ -164,13 +164,21 @@ export function SiteNav() {
             </ul>
             <p className={styles.menuHead}>Projects</p>
             <ul>
-              {projects.map((p) => (
-                <li key={p.slug}>
-                  <Link href={`/work/${p.slug}/`} onClick={() => setOpen(false)}>
-                    {p.name}
-                  </Link>
-                </li>
-              ))}
+              {/* The featured few (the home stage's); the rest are on the Projects page. */}
+              {projects
+                .filter((p) => p.art.word)
+                .map((p) => (
+                  <li key={p.slug}>
+                    <Link href={`/projects/${p.slug}/`} onClick={() => setOpen(false)}>
+                      {p.name}
+                    </Link>
+                  </li>
+                ))}
+              <li>
+                <Link href="/projects/" onClick={() => setOpen(false)}>
+                  All projects ({projects.length}) →
+                </Link>
+              </li>
             </ul>
           </div>
 

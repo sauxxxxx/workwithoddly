@@ -6,6 +6,13 @@ import { site } from "@/content/site";
 import "./globals.css";
 import "lenis/dist/lenis.css";
 import { ScrollRuntime } from "@/components/motion/ScrollRuntime";
+import { LogoReveal } from "@/components/intro/LogoReveal";
+import { PageTransition } from "@/components/motion/PageTransition";
+
+/* Decides before first paint whether the entrance reveal plays: first visit of
+   the session, home page, motion allowed. A failsafe releases the page if the
+   reveal never runs. */
+const INTRO = `try{var d=document.documentElement;if(location.pathname==="/"&&!sessionStorage.getItem("oddly-intro")&&!matchMedia("(prefers-reduced-motion: reduce)").matches){d.dataset.intro="play";d.style.overflow="hidden";setTimeout(function(){if(d.dataset.intro!=="done"){d.dataset.intro="done";d.style.overflow="";}},7000);}}catch(e){}`;
 
 const archivo = Archivo({
   subsets: ["latin"],
@@ -47,15 +54,20 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${archivo.variable} ${jakarta.variable} ${inter.variable}`}>
+    <html lang="en" className={`${archivo.variable} ${jakarta.variable} ${inter.variable}`} suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: INTRO }} />
+      </head>
       <body>
         <a className="skip-link" href="#main">
           Skip to content
         </a>
+        <LogoReveal />
         <SiteNav />
         <ScrollRuntime />
         <StageHost />
         <main id="main">{children}</main>
+        <PageTransition />
       </body>
     </html>
   );

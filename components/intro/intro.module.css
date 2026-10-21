@@ -1,0 +1,119 @@
+/* "The odd letter" entrance. Hidden unless html[data-intro] says it plays. */
+
+.intro {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: none;
+  pointer-events: none;
+}
+
+:global(html[data-intro="play"]) .intro,
+:global(html[data-intro="landing"]) .intro {
+  display: block;
+}
+
+/* The lavender page the reveal happens on; it opens as a circle from the dot. */
+.bg {
+  --r: 0px;
+  --cx: 50%;
+  --cy: 50%;
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(42% 46% at 18% 14%, rgb(255 255 255 / 0.75), rgb(255 255 255 / 0) 70%),
+    radial-gradient(38% 44% at 86% 58%, rgb(255 122 89 / 0.11), rgb(255 122 89 / 0) 70%),
+    var(--ground);
+  -webkit-mask-image: radial-gradient(circle at var(--cx) var(--cy), transparent var(--r), #000 calc(var(--r) + 1px));
+  mask-image: radial-gradient(circle at var(--cx) var(--cy), transparent var(--r), #000 calc(var(--r) + 1px));
+}
+
+.center {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: var(--s-6);
+}
+
+.row {
+  --mark-h: min(14vw, 17svh);
+  display: flex;
+  align-items: flex-end;
+  height: var(--mark-h);
+  color: var(--charcoal);
+  fill: currentColor;
+  transform-origin: 0 0;
+  will-change: transform;
+}
+
+.row svg {
+  display: block;
+  height: var(--mark-h);
+  fill: currentColor;
+}
+
+/* Each letter rises from behind its own edge. */
+.mask {
+  display: block;
+  overflow: hidden;
+  padding-top: 0.04em;
+}
+
+/* Resting state = the timeline's first frame, so nothing shows before it starts. */
+.slot {
+  display: block;
+  transform: translateY(115%);
+}
+
+/* The third letter: two faces turning over one slot. */
+.flip {
+  position: relative;
+  perspective: 900px;
+}
+
+.spacer {
+  visibility: hidden;
+}
+
+.faces {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+}
+
+.face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  transform-origin: 50% 50%;
+}
+
+.bowl {
+  transform: rotateY(-90deg);
+}
+
+.dotSlot {
+  display: block;
+  transform: translateY(-900%);
+  opacity: 0;
+}
+
+.label {
+  opacity: 0;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+/* While the reveal plays: the nav logo waits for the flying mark, the hero waits for the page. */
+:global(html[data-intro="play"]) :global([data-nav-logo]) {
+  opacity: 0;
+}
+
+:global([data-nav-logo]) {
+  transition: opacity 200ms linear;
+}

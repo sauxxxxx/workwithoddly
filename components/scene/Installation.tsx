@@ -10,8 +10,8 @@ import { sceneIdAt, sceneProgress, track } from "./track";
 import { buildCompound, buildSculpture, type Quality } from "./geometry";
 import { makeFinish } from "./materials";
 import { buildObject } from "./objects";
-import { addPortalTarget } from "./portal-geometry";
 import { journey, range } from "./journey";
+import { GROW, TRAVEL, stageTravel } from "./travel";
 import { StageDressing } from "./StageDressing";
 import { ModelPiece } from "./ModelPiece";
 
@@ -68,7 +68,6 @@ export function Installation({ quality, compact, reducedMotion, onFirstFrame }: 
       const built = spec.compound
         ? buildCompound(spec.compound, spec, quality)
         : buildSculpture(spec.curve ?? "loop", spec, quality);
-      if (spec.id === "loop") addPortalTarget(built.tube, size.width, size.height);
       const material = makeFinish(spec.finish ?? { kind: "lacquer", colour: spec.colour }, lite);
       return { spec, obj: null, built, material };
     });
@@ -81,7 +80,7 @@ export function Installation({ quality, compact, reducedMotion, onFirstFrame }: 
       wireGeo: new THREE.CylinderGeometry(WIRE_RADIUS, WIRE_RADIUS, 1, 6, 1, true),
       wire: new THREE.MeshBasicMaterial({ color: CHARCOAL, transparent: true, opacity: 0 }),
     };
-  }, [quality, shadows, size.width, size.height]);
+  }, [quality, shadows]);
 
   useEffect(
     () => () => {
@@ -148,6 +147,7 @@ export function Installation({ quality, compact, reducedMotion, onFirstFrame }: 
     const phaseA = sceneProgress(track.from);
     const phaseB = sceneProgress(track.to);
     const opening = journey();
+    const travel = reducedMotion ? null : stageTravel();
 
     SCULPTURES.forEach((spec, i) => {
       const id = spec.id;
@@ -180,21 +180,33 @@ export function Installation({ quality, compact, reducedMotion, onFirstFrame }: 
         rz: ar[2] + (br[2] - ar[2]) * u,
         s: pa.s + (pb.s - pa.s) * u,
       };
+      // The statement: the loop holds through the middle line, then floats
+      // off up and to the right as the reel card rises in.
       if (!compact && !reducedMotion && opening.active && id === "loop") {
-        const progress = range(opening.progress, .18, .72);
+        const away = range(opening.progress, 0.14, 0.34);
         const start = set.studio.loop;
-        target.x = start.x * (1 - progress);
-        target.y = start.y * (1 - progress) - .10 * progress + opening.exit * 2;
-        target.z = .8;
-        target.rx = start.r[0] * (1 - progress);
-        target.ry = start.r[1] * (1 - progress);
-        target.rz = start.r[2] * (1 - progress);
-        target.s = start.s + (1 - start.s) * progress;
+        target.x = start.x + (1.5 - start.x) * away;
+        target.y = start.y + (1.3 - start.y) * away;
+        target.z = start.z;
+        target.rx = start.r[0] + 0.9 * away;
+        target.ry = start.r[1] - 0.6 * away;
+        target.rz = start.r[2] + 1.2 * away;
+        target.s = start.s;
+      }
+      // Project to project: each piece rides with its own scene, straight down
+      // and out, or down in from above (travel.ts). Followed exactly, so the
+      // piece never lags behind its word.
+      if (travel) {
+        const own = !offscreen(pa) ? { pose: pa, r: ar, y: -travel.leave, grow: travel.leave } : !offscreen(pb) ? { pose: pb, r: br, y: travel.arrive, grow: 0 } : null;
+        if (own) {
+          Object.assign(target, toLive({ ...own.pose, r: own.r as Pose["r"] }));
+          target.y += own.y * TRAVEL;
+          target.s *= 1 + GROW * own.grow;
+        }
       }
       for (const key of ["x", "y", "z", "rx", "ry", "rz", "s"] as const) {
         const d = target[key] - L[key];
-        const synchronizedFrame = id === "loop" && opening.active && opening.progress >= .74 && !compact && !reducedMotion;
-        L[key] += d * (jump || synchronizedFrame ? 1 : k);
+        L[key] += d * (jump || travel ? 1 : k);
         motion = Math.max(motion, Math.abs(d));
       }
 
@@ -205,23 +217,12 @@ export function Installation({ quality, compact, reducedMotion, onFirstFrame }: 
       g.scale.setScalar((L.s * hh) / H0);
 
       // A very slow breathing sway so the pieces feel suspended, not pasted.
-      const swayWeight = id === "loop" && opening.active ? 1 - range(opening.progress, .49, .74) : 1;
-      const sway = reducedMotion ? 0 : Math.sin(time * 0.42 + i * 1.7) * 0.03 * swayWeight;
+      const sway = reducedMotion ? 0 : Math.sin(time * 0.42 + i * 1.7) * 0.03;
       g.rotation.set(L.rx + sway, L.ry + sway * 0.6, L.rz);
 
       // Scroll-linked rotation on each piece's own axes.
       const sp = spins.current[id];
       if (sp) sp.rotation.set(0, 0, 0);
-      if (id === "loop" && sp) {
-        const mesh = sp.children[0] as THREE.Mesh;
-        const enabled = !compact && !reducedMotion && opening.active;
-        const morph = enabled ? range(opening.progress, .49, .74) : 0;
-        if (mesh?.morphTargetInfluences) {
-          mesh.morphTargetInfluences[0] = morph;
-          mesh.morphTargetInfluences[1] = enabled ? range(opening.progress, .28, .49) * (1 - morph) : 0;
-        }
-        (mesh.material as THREE.MeshStandardMaterial).color.set(spec.colour);
-      }
 
       const radius = spec.size * L.s * 0.65 / H0;
       const visible = Math.abs(L.x) < 1 + radius / aspect && Math.abs(L.y) < 1 + radius && (!compact || spec.phone);
@@ -274,7 +275,7 @@ export function Installation({ quality, compact, reducedMotion, onFirstFrame }: 
     p.x += (p.tx - p.x) * (1 - Math.exp(-3 * dt));
     p.y += (p.ty - p.y) * (1 - Math.exp(-3 * dt));
     if (root.current) {
-      const strength = opening.active && !compact ? 1 - range(opening.progress, .49, .74) : 1;
+      const strength = 1;
       root.current.rotation.y = p.x * 0.05 * strength;
       root.current.rotation.x = p.y * 0.035 * strength;
     }
@@ -367,7 +368,6 @@ export function Installation({ quality, compact, reducedMotion, onFirstFrame }: 
                     material={material}
                     castShadow={shadows}
                     receiveShadow={shadows}
-                    onUpdate={(mesh) => mesh.updateMorphTargets()}
                   />
                   {built.capGeometry &&
                     built.caps.map((c, i) => (

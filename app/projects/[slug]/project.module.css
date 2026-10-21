@@ -1,0 +1,389 @@
+/* A project page: name, facts, the reel, story, scope, technology, pictures. */
+
+.page {
+  position: relative;
+  z-index: var(--z-front);
+}
+
+/* ═════════ The name ═════════ */
+
+.hero {
+  display: grid;
+  gap: var(--s-6);
+  padding: calc(var(--nav-h) + var(--s-6)) var(--margin) var(--s-8);
+}
+
+.top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--s-3) var(--s-6);
+}
+
+.back {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  font-size: var(--t-small);
+  color: var(--ink-soft);
+  text-decoration: none;
+}
+
+.back:hover {
+  color: var(--ink);
+}
+
+.kicker {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.kicker span {
+  color: var(--coral);
+}
+
+.name {
+  margin: var(--s-6) 0 0;
+  font-size: clamp(3.25rem, 11.5vw, 12rem);
+  line-height: 0.9;
+  text-wrap: balance;
+  overflow-wrap: anywhere;
+}
+
+.lead {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+  gap: var(--s-6);
+}
+
+.summary {
+  max-width: 40rem;
+  font-family: var(--f-brand);
+  font-size: var(--t-lead);
+  line-height: 1.35;
+  letter-spacing: -0.015em;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2);
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-3);
+  padding: 0.85rem 1.4rem;
+  border: 1px solid var(--charcoal);
+  border-radius: 999px;
+  background: var(--charcoal);
+  color: var(--cream);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background-color var(--d-fast) linear, color var(--d-fast) linear, border-color var(--d-fast) linear;
+}
+
+.pill:hover {
+  border-color: var(--coral);
+  background: var(--coral);
+  color: var(--charcoal);
+}
+
+.pillQuiet {
+  background: transparent;
+  color: var(--ink);
+}
+
+/* The facts, in a hairline row. */
+.facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+  gap: var(--s-4) var(--gutter);
+  margin: var(--s-4) 0 0;
+  padding-top: var(--s-5);
+  border-top: var(--hair);
+}
+
+.facts dt,
+.label {
+  margin: 0;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+}
+
+.facts dd {
+  margin: var(--s-1) 0 0;
+  font-size: var(--t-small);
+  line-height: 1.45;
+}
+
+/* ═════════ The story ═════════ */
+
+.story {
+  display: grid;
+  gap: var(--s-6);
+  padding: var(--section-pad) var(--margin) var(--s-8);
+}
+
+.parts {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--gutter);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.parts li {
+  display: grid;
+  align-content: start;
+  gap: var(--s-3);
+  padding-top: var(--s-5);
+  border-top: var(--line);
+}
+
+.parts h3 {
+  margin: 0;
+  font-family: var(--f-brand);
+  font-size: 1.5rem;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+
+.parts p {
+  font-size: var(--t-body);
+  line-height: 1.6;
+  color: var(--ink-soft);
+}
+
+.num {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  color: var(--coral);
+}
+
+/* ═════════ In focus ═════════ */
+
+.highlights {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--gutter);
+  padding: 0 var(--margin) var(--s-8);
+}
+
+.highlights div {
+  display: grid;
+  gap: var(--s-3);
+  padding: var(--s-6);
+  border-radius: 1.25rem;
+  background: var(--ground-deep);
+}
+
+.highlights h3 {
+  margin: 0;
+  font-family: var(--f-brand);
+  font-size: var(--t-lead);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+
+.highlights p {
+  color: var(--ink-soft);
+  line-height: 1.55;
+}
+
+/* ═════════ What we built ═════════ */
+
+.capabilities {
+  display: grid;
+  gap: var(--s-7);
+  padding: var(--s-9) var(--margin) var(--s-8);
+}
+
+.heading {
+  margin: 0;
+  font-family: var(--f-display);
+  font-weight: 300;
+  font-stretch: 112%;
+  font-variation-settings: "wdth" 112;
+  text-transform: uppercase;
+  font-size: var(--t-display-s);
+  line-height: 0.95;
+}
+
+.capabilities ol {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: var(--gutter);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.capabilities li {
+  display: grid;
+  grid-template-columns: 2.5rem 1fr;
+  align-items: baseline;
+  padding: var(--s-4) 0;
+  border-top: var(--hair);
+  font-size: var(--t-body);
+  line-height: 1.45;
+}
+
+/* ═════════ Technology ═════════ */
+
+.technology {
+  display: grid;
+  grid-template-columns: minmax(10rem, 1fr) 3fr;
+  gap: var(--s-5) var(--gutter);
+  padding: var(--s-8) var(--margin);
+}
+
+.technology dl {
+  margin: 0;
+}
+
+.technology dl div {
+  display: grid;
+  grid-template-columns: minmax(9rem, 1fr) 2fr;
+  gap: var(--gutter);
+  padding: var(--s-4) 0;
+  border-top: var(--hair);
+}
+
+.technology dt {
+  font-weight: 600;
+}
+
+.technology dd {
+  margin: 0;
+  color: var(--ink-soft);
+}
+
+/* ═════════ More pictures ═════════ */
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: var(--s-8) var(--gutter);
+  padding: var(--s-9) var(--margin);
+}
+
+.shot {
+  grid-column: span 12;
+}
+
+.shot[data-shape="wide"]:nth-child(odd) {
+  grid-column: 1 / span 9;
+}
+
+.shot[data-shape="wide"]:nth-child(even) {
+  grid-column: 4 / span 9;
+}
+
+.shot[data-shape="phone"] {
+  grid-column: span 4;
+  padding: var(--s-6);
+  border-radius: 1.25rem;
+  background: var(--ground);
+}
+
+.shot figure {
+  margin: 0;
+  overflow: hidden;
+  border-radius: 1rem;
+}
+
+/* ═════════ Onward ═════════ */
+
+.onward {
+  padding: var(--s-9) var(--margin) var(--section-pad);
+}
+
+.next {
+  display: grid;
+  justify-items: center;
+  gap: var(--s-5);
+  padding: var(--s-9) var(--margin);
+  border-radius: 1.5rem;
+  background: var(--ground-deep);
+  color: var(--ink);
+  text-align: center;
+  text-decoration: none;
+}
+
+.nextLabel {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.nextWord {
+  font-size: clamp(3rem, 9vw, 9rem);
+  line-height: 0.9;
+  text-wrap: balance;
+}
+
+.nextGo {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  padding: 0.75rem 1.25rem;
+  border: 1px solid var(--rule-strong);
+  border-radius: 999px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transition: background-color var(--d-fast) linear, color var(--d-fast) linear;
+}
+
+.next:hover .nextGo {
+  background: var(--charcoal);
+  color: var(--cream);
+}
+
+/* ═════════ Phones and tablets ═════════ */
+
+@media (max-width: 899px) {
+  .lead {
+    grid-template-columns: 1fr;
+  }
+
+  .parts,
+  .highlights,
+  .capabilities ol {
+    grid-template-columns: 1fr;
+  }
+
+  .technology,
+  .technology dl div {
+    grid-template-columns: 1fr;
+    gap: var(--s-2);
+  }
+
+  .shot[data-shape="wide"]:nth-child(odd),
+  .shot[data-shape="wide"]:nth-child(even) {
+    grid-column: span 12;
+  }
+
+  .shot[data-shape="phone"] {
+    grid-column: span 6;
+    padding: var(--s-3);
+  }
+}

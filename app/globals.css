@@ -203,6 +203,14 @@ button {
   border: 0;
 }
 
+/* Work cards lean with the scroll: the leading edge tips away and the card
+   shears a touch, then settles flat when the page stops (the Lusion grid).
+   `--speed` is written by ScrollRuntime; unset under reduced motion. */
+[data-speed-tilt] {
+  transform: perspective(1400px) rotateX(calc(var(--speed, 0) * -6deg)) skewY(calc(var(--speed, 0) * 1.2deg));
+  transform-origin: 50% 50%;
+}
+
 .skip-link {
   position: fixed;
   left: var(--margin);

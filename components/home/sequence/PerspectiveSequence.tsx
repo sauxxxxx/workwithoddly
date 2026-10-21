@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "@/components/Icons";
-import { RevealReel } from "./RevealReel";
+import { ReelCard } from "./ReelCard";
 import s from "./sequence.module.css";
 
 const project = "/work/the-beach-park-hadsan/";
@@ -10,9 +10,8 @@ const project = "/work/the-beach-park-hadsan/";
  * After the hero: one statement, then the first project.
  *
  * 1. Three thin lines, centred, with the coral loop passing through them.
- * 2. The loop becomes a frame; the Beach Park recording opens inside it and
- *    then grows to fill the screen (the Lusion move), with one quiet row of
- *    copy at the bottom.
+ * 2. The loop floats away; the Beach Park reel card rises in on its grid of
+ *    marks, then grows evenly to fill the screen, with one quiet row of copy.
  *
  * Two sticky layers: sticky positioning isolates stacking, so the back layer
  * sits under the 3D stage and the front layer over it.
@@ -58,28 +57,38 @@ export function PerspectiveSequence() {
         </div>
 
         <div className={s.project} data-sequence-project>
-          <div className={s.window} data-sequence-window>
+          {/* The card: full-size and clipped to its frame, which grows to the screen. */}
+          <div className={s.card} data-sequence-window>
+            <ReelCard
+              classes={{ media: s.media, title: s.reelTitle, word: s.reelWord, pill: s.playPill, glyph: s.glyph, back: s.reelBack }}
+            />
             <span className={s.shade} data-sequence-shade aria-hidden="true" />
-            <RevealReel controlClass={s.playToggle} />
+            <div className={s.fullMeta} data-sequence-meta>
+              <p className={s.tags}>
+                <span className={s.chip}>Technology</span>
+                <span>Hospitality website</span>
+              </p>
+              <Link className={s.pill} href={project}>
+                View project <ArrowUpRight />
+              </Link>
+            </div>
           </div>
 
-          <div className={s.meta} data-sequence-meta>
-            <p className={s.tags}>
-              <span className={s.chip}>Technology</span>
-              <span>Hospitality website</span>
-            </p>
-            <Link className={s.pill} href={project}>
+          {/* Registration marks and caption, set from the same frame. */}
+          <div className={s.marks} data-sequence-marks aria-hidden="true">
+            {Array.from({ length: 5 }, (_, i) => (
+              <span key={i} />
+            ))}
+          </div>
+          <div className={s.caption} data-sequence-caption>
+            <div>
+              <p className={s.captionTags}>Website • Digital experience • SEO</p>
+              <p className={s.captionName}>The Beach Park — Hadsan</p>
+            </div>
+            <Link href={project} className={s.captionLink}>
               View project <ArrowUpRight />
             </Link>
-            <p className={s.about}>
-              <strong>The Beach Park — Hadsan</strong>
-              <span>Hospitality, thoughtfully connected.</span>
-            </p>
           </div>
-        </div>
-
-        <div className={s.progress} aria-hidden="true">
-          <span data-sequence-progress />
         </div>
       </div>
       <span id="work" className={s.workAnchor} aria-hidden="true" />

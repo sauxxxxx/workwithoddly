@@ -1,0 +1,76 @@
+/* After the footer: a dark band whose bar fills as you scroll into it. */
+
+.band {
+  position: relative;
+  z-index: var(--z-front);
+  height: 72svh;
+  min-height: 26rem;
+  background: var(--charcoal);
+  color: var(--cream);
+}
+
+.inner {
+  position: absolute;
+  left: var(--margin);
+  right: var(--margin);
+  bottom: max(6svh, var(--s-6));
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: end;
+  gap: var(--s-4) var(--s-6);
+}
+
+.kicker {
+  grid-column: 1 / -1;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgb(248 246 239 / 0.72);
+}
+
+.label {
+  margin: 0;
+  font-size: var(--t-display-s);
+  line-height: 0.95;
+  text-transform: uppercase;
+}
+
+.go {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-3);
+  padding-bottom: 0.6rem;
+  color: var(--cream);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.go:hover .fill {
+  background: var(--cream);
+}
+
+.track {
+  position: relative;
+  width: clamp(5rem, 12vw, 9rem);
+  height: 2px;
+  background: rgb(248 246 239 / 0.22);
+  overflow: hidden;
+}
+
+.fill {
+  position: absolute;
+  inset: 0;
+  background: var(--coral);
+  transform: scaleX(0);
+  transform-origin: left center;
+}
+
+@media (max-width: 899px) {
+  .inner {
+    grid-template-columns: 1fr;
+  }
+}

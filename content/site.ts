@@ -12,10 +12,8 @@ export const site = {
     "ODDLY® is a creative technology studio in Cebu, Philippines, bringing technology, automation, and creative services together to help businesses build digital products, improve operations, and communicate more effectively.",
 
   contact: {
-    // PLACEHOLDER — the .example domain is reserved and will never deliver mail.
-    email: "hello@oddly.example",
-    // PLACEHOLDER — set to a string like "+63 900 000 0000" to publish a phone number.
-    phone: null as string | null,
+    email: "info@workwithoddly.com",
+    phone: "+63 908 300 5368" as string | null,
   },
 
   // PLACEHOLDER — add real profile URLs; entries with a null url are not rendered.
@@ -26,14 +24,14 @@ export const site = {
   ],
 
   nav: [
-    { label: "Work", href: "/#work" },
+    { label: "Work", href: "/projects/" },
     { label: "Services", href: "/services/" },
-    { label: "About", href: "/#about" },
-    { label: "Contact", href: "/#contact" },
+    { label: "About", href: "/about/" },
+    { label: "Contact", href: "/contact/" },
   ],
 };
 
 export type Site = typeof site;
 
 export const hasContactEmail = !site.contact.email.endsWith(".example");
-export const contactHref = hasContactEmail ? `mailto:${site.contact.email}` : "/#contact";
+export const contactHref = hasContactEmail ? `mailto:${site.contact.email}` : "/contact/";
