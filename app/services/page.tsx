@@ -90,7 +90,7 @@ export default function Services() {
           </section>
         );
       })}
-      <NextPage href="/projects/" label="Projects" />
+      <NextPage href="/projects/" label="Projects" size="min(12.6vw, 27svh)" leading={0.86} />
     </>
   );
 }

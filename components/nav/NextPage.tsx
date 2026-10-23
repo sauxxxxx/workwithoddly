@@ -2,78 +2,149 @@
 
 import Link from "next/link";
 import { useEffect, useRef } from "react";
-import { ArrowRight } from "@/components/Icons";
+import { ArrowDown } from "@/components/Icons";
 import { leaveTo } from "@/components/motion/PageTransition";
+import { smooth } from "@/components/motion/smooth";
 import s from "./next-page.module.css";
 
 /** How long the reader rests at the very bottom before the next page opens. */
 const DWELL = 450;
 
 /**
- * The page never ends (the Lusion move): a dark band after the footer says
- * "keep scrolling", its bar fills as the band comes into view, and resting at
- * the bottom with the bar full opens the next page through the page
- * transition. Only once the reader has scrolled into the band themselves,
- * never on load, and never under reduced motion, where the band is a link.
+ * The page never ends (the Lusion pull-through): the last screen is the next
+ * page's opening — its name, set like its hero — with a ring that fills as it
+ * scrolls into view. Resting at the bottom with the ring full swaps the page
+ * underneath without a visible change (PageTransition crossfades). Clicking
+ * the ring scrolls the rest of the way and does the same. Only once the
+ * reader has scrolled into the band themselves, never on load, and never
+ * under reduced motion, where the ring is a link.
  */
-export function NextPage({ href, label }: { href: string; label: string }) {
+export function NextPage({
+  href,
+  label,
+  title = label,
+  size,
+  leading,
+  centered = false,
+}: {
+  href: string;
+  label: string;
+  /** The next page's heading; a newline breaks it, a final "." becomes the coral dot. */
+  title?: string;
+  /** That heading's font-size and line-height, so the swap lines up. */
+  size?: string;
+  leading?: number;
+  /** Mirror a hero that centres its heading (Contact) rather than topping it. */
+  centered?: boolean;
+}) {
+  const dot = title.endsWith(".");
+  const words = dot ? title.slice(0, -1) : title;
   const band = useRef<HTMLElement>(null);
-  const bar = useRef<HTMLSpanElement>(null);
+  const ring = useRef<SVGCircleElement>(null);
+  const percent = useRef<HTMLSpanElement>(null);
+  const gone = useRef(false);
+
+  const leave = () => {
+    if (gone.current || !band.current) return;
+    gone.current = true;
+    leaveTo({ href, label, from: band.current });
+  };
 
   useEffect(() => {
     const el = band.current;
-    const fill = bar.current;
-    if (!el || !fill) return;
+    const fill = ring.current;
+    const count = percent.current;
+    if (!el || !fill || !count) return;
+    gone.current = false;
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
     let raf = 0;
     let armed = false;
     let fullSince = 0;
-    let gone = false;
+    let shown = -1;
 
     const frame = (now: number) => {
       raf = requestAnimationFrame(frame);
       const rect = el.getBoundingClientRect();
       const vh = window.innerHeight;
       const progress = Math.min(1, Math.max(0, (vh - rect.top) / Math.min(rect.height, vh)));
-      fill.style.transform = `scaleX(${progress.toFixed(4)})`;
+      const step = Math.round(progress * 100);
+      if (step !== shown) {
+        shown = step;
+        fill.style.strokeDashoffset = (1 - progress).toFixed(4);
+        count.textContent = `${step}%`;
+        el.dataset.full = step >= 100 ? "true" : "false";
+      }
       // Armed only after the reader has been above the band's end.
       if (progress < 0.9) armed = true;
-      if (!armed || gone || reduced.matches || progress < 0.995) {
+      if (!armed || gone.current || reduced.matches || progress < 0.995) {
         fullSince = 0;
         return;
       }
       fullSince ||= now;
       if (now - fullSince > DWELL) {
-        gone = true;
-        leaveTo({ href, label });
+        gone.current = true;
+        leaveTo({ href, label, from: el });
       }
     };
     raf = requestAnimationFrame(frame);
     return () => cancelAnimationFrame(raf);
   }, [href, label]);
 
-  // A plain click goes through the same transition; modified clicks stay native.
+  // A plain click scrolls the rest of the way, then leaves; modified clicks stay native.
   const onClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
     e.preventDefault();
-    leaveTo({ href, label });
+    const el = band.current;
+    if (!el || gone.current) return;
+    const rest = el.getBoundingClientRect().bottom - window.innerHeight;
+    if (rest < 2 || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      leave();
+      return;
+    }
+    const target = window.scrollY + rest;
+    if (smooth.lenis) {
+      smooth.lenis.scrollTo(target, { duration: 0.9, force: true, onComplete: leave });
+    } else {
+      window.scrollTo({ top: target, behavior: "smooth" });
+      window.setTimeout(leave, 700);
+    }
   };
 
   return (
-    <section ref={band} className={s.band} data-scene="away" aria-label="Next page">
-      <div className={s.inner}>
+    <section ref={band} className={s.band} data-scene="away" aria-label={`Next page: ${label}`}>
+      <div className={centered ? `${s.top} ${s.centered}` : s.top}>
         <p className={s.kicker}>
-          Keep scrolling
-          <br />
-          to see more
+          Next page<span className={s.sep}>·</span>
+          {label}
         </p>
-        <p className={`${s.label} display`}>{label}</p>
-        <Link href={href} className={s.go} onClick={onClick}>
-          <span>Next page</span>
-          <span className={s.track} aria-hidden="true">
-            <span ref={bar} className={s.fill} />
+        <p
+          className={`${s.title} display`}
+          style={{ ["--title-size" as string]: size, ["--title-leading" as string]: leading }}
+          aria-hidden="true"
+        >
+          {words}
+          {dot && <span className="dot" />}
+        </p>
+        {centered && <span className={s.spacer} aria-hidden="true" />}
+      </div>
+      <div className={s.bottom}>
+        <p className={s.cue}>
+          <span className={s.bob} aria-hidden="true">
+            <ArrowDown />
           </span>
-          <ArrowRight />
+          Keep scrolling
+          <span ref={percent} className={s.percent} aria-hidden="true">
+            0%
+          </span>
+        </p>
+        <Link href={href} className={s.ring} onClick={onClick} aria-label={`Go to ${label}`}>
+          <svg className={s.dial} viewBox="0 0 100 100" aria-hidden="true">
+            <circle className={s.track} cx="50" cy="50" r="48" pathLength={1} />
+            <circle ref={ring} className={s.fill} cx="50" cy="50" r="48" pathLength={1} />
+          </svg>
+          <span className={s.arrow} aria-hidden="true">
+            <ArrowDown />
+          </span>
         </Link>
       </div>
     </section>

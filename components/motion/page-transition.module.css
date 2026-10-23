@@ -1,39 +1,18 @@
-/* The cover between pages: over everything, hidden until a page change. */
+/* The cover between pages: the page ground itself, under the nav, hidden
+   until a page change. It holds a copy of the screen being left. */
 
 .cover {
   position: fixed;
   inset: 0;
-  z-index: calc(var(--z-menu) + 10);
-  display: grid;
-  place-content: center;
-  justify-items: center;
-  gap: var(--s-5);
-  background: var(--charcoal);
+  z-index: calc(var(--z-nav) - 5);
+  background: var(--backdrop);
   visibility: hidden;
-  clip-path: inset(100% 0 0 0);
-}
-
-/* Each line rises out of its own mask. */
-.mask {
-  display: block;
+  opacity: 0;
   overflow: hidden;
-  padding-bottom: 0.08em;
+  pointer-events: none;
 }
 
-.rise {
-  display: block;
-}
-
-.mark {
-  display: block;
-  width: min(42vw, 15rem);
-  height: auto;
-}
-
-.label {
-  font-size: 0.6875rem;
-  font-weight: 600;
-  letter-spacing: 0.24em;
-  text-transform: uppercase;
-  color: rgb(248 246 239 / 0.72);
+.slot {
+  position: absolute;
+  inset: 0;
 }

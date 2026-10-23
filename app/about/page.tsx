@@ -62,7 +62,7 @@ export default function About() {
         </p>
       </section>
 
-      <NextPage href="/contact/" label="Contact" />
+      <NextPage href="/contact/" label="Contact" title={"Let’s make\nit Oddly."} size="min(13vw, 22svh)" leading={0.88} centered />
     </div>
   );
 }

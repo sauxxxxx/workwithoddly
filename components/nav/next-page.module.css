@@ -1,76 +1,174 @@
-/* After the footer: a dark band whose bar fills as you scroll into it. */
+/* The last screen of every page: the next page's opening, with a ring that
+   fills as it scrolls in. Transparent over the fixed ground, so at full
+   screen it reads exactly like the page it leads to. */
 
 .band {
   position: relative;
   z-index: var(--z-front);
-  height: 72svh;
-  min-height: 26rem;
-  background: var(--charcoal);
-  color: var(--cream);
+  height: 100svh;
+  min-height: 34rem;
+  border-top: 1px solid var(--rule);
+  color: var(--ink);
 }
 
-.inner {
-  position: absolute;
-  left: var(--margin);
-  right: var(--margin);
-  bottom: max(6svh, var(--s-6));
+/* Set like the heroes it leads to: tag, then the giant name. */
+.top {
   display: grid;
-  grid-template-columns: 1fr auto;
-  align-items: end;
-  gap: var(--s-4) var(--s-6);
+  gap: var(--s-6);
+  padding: calc(var(--nav-h) + var(--s-9)) var(--margin) 0;
+}
+
+/* Contact's hero: centred in 92svh, with its action row below the title. */
+.centered {
+  min-height: 92svh;
+  align-content: center;
+  gap: var(--s-7);
+  padding: calc(var(--nav-h) + var(--s-8)) var(--margin) var(--s-9);
+}
+
+.spacer {
+  height: 3.375rem;
+}
+
+@media (max-width: 599px) {
+  .spacer {
+    height: 7.875rem;
+  }
 }
 
 .kicker {
-  grid-column: 1 / -1;
+  margin: 0;
   font-size: 0.6875rem;
   font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: rgb(248 246 239 / 0.72);
+  color: var(--ink-soft);
 }
 
-.label {
+.sep {
+  margin: 0 0.6em;
+  color: var(--coral);
+}
+
+.title {
   margin: 0;
-  font-size: var(--t-display-s);
-  line-height: 0.95;
+  white-space: pre-line;
+  font-size: var(--title-size, min(12vw, 21svh));
+  line-height: var(--title-leading, 0.9);
   text-transform: uppercase;
 }
 
-.go {
+.bottom {
+  position: absolute;
+  left: var(--margin);
+  right: var(--margin);
+  bottom: max(5svh, var(--s-6));
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--s-6);
+}
+
+.cue {
   display: inline-flex;
   align-items: center;
   gap: var(--s-3);
-  padding-bottom: 0.6rem;
-  color: var(--cream);
+  margin: 0;
   font-size: 0.6875rem;
   font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  text-decoration: none;
+  color: var(--ink-soft);
 }
 
-.go:hover .fill {
-  background: var(--cream);
+.percent {
+  min-width: 3.5ch;
+  font-variant-numeric: tabular-nums;
+  color: var(--coral);
+}
+
+.bob {
+  display: inline-flex;
+  animation: bob 1.6s var(--ease-out, ease-out) infinite;
+}
+
+@keyframes bob {
+  0%,
+  100% {
+    transform: translateY(-2px);
+  }
+  50% {
+    transform: translateY(3px);
+  }
+}
+
+/* The ring: a coral arc that closes as the band fills the screen. */
+.ring {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 5.5rem;
+  height: 5.5rem;
+  border-radius: 50%;
+  color: var(--ink);
+  text-decoration: none;
+  transition: transform var(--d-base) var(--ease-out);
+}
+
+.dial {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+  overflow: visible;
+}
+
+.ring circle {
+  fill: none;
+  stroke-width: 2.5;
+  vector-effect: non-scaling-stroke;
 }
 
 .track {
-  position: relative;
-  width: clamp(5rem, 12vw, 9rem);
-  height: 2px;
-  background: rgb(248 246 239 / 0.22);
-  overflow: hidden;
+  stroke: var(--rule);
 }
 
 .fill {
-  position: absolute;
-  inset: 0;
-  background: var(--coral);
-  transform: scaleX(0);
-  transform-origin: left center;
+  stroke: var(--coral);
+  stroke-linecap: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+}
+
+.arrow {
+  display: inline-flex;
+  font-size: 1.375rem;
+  transition: transform var(--d-base) var(--ease-out);
+}
+
+.ring:hover {
+  transform: scale(1.06);
+}
+
+.ring:hover .track {
+  stroke: var(--rule-strong);
+}
+
+/* Full: the arrow turns to point onward. */
+.band[data-full="true"] .arrow {
+  transform: rotate(-90deg);
 }
 
 @media (max-width: 899px) {
-  .inner {
-    grid-template-columns: 1fr;
+  .ring {
+    width: 4.5rem;
+    height: 4.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bob {
+    animation: none;
   }
 }

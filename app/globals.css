@@ -12,6 +12,12 @@
   /* Roles — a pale lavender ground (from brand lavender), charcoal ink */
   --ground: #e7e4f4;
   --ground-deep: #dcd8ee;           /* a half-step deeper, for quiet fields */
+  /* The full page ground: lavender with three soft blooms of light. */
+  --backdrop:
+    radial-gradient(42% 46% at 18% 14%, rgb(255 255 255 / 0.75), rgb(255 255 255 / 0) 70%),
+    radial-gradient(38% 44% at 86% 58%, rgb(255 122 89 / 0.11), rgb(255 122 89 / 0) 70%),
+    radial-gradient(48% 40% at 40% 100%, rgb(167 139 250 / 0.16), rgb(167 139 250 / 0) 70%),
+    var(--ground);
   --ink: var(--charcoal);
   --ink-soft: rgb(15 23 42 / 0.74); /* ≈7.4:1 on the ground */
   --ink-mute: rgb(15 23 42 / 0.64); /* ≈5.3:1 — the floor for small text */
@@ -121,11 +127,7 @@ body::before {
   inset: 0;
   z-index: -1;
   pointer-events: none;
-  background:
-    radial-gradient(42% 46% at 18% 14%, rgb(255 255 255 / 0.75), rgb(255 255 255 / 0) 70%),
-    radial-gradient(38% 44% at 86% 58%, rgb(255 122 89 / 0.11), rgb(255 122 89 / 0) 70%),
-    radial-gradient(48% 40% at 40% 100%, rgb(167 139 250 / 0.16), rgb(167 139 250 / 0) 70%),
-    var(--ground);
+  background: var(--backdrop);
 }
 
 ::selection {

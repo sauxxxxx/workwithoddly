@@ -1,16 +1,20 @@
 "use client";
 
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { Wordmark } from "@/components/Wordmark";
 import { smooth } from "./smooth";
 import s from "./page-transition.module.css";
 
 gsap.registerPlugin(ScrollTrigger);
 
-export type Leave = { href: string; label: string };
+export type Leave = {
+  href: string;
+  label: string;
+  /** The band on screen; the cover copies it so the swap is invisible. */
+  from?: HTMLElement;
+};
 
 /** Open another page behind the cover (see PageTransition). */
 export const leaveTo = (detail: Leave) => window.dispatchEvent(new CustomEvent<Leave>("oddly:leave", { detail }));
@@ -40,20 +44,22 @@ function blockScrolling() {
 }
 
 /**
- * Page changes, Lusion-fashion. Lives in the layout, so it outlasts the page
- * it leaves: on `oddly:leave` a charcoal cover sweeps up with the wordmark and
- * the next page's name, the route changes behind it, the new page is set at
- * its top, and the cover sweeps off while the page's hero rises in.
+ * Page changes, Lusion's pull-through. Lives in the layout, so it outlasts the
+ * page it leaves. Every page ends in a band set like the next page's opening
+ * (NextPage); on `oddly:leave` that band, now filling the screen, is copied
+ * onto a cover that looks exactly the same, the route changes underneath, the
+ * new page is set at its top, and the cover fades away to show it. Nothing
+ * slides or rises: it reads as one page that keeps going.
  *
- * The entrance (elements marked `data-enter`, the giant word as
- * `data-enter="word"`) also plays, without a cover, after any other client
- * navigation; never on first load, which belongs to the intro.
+ * After any other client navigation the new page's opening (elements marked
+ * `data-enter`) fades in where it stands; never on first load, which belongs
+ * to the intro.
  */
 export function PageTransition() {
   const router = useRouter();
   const pathname = usePathname();
   const cover = useRef<HTMLDivElement>(null);
-  const [label, setLabel] = useState("");
+  const slot = useRef<HTMLDivElement>(null);
   const pending = useRef<{ unblock: () => void } | null>(null);
   const last = useRef<string | null>(null);
   // Links open a page at its top; back/forward returns to where the reader
@@ -75,25 +81,42 @@ export function PageTransition() {
     };
   }, []);
 
-  // Leaving: cover in, then change the route underneath it.
+  // Leaving: the screen as it stands onto the cover, then change the route.
   useEffect(() => {
     const onLeave = (e: Event) => {
-      const { href, label } = (e as CustomEvent<Leave>).detail;
+      const { href, from } = (e as CustomEvent<Leave>).detail;
       const el = cover.current;
-      if (pending.current || !el) return;
+      const into = slot.current;
+      if (pending.current || !el || !into) return;
       if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
         router.push(href);
         return;
       }
-      setLabel(label);
       pending.current = { unblock: blockScrolling() };
-      gsap
-        .timeline()
-        .set(el, { visibility: "visible", clipPath: "inset(100% 0% 0% 0%)" })
-        .to(el, { clipPath: "inset(0% 0% 0% 0%)", duration: 0.55, ease: "power3.inOut" }, 0)
-        .fromTo(el.querySelectorAll("[data-cover-rise]"), { yPercent: 110 }, { yPercent: 0, duration: 0.5, stagger: 0.07, ease: "power3.out" }, 0.22)
-        // We place the new page ourselves once it is in (below).
-        .add(() => router.push(href, { scroll: false }), 0.62);
+      // We place the new page ourselves once it is in (below).
+      const go = () => router.push(href, { scroll: false });
+      if (from) {
+        const rect = from.getBoundingClientRect();
+        const copy = from.cloneNode(true) as HTMLElement;
+        copy.removeAttribute("id");
+        copy.querySelectorAll("[id]").forEach((n) => n.removeAttribute("id"));
+        copy.setAttribute("inert", "");
+        Object.assign(copy.style, {
+          position: "absolute",
+          top: `${rect.top}px`,
+          left: "0px",
+          width: "100%",
+          height: `${rect.height}px`,
+          minHeight: "0px",
+          margin: "0px",
+        });
+        into.replaceChildren(copy);
+        gsap.set(el, { visibility: "visible", opacity: 1 });
+        requestAnimationFrame(go);
+      } else {
+        into.replaceChildren();
+        gsap.fromTo(el, { visibility: "visible", opacity: 0 }, { opacity: 1, duration: 0.3, ease: "power2.out", onComplete: go });
+      }
     };
     window.addEventListener("oddly:leave", onLeave);
     return () => window.removeEventListener("oddly:leave", onLeave);
@@ -134,15 +157,15 @@ export function PageTransition() {
     }
 
     const ctx = gsap.context(() => {});
+    // The opening fades in where it stands: no rise, no scale.
     const entrance = () =>
-      ctx.add(() => {
-        const words = gsap.utils.toArray<HTMLElement>('main [data-enter="word"]');
-        const rest = gsap.utils.toArray<HTMLElement>('main [data-enter]:not([data-enter="word"])');
-        return gsap
-          .timeline()
-          .fromTo(words, { y: 110, opacity: 0, scale: 1.06 }, { y: 0, opacity: 1, scale: 1, duration: 0.9, ease: "power3.out", clearProps: "transform,opacity" }, 0)
-          .fromTo(rest, { y: 28, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: "power3.out", stagger: 0.06, clearProps: "transform,opacity" }, 0.2);
-      });
+      ctx.add(() =>
+        gsap.fromTo(
+          gsap.utils.toArray<HTMLElement>("main [data-enter]"),
+          { opacity: 0 },
+          { opacity: 1, duration: 0.45, ease: "power2.out", stagger: 0.04, clearProps: "opacity" },
+        ),
+      );
 
     if (reduced) {
       chain?.unblock();
@@ -157,48 +180,33 @@ export function PageTransition() {
       };
     }
 
-    // Hold the entrance pieces down while the cover is still up.
-    ctx.add(() => {
-      gsap.set('main [data-enter="word"]', { y: 110, opacity: 0, scale: 1.06 });
-      gsap.set('main [data-enter]:not([data-enter="word"])', { y: 28, opacity: 0 });
-    });
     // Two frames: the new page is laid out and ScrollRuntime has its new Lenis.
+    // The cover still shows the band, which matches this page's opening; it
+    // fades off to reveal it.
     let raf = requestAnimationFrame(() => {
       raf = requestAnimationFrame(() => {
         toTop();
         ScrollTrigger.refresh();
-        gsap
-          .timeline({
-            onComplete: () => {
-              chain.unblock();
-              pending.current = null;
-              gsap.set(el, { visibility: "hidden" });
-            },
-          })
-          .to(el, { clipPath: "inset(0% 0% 100% 0%)", duration: 0.75, ease: "power3.inOut" }, 0.08)
-          .add(() => {
-            entrance();
-          }, 0.3);
+        gsap.to(el, {
+          opacity: 0,
+          duration: 0.45,
+          ease: "power2.out",
+          delay: 0.05,
+          onComplete: () => {
+            chain.unblock();
+            pending.current = null;
+            gsap.set(el, { visibility: "hidden" });
+            slot.current?.replaceChildren();
+          },
+        });
       });
     });
-    return () => {
-      cancelAnimationFrame(raf);
-      ctx.revert();
-    };
+    return () => cancelAnimationFrame(raf);
   }, [pathname]);
 
   return (
     <div ref={cover} className={s.cover} aria-hidden="true">
-      <span className={s.mask}>
-        <span className={s.rise} data-cover-rise>
-          <Wordmark className={s.mark} ink="var(--cream)" />
-        </span>
-      </span>
-      <span className={s.mask}>
-        <span className={`${s.rise} ${s.label}`} data-cover-rise>
-          Next · {label}
-        </span>
-      </span>
+      <div ref={slot} className={s.slot} />
     </div>
   );
 }

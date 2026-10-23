@@ -72,7 +72,7 @@ export default function Contact() {
         <p>© {new Date().getFullYear()} ODDLY®</p>
       </footer>
 
-      <NextPage href="/" label="Back to the start" />
+      <NextPage href="/" label="Back to the start" title={"Creative\nTechnology\nStudio."} />
     </div>
   );
 }

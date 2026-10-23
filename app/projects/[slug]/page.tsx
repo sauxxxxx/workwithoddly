@@ -235,7 +235,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
         </Link>
       </nav>
 
-      <NextPage href="/about/" label="About us" />
+      <NextPage href="/about/" label="About us" title={"One studio.\nA shared direction."} size="min(11.5vw, 19svh)" leading={0.9} />
     </article>
   );
 }
