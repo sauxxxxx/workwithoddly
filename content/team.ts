@@ -22,7 +22,7 @@ export const people: TeamMember[] = [
   { name: "Remar Ugsimar", role: "Full-stack developer", portrait: "/team/remar-ugsimar.webp" },
   { name: "Zhy Batican", role: "Full-stack developer, AI engineer & UI/UX designer", portrait: "/team/rolex-zhyronne-batican.webp" },
   { name: "Nathan Languido", role: null, portrait: "/team/nathaniel-languido.webp" },
-  { name: "Aaron Demol", role: null, portrait: null },
+  { name: "Aaron Demol", role: null, portrait: "/team/aaron-demol.webp" },
   { name: "Reynan Montejo", role: null, portrait: null },
   { name: "GD Vergara", role: null, portrait: "/team/gil-denver-vergara.webp" },
 ];
