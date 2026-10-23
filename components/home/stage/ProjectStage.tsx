@@ -1,12 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import { ArrowUpRight } from "@/components/Icons";
 import { projects, type Project } from "@/content/projects";
 import { disciplineById } from "@/content/services";
-import { sceneIdAt, track } from "@/components/scene/track";
-import { GROW, TRAVEL, stageTravel } from "@/components/scene/travel";
+import { centreScene, useDescent } from "./useDescent";
 import { ScrambleText } from "@/components/motion/ScrambleText";
 import s from "./stage.module.css";
 
@@ -16,94 +15,22 @@ const ORDER = ["joyno-accounting", "sharks-tail", "joynosync", "casatoon", "nxon
 const cap = (x: string) => x[0].toUpperCase() + x.slice(1);
 
 /**
- * The project stage: the screen stays put and each project replaces the last
- * in place. Two sticky full-screen layers (sticky positioning isolates
- * stacking): the words sit behind the 3D stage, the copy in front. Invisible
- * markers spaced down the section drive the 3D objects through the shared
- * scroll track, and the DOM reads that same track every frame, so the word,
- * the copy and the object always change together.
+ * The project stage, in the Noomo descent (components/scene/descent.ts): each
+ * project drops in from above, drifts through the centre and falls out of the
+ * bottom, its word, object and plinth moving as one. Two sticky full-screen
+ * layers (sticky isolates stacking): the words behind the 3D stage, the copy
+ * in front. One invisible marker per scene drives both the DOM and the 3D.
  */
 export function ProjectStage() {
   const scenes = ORDER.map((slug) => projects.find((p) => p.slug === slug)).filter(
     (p): p is Project => !!p?.art.word && !!p.art.sculpture,
   );
   const root = useRef<HTMLElement>(null);
+  useDescent(root);
 
-  useEffect(() => {
-    const el = root.current;
-    if (!el) return;
-    const ids = scenes.map((p) => `p-${p.art.sculpture}`);
-    const layers = ids.map((id) => Array.from(el.querySelectorAll<HTMLElement>(`[data-stage-scene="${id}"]`)));
-    const travelling = layers.map((nodes) => nodes.flatMap((n) => Array.from(n.querySelectorAll<HTMLElement>("[data-travel]"))));
-    const settling = layers.map((nodes) => nodes.flatMap((n) => Array.from(n.querySelectorAll<HTMLElement>("[data-settle]"))));
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const clamp = (v: number) => Math.min(1, Math.max(0, v));
-    let raf = 0;
-    let last = "";
-
-    const frame = () => {
-      raf = requestAnimationFrame(frame);
-      const from = sceneIdAt(track.from);
-      const to = sceneIdAt(track.to);
-      const t = track.t;
-      const vh = window.innerHeight;
-      const key = `${from}|${to}|${t.toFixed(4)}|${vh}`;
-      if (key === last) return;
-      last = key;
-      const travel = reduced.matches ? null : stageTravel();
-      ids.forEach((id, i) => {
-        if (travel && (from === id || to === id)) {
-          // Project to project: the word travels with its sculpture (travel.ts);
-          // the copy fades where it stands, and the next scene's copy waits
-          // until its scene has all but settled.
-          const leaving = from === id;
-          const y = (leaving ? travel.leave : -travel.arrive) * (TRAVEL / 2) * vh;
-          const scale = leaving ? 1 + GROW * travel.leave : 1;
-          const shown = leaving ? 1 - clamp(t / 0.15) : clamp((t - 0.9) / 0.1);
-          for (const node of layers[i]) {
-            node.style.opacity = "1";
-            node.style.transform = "";
-            node.style.filter = "";
-            node.dataset.active = String(shown > 0.5);
-          }
-          for (const node of travelling[i]) node.style.transform = `translate3d(0, ${y.toFixed(1)}px, 0) scale(${scale.toFixed(4)})`;
-          for (const node of settling[i]) {
-            node.style.opacity = String(shown);
-            node.style.transform = `translate3d(0, ${((1 - shown) * 14).toFixed(1)}px, 0)`;
-          }
-          return;
-        }
-        // Into and out of the stage: the leaving scene clears in the first
-        // half, the next arrives in the second.
-        const w = from === id && to === id ? 1 : from === id ? 1 - clamp(t / 0.5) : to === id ? clamp((t - 0.5) / 0.5) : 0;
-        // Leaving rises out; arriving rises in from below.
-        const dir = from === id && to !== id ? -1 : 1;
-        const y = reduced.matches ? 0 : (1 - w) * 44 * dir;
-        const blur = reduced.matches ? 0 : (1 - w) * 6;
-        for (const node of layers[i]) {
-          node.style.opacity = String(w);
-          node.style.transform = `translate3d(0, ${y.toFixed(1)}px, 0)`;
-          node.style.filter = blur > 0.05 ? `blur(${blur.toFixed(2)}px)` : "";
-          node.dataset.active = String(w > 0.5);
-        }
-        for (const node of travelling[i]) node.style.transform = "";
-        for (const node of settling[i]) {
-          node.style.opacity = "";
-          node.style.transform = "";
-        }
-      });
-    };
-    raf = requestAnimationFrame(frame);
-    return () => cancelAnimationFrame(raf);
-  }, [scenes]);
-
-  /* Keyboard: focusing a link in a hidden scene brings that scene on stage. */
-  const bringIntoView = (i: number) => {
-    const marker = root.current?.querySelectorAll<HTMLElement>("[data-stage-marker]")[i];
-    if (!marker) return;
-    const top = marker.getBoundingClientRect().top + window.scrollY;
-    window.scrollTo({ top: top + window.innerHeight * 0.05, behavior: "auto" });
-  };
+  /* Keyboard: focusing a link in a scene brings that scene to the centre. */
+  const bringIntoView = (i: number) =>
+    centreScene(root.current?.querySelectorAll<HTMLElement>("[data-stage-marker]")[i]);
 
   return (
     <section
@@ -132,8 +59,8 @@ export function ProjectStage() {
       {/* Behind the 3D: the full words. */}
       <div className={`${s.frame} ${s.back}`}>
         {scenes.map((p) => (
-          <div key={p.slug} className={s.layer} data-stage-scene={`p-${p.art.sculpture}`}>
-            <h2 id={`stage-${p.slug}`} className={`${s.word} display`} style={{ ["--chars" as string]: p.art.word?.length }} data-travel>
+          <div key={p.slug} className={s.layer} data-descent={`p-${p.art.sculpture}`}>
+            <h2 id={`stage-${p.slug}`} className={`${s.word} display`} style={{ ["--chars" as string]: p.art.word?.length }} data-ride>
               {p.art.word}
             </h2>
           </div>
@@ -146,7 +73,7 @@ export function ProjectStage() {
           const lead = disciplineById(p.disciplines[0]);
 
           return (
-            <div key={p.slug} className={s.layer} data-stage-scene={`p-${p.art.sculpture}`} aria-labelledby={`stage-${p.slug}`}>
+            <div key={p.slug} className={s.layer} data-descent={`p-${p.art.sculpture}`} aria-labelledby={`stage-${p.slug}`}>
               <p className={s.index} data-settle>
                 <span>{String(i + 1).padStart(2, "0")}</span> / {String(scenes.length).padStart(2, "0")} · {lead.name}
               </p>
@@ -154,7 +81,7 @@ export function ProjectStage() {
                 className={`${s.word} ${s.wordFront} display`}
                 style={{ ["--chars" as string]: p.art.word?.length }}
                 aria-hidden="true"
-                data-travel
+                data-ride
               >
                 {p.art.word}
               </span>

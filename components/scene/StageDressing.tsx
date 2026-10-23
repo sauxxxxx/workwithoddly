@@ -5,7 +5,7 @@ import * as THREE from "three";
 import { useFrame, useThree } from "@react-three/fiber";
 import { CAMERA } from "./choreography";
 import { sceneIdAt, track } from "./track";
-import { GROW, TRAVEL, stageTravel } from "./travel";
+import { activeDescent } from "./descent";
 import { makeAsterisk, makeCube, makeStar, type Quality } from "./geometry";
 import { makeFinish, type Finish } from "./materials";
 import { buildPlinth } from "./objects";
@@ -82,9 +82,17 @@ export function StageDressing({
 
   useFrame((state, delta) => {
     const dt = Math.min(delta, 0.05);
-    const target = enabled ? isStage(sceneIdAt(track.from)) * (1 - track.t) + isStage(sceneIdAt(track.to)) * track.t : 0;
-    weight.current += (target - weight.current) * (1 - Math.exp(-6 * dt));
+    // On the home page the plinth and marks ride the project scene on stage
+    // (descent.ts); elsewhere (case studies, services) they settle by weight.
+    const descent = enabled ? activeDescent() : null;
+    const riding = descent?.id.startsWith("p-") ? descent : null;
+    const target = descent
+      ? riding ? 1 : 0
+      : enabled ? isStage(sceneIdAt(track.from)) * (1 - track.t) + isStage(sceneIdAt(track.to)) * track.t : 0;
+    weight.current = descent ? target : weight.current + (target - weight.current) * (1 - Math.exp(-6 * dt));
     const w = weight.current;
+    const ride = riding ? -2 * riding.offset : 0;
+    const grow = riding ? riding.grow : 1;
     const aspect = size.width / size.height;
     const time = state.clock.elapsedTime;
 
@@ -92,13 +100,9 @@ export function StageDressing({
     if (p) {
       const hh = halfH(PLINTH.z);
       const py = compact ? -0.16 : PLINTH.y;
-      // Between projects it travels with the scenes: out with the leaving one,
-      // then in from above under the next (travel.ts).
-      const travel = enabled ? stageTravel() : null;
-      const ride = travel ? (travel.t < 0.5 ? -travel.leave : travel.arrive) * TRAVEL : 0;
-      const grow = travel && travel.t < 0.5 ? 1 + GROW * travel.leave : 1;
-      // The plinth rises into place as the stage begins and sinks away after.
-      p.position.set(PLINTH.x * hh * aspect, (py - (1 - w) * 0.9 + ride) * hh, PLINTH.z);
+      // Off the home stage the plinth rises into place by weight.
+      const rise = descent ? 0 : (1 - w) * 0.9;
+      p.position.set(PLINTH.x * hh * aspect, (py - rise + ride) * hh, PLINTH.z);
       p.rotation.set(PLINTH.tilt, Math.sin(time * 0.2) * 0.05, 0);
       p.scale.setScalar(PLINTH.s * (compact ? 0.55 : 1) * (hh / halfH(0)) * grow);
       p.visible = w > 0.01;
@@ -109,7 +113,9 @@ export function StageDressing({
       if (!m) return;
       const hh = halfH(f.z);
       const x = compact ? f.x * 0.9 : f.x;
-      m.position.set(x * hh * aspect, f.y * hh + Math.sin(time * 0.45 + i * 1.3) * 0.08, f.z);
+      // The marks ride with the scene, nearer ones a touch faster (parallax).
+      const depth = 0.85 + ((f.z + 2) / 4) * 0.3;
+      m.position.set(x * hh * aspect, (f.y + ride * depth) * hh + Math.sin(time * 0.45 + i * 1.3) * 0.08, f.z);
       m.rotation.set(time * f.spin[0] * 0.35 + i, time * f.spin[1] * 0.35, time * f.spin[2] * 0.35);
       m.scale.setScalar(f.s * w * (compact ? 0.55 : 1));
       m.visible = w > 0.01 && (!compact || i < 3);

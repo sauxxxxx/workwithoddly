@@ -11,7 +11,7 @@ import { buildCompound, buildSculpture, type Quality } from "./geometry";
 import { makeFinish } from "./materials";
 import { buildObject } from "./objects";
 import { journey, range } from "./journey";
-import { GROW, TRAVEL, stageTravel } from "./travel";
+import { activeDescent, isDescent } from "./descent";
 import { StageDressing } from "./StageDressing";
 import { ModelPiece } from "./ModelPiece";
 
@@ -132,7 +132,11 @@ export function Installation({ quality, compact, reducedMotion, onFirstFrame }: 
     const aspect = size.width / size.height;
 
     // Reduced motion: hold the opening composition; the stage fades out past it.
-    const A: Scene = reducedMotion ? set.hero : (set[sceneIdAt(track.from)] ?? set.away);
+    const descent = reducedMotion ? null : activeDescent();
+    // Leaving the project descent for About: the last project's object has
+    // already fallen out of the frame, so the hand-off starts from away.
+    const leftDescent = !reducedMotion && !descent && isDescent(sceneIdAt(track.from));
+    const A: Scene = reducedMotion ? set.hero : leftDescent ? set.away : (set[sceneIdAt(track.from)] ?? set.away);
     const B: Scene = reducedMotion ? set.hero : (set[sceneIdAt(track.to)] ?? set.away);
     // A scene can hold its pieces back until late in the approach (`enter`),
     // so they arrive once the previous section's text has scrolled away.
@@ -147,7 +151,6 @@ export function Installation({ quality, compact, reducedMotion, onFirstFrame }: 
     const phaseA = sceneProgress(track.from);
     const phaseB = sceneProgress(track.to);
     const opening = journey();
-    const travel = reducedMotion ? null : stageTravel();
 
     SCULPTURES.forEach((spec, i) => {
       const id = spec.id;
@@ -193,20 +196,32 @@ export function Installation({ quality, compact, reducedMotion, onFirstFrame }: 
         target.rz = start.r[2] + 1.2 * away;
         target.s = start.s;
       }
-      // Project to project: each piece rides with its own scene, straight down
-      // and out, or down in from above (travel.ts). Followed exactly, so the
-      // piece never lags behind its word.
-      if (travel) {
-        const own = !offscreen(pa) ? { pose: pa, r: ar, y: -travel.leave, grow: travel.leave } : !offscreen(pb) ? { pose: pb, r: br, y: travel.arrive, grow: 0 } : null;
-        if (own) {
-          Object.assign(target, toLive({ ...own.pose, r: own.r as Pose["r"] }));
-          target.y += own.y * TRAVEL;
-          target.s *= 1 + GROW * own.grow;
+      // From the first project to Contact: every piece in the scene on stage
+      // rides it down the screen (descent.ts) and follows it exactly, so it
+      // never lags its word; pieces not in that scene wait off-frame.
+      let locked = false;
+      if (descent) {
+        const scene = set[descent.id];
+        const pose = scene?.[id];
+        if (pose && !offscreen(pose)) {
+          const spin = scene.turn?.[id];
+          const q = Math.min(1, Math.max(0, descent.p));
+          Object.assign(target, toLive(pose));
+          if (spin) {
+            target.rx += spin[0] * q;
+            target.ry += spin[1] * q;
+            target.rz += spin[2] * q;
+          }
+          target.y -= 2 * descent.offset;
+          target.s *= descent.grow;
+        } else {
+          Object.assign(target, toLive(set.away[id]));
         }
+        locked = true;
       }
       for (const key of ["x", "y", "z", "rx", "ry", "rz", "s"] as const) {
         const d = target[key] - L[key];
-        L[key] += d * (jump || travel ? 1 : k);
+        L[key] += d * (jump || locked ? 1 : k);
         motion = Math.max(motion, Math.abs(d));
       }
 

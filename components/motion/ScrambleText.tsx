@@ -39,7 +39,7 @@ export function ScrambleText({ text, className }: { text: string; className?: st
       raf = requestAnimationFrame(tick);
     };
 
-    const host = el.closest<HTMLElement>("[data-stage-scene]");
+    const host = el.closest<HTMLElement>("[data-descent]");
     let stop: () => void;
     if (host) {
       let was = host.dataset.active === "true";

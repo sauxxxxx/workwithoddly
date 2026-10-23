@@ -14,11 +14,7 @@ export function StudioAbout() {
       aria-labelledby="about-title"
     >
       <p className={`${s.kicker} front`}>The studio / Cebu, Philippines</p>
-      <h2
-        id="about-title"
-        className={`${s.aboutTitle} display front`}
-        data-reveal-heading
-      >
+      <h2 id="about-title" className={`${s.aboutTitle} display front`} data-reveal-heading>
         One studio.
         <br />A shared
         <br />

@@ -31,7 +31,7 @@ The postbuild step adds equivalent dot-separated filenames for Next 16's nested 
 | Statement and Beach Park reveal | `components/home/sequence/` |
 | Reference breakdown and prototype status | `REFERENCE-STUDY.md` |
 | Reference script (Lusion, Noomo, Psychoactive, Unseen) | `output/reference-script/README.md` |
-| Project stage (pinned; scenes change in place) | `components/home/stage/` — word and object per project in `content/projects.ts → art.word / art.sculpture` |
+| Project stage (Noomo descent: each scene drops in from the top, drifts, falls out the bottom; About and Contact scroll normally) | `components/scene/descent.ts` + `components/home/stage/` — word and object per project in `content/projects.ts → art.word / art.sculpture` |
 | Project objects (gold coins, glass wave, sync arrows, clapperboard, magnifier, megaphone) and the plinth | `components/scene/objects.ts`, registered in `sculptures.ts` |
 | Finishes (chrome, gold, lacquer, glass, frosted) | `components/scene/materials.ts` |
 | Optional sound (off by default, synthesised) | `components/sound/` |

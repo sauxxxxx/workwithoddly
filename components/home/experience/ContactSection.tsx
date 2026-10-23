@@ -14,11 +14,7 @@ export function ContactSection() {
       aria-labelledby="contact-title"
     >
       <p className={`${s.kicker} front`}>Have something in mind?</p>
-      <h2
-        id="contact-title"
-        className={`${s.contactTitle} display front`}
-        data-reveal-heading
-      >
+      <h2 id="contact-title" className={`${s.contactTitle} display front`} data-reveal-heading>
         Let’s make
         <br />
         it Oddly

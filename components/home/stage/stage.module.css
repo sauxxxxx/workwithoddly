@@ -2,7 +2,7 @@
 
 .stage {
   position: relative;
-  height: calc(var(--n) * 120svh + 60svh);
+  height: calc(var(--n) * 170svh + 100svh);
 }
 
 /* Invisible scroll markers, one per scene, driving the 3D through the track. */
@@ -10,8 +10,8 @@
   position: absolute;
   left: 0;
   width: 1px;
-  top: calc(var(--i) * 120svh);
-  height: 120svh;
+  top: calc(var(--i) * 170svh);
+  height: 170svh;
   pointer-events: none;
   scroll-margin-top: 0;
 }
@@ -35,11 +35,16 @@
 }
 
 /* Every scene fills the frame; only the active one is visible. */
+/* Every scene fills the frame; useDescent shows the one on stage. */
 .layer {
   position: absolute;
   inset: 0;
-  opacity: 0;
-  will-change: opacity, transform;
+  visibility: hidden;
+}
+
+.layer [data-ride],
+.layer [data-settle] {
+  will-change: transform, opacity;
 }
 
 .layer[data-active="true"] a {
