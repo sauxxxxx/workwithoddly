@@ -20,6 +20,13 @@ import { buildPlinth } from "./objects";
 const HALF_FOV = Math.tan(THREE.MathUtils.degToRad(CAMERA.fov / 2));
 const halfH = (z: number) => HALF_FOV * (CAMERA.z - z);
 
+/**
+ * Whether the dressing changed this frame (still fading in or out). Installation
+ * renders on demand on phones and reads this, so the plinth and marks are never
+ * left frozen on screen after their scene has gone.
+ */
+export const dressing = { moving: false };
+
 /** Where the plinth sits (screen fractions). Project poses rest their object on it. */
 export const PLINTH = { x: 0, y: -0.5, z: 0.9, tilt: 0.24, s: 0.78 };
 
@@ -89,8 +96,12 @@ export function StageDressing({
     const target = descent
       ? riding ? 1 : 0
       : enabled ? isStage(sceneIdAt(track.from)) * (1 - track.t) + isStage(sceneIdAt(track.to)) * track.t : 0;
+    const before = weight.current;
     weight.current = descent ? target : weight.current + (target - weight.current) * (1 - Math.exp(-6 * dt));
+    // Settle fully rather than creeping towards zero for ever.
+    if (Math.abs(target - weight.current) < 0.002) weight.current = target;
     const w = weight.current;
+    dressing.moving = Math.abs(w - before) > 0;
     const ride = riding ? -2 * riding.offset : 0;
     const grow = riding ? riding.grow : 1;
     const aspect = size.width / size.height;

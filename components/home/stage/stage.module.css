@@ -158,6 +158,18 @@
 }
 
 @media (max-width: 899px) {
+  /* Phones: the Beach Park section ends in a short tail of text, so start the
+     stage under it; the first scene drops in as that text leaves instead of
+     after half a screen of empty page. The frame is transparent and lets taps
+     through to the link it overlaps; only the active scene's links take them. */
+  .stage {
+    margin-top: -35svh;
+  }
+
+  .frame {
+    pointer-events: none;
+  }
+
   .word {
     top: calc(var(--nav-h) + 9svh);
     font-size: min(calc(90vw / (var(--chars) * 0.84)), 12svh);

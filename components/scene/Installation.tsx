@@ -12,7 +12,7 @@ import { makeFinish } from "./materials";
 import { buildObject } from "./objects";
 import { journey, range } from "./journey";
 import { activeDescent, isDescent } from "./descent";
-import { StageDressing } from "./StageDressing";
+import { StageDressing, dressing } from "./StageDressing";
 import { ModelPiece } from "./ModelPiece";
 
 type Props = {
@@ -301,7 +301,7 @@ export function Installation({ quality, compact, reducedMotion, onFirstFrame }: 
     // keeps rendering while pieces are in view (the sway); phones only while
     // scrolling or settling.
     const idle = anyVisible && !reducedMotion && !compact;
-    if (frames.current < 3 || motion > 0.0004 || idle || pointerMoving || sc !== lastScroll.current) {
+    if (frames.current < 3 || motion > 0.0004 || idle || pointerMoving || dressing.moving || sc !== lastScroll.current) {
       state.gl.render(state.scene, state.camera);
       lastScroll.current = sc;
       if (!firstFrameSent.current) {
