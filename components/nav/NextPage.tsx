@@ -13,9 +13,9 @@ const DWELL = 450;
 /**
  * The page never ends (the Lusion pull-through): the last screen is the next
  * page's opening — its name, set like its hero — with a ring that fills as it
- * scrolls into view. Resting at the bottom with the ring full swaps the page
- * underneath without a visible change (PageTransition crossfades). Clicking
- * the ring scrolls the rest of the way and does the same. Only once the
+ * scrolls into view. Resting at the bottom with the ring full opens the next
+ * page: the ring floods the screen with coral (PageTransition's iris).
+ * Clicking the ring scrolls the rest of the way and does the same. Only once the
  * reader has scrolled into the band themselves, never on load, and never
  * under reduced motion, where the ring is a link.
  */
@@ -42,12 +42,19 @@ export function NextPage({
   const band = useRef<HTMLElement>(null);
   const ring = useRef<SVGCircleElement>(null);
   const percent = useRef<HTMLSpanElement>(null);
+  const button = useRef<HTMLAnchorElement>(null);
   const gone = useRef(false);
 
+  // The iris grows out of the ring itself.
+  const fromRing = () => {
+    const r = button.current?.getBoundingClientRect();
+    return r ? { x: r.left + r.width / 2, y: r.top + r.height / 2, r: r.width / 2 } : undefined;
+  };
+
   const leave = () => {
-    if (gone.current || !band.current) return;
+    if (gone.current) return;
     gone.current = true;
-    leaveTo({ href, label, from: band.current });
+    leaveTo({ href, label, origin: fromRing() });
   };
 
   useEffect(() => {
@@ -83,7 +90,7 @@ export function NextPage({
       fullSince ||= now;
       if (now - fullSince > DWELL) {
         gone.current = true;
-        leaveTo({ href, label, from: el });
+        leaveTo({ href, label, origin: fromRing() });
       }
     };
     raf = requestAnimationFrame(frame);
@@ -137,7 +144,7 @@ export function NextPage({
             0%
           </span>
         </p>
-        <Link href={href} className={s.ring} onClick={onClick} aria-label={`Go to ${label}`}>
+        <Link ref={button} href={href} className={s.ring} onClick={onClick} data-transition="own" aria-label={`Go to ${label}`}>
           <svg className={s.dial} viewBox="0 0 100 100" aria-hidden="true">
             <circle className={s.track} cx="50" cy="50" r="48" pathLength={1} />
             <circle ref={ring} className={s.fill} cx="50" cy="50" r="48" pathLength={1} />

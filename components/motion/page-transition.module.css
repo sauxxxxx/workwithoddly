@@ -1,18 +1,12 @@
-/* The cover between pages: the page ground itself, under the nav, hidden
-   until a page change. It holds a copy of the screen being left. */
+/* The coral iris between pages: over everything (the menu included), hidden
+   until a page change, shaped by a circular clip-path. */
 
 .cover {
   position: fixed;
   inset: 0;
-  z-index: calc(var(--z-nav) - 5);
-  background: var(--backdrop);
+  z-index: calc(var(--z-menu) + 10);
+  background: var(--coral);
   visibility: hidden;
-  opacity: 0;
-  overflow: hidden;
+  clip-path: circle(0px at 50% 50%);
   pointer-events: none;
-}
-
-.slot {
-  position: absolute;
-  inset: 0;
 }
