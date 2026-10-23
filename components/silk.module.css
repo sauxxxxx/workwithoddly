@@ -1,0 +1,54 @@
+/* Fixed behind all content, above the lavender ground (body::before). */
+.silk {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.scroll {
+  position: absolute;
+  inset: -12% -6%;
+}
+
+.drift {
+  display: block;
+  width: 100%;
+  height: 100%;
+  will-change: transform;
+  animation: drift 38s ease-in-out infinite alternate;
+}
+
+@keyframes drift {
+  from {
+    transform: translate3d(-1.5%, 0, 0) rotate(-1deg);
+  }
+  to {
+    transform: translate3d(1.5%, 2%, 0) rotate(1.2deg);
+  }
+}
+
+/* The silk rises slowly through the page as it scrolls. */
+@supports (animation-timeline: scroll()) {
+  .scroll {
+    animation: rise linear both;
+    animation-timeline: scroll(root);
+  }
+
+  @keyframes rise {
+    from {
+      transform: translate3d(0, 4%, 0);
+    }
+    to {
+      transform: translate3d(0, -6%, 0);
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .drift,
+  .scroll {
+    animation: none;
+  }
+}

@@ -8,6 +8,7 @@ import "lenis/dist/lenis.css";
 import { ScrollRuntime } from "@/components/motion/ScrollRuntime";
 import { LogoReveal } from "@/components/intro/LogoReveal";
 import { PageTransition } from "@/components/motion/PageTransition";
+import { Silk } from "@/components/Silk";
 import { JsonLd, studio } from "@/components/seo/JsonLd";
 import { ogImage, ogShared } from "@/components/seo/meta";
 
@@ -71,6 +72,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <a className="skip-link" href="#main">
           Skip to content
         </a>
+        <Silk />
         <LogoReveal />
         <SiteNav />
         <ScrollRuntime />
