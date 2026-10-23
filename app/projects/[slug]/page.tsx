@@ -27,6 +27,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 const width = (m: Media) => Number(m.ratio.split("/")[0]);
 const pad = (n: number) => String(n).padStart(2, "0");
+/** The longest word in a name, in characters: phones size the heading so it fits whole. */
+const longest = (name: string) => ({ ["--longest" as string]: Math.max(...name.split(/\s+/).map((w) => w.length)) });
 
 /**
  * A project page. The name, the facts, then the picture opening to the full
@@ -104,7 +106,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
             <span>{pad(index)}</span> / {pad(projects.length)} · {p.headline ?? p.category}
           </p>
         </div>
-        <h1 id="project-title" className={`${s.name} display`} data-enter="word">
+        <h1 id="project-title" className={`${s.name} display`} style={longest(p.name)} data-enter="word">
           {p.name}
         </h1>
         <div className={s.lead}>
@@ -228,7 +230,9 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
           <span className={s.nextLabel}>
             Next project · {tagLine(next)}
           </span>
-          <span className={`${s.nextWord} display`}>{next.name}</span>
+          <span className={`${s.nextWord} display`} style={longest(next.name)}>
+            {next.name}
+          </span>
           <span className={s.nextGo}>
             View project <ArrowRight />
           </span>

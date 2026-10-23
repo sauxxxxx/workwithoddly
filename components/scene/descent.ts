@@ -27,8 +27,13 @@ export const GROW = 0.22;
 export const isDescent = (id: string) => id.startsWith("p-");
 
 /** With reduced motion the scenes swap in place instead of travelling. */
-const reducedMotion = () =>
-  typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+let reducedQuery: MediaQueryList | null = null;
+const reducedMotion = () => {
+  if (typeof window === "undefined") return false;
+  // Read many times a frame: keep one live query rather than a new one per call.
+  reducedQuery ??= window.matchMedia("(prefers-reduced-motion: reduce)");
+  return reducedQuery.matches;
+};
 
 export type Descent = {
   id: string;

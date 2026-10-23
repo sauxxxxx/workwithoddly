@@ -18,20 +18,25 @@ export type Finish =
 
 export function makeFinish(f: Finish, lite = false): THREE.Material {
   switch (f.kind) {
+    // Metals carry no clearcoat in lite mode, so they take the cheaper
+    // standard shader there: the same look for a fraction of the GPU cost.
     case "chrome":
-      return new THREE.MeshPhysicalMaterial({
+      return new (lite ? THREE.MeshStandardMaterial : THREE.MeshPhysicalMaterial)({
         color: "#e9ebf2",
         metalness: 1,
         roughness: 0.08,
         envMapIntensity: 1.25,
       });
     case "gold":
+      if (lite) {
+        return new THREE.MeshStandardMaterial({ color: "#e3b54a", metalness: 1, roughness: 0.16, envMapIntensity: 1.35 });
+      }
       return new THREE.MeshPhysicalMaterial({
         color: "#e3b54a",
         metalness: 1,
         roughness: 0.16,
         envMapIntensity: 1.35,
-        clearcoat: lite ? 0 : 0.4,
+        clearcoat: 0.4,
         clearcoatRoughness: 0.1,
       });
     case "lacquer":

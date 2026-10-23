@@ -7,6 +7,16 @@
   transition: opacity var(--d-slow) var(--ease-out);
 }
 
+/* Phones: the address bar slides in and out while scrolling, which would
+   resize an inset:0 layer and make the canvas reallocate and the objects
+   jump. Size it to the large viewport instead, so it never changes. */
+@media (pointer: coarse) {
+  .stage {
+    inset: 0 0 auto 0;
+    height: 100lvh;
+  }
+}
+
 .stage[data-ready="true"] {
   opacity: 1;
 }

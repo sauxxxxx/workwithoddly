@@ -339,6 +339,25 @@
   text-wrap: balance;
 }
 
+/* Phones: size the name to its longest word, so a word like ACCOUNTING is
+   never broken across lines or pushed past the edge. */
+@media (max-width: 899px) {
+  .name,
+  .nextWord {
+    overflow-wrap: normal;
+    font-size: min(13vw, calc((100vw - 2 * var(--margin)) / (var(--longest, 6) * 0.84)));
+  }
+
+  /* The next-project word sits inside a padded card: fit it to the card. */
+  .next {
+    container-type: inline-size;
+  }
+
+  .nextWord {
+    font-size: min(13vw, calc(100cqi / (var(--longest, 6) * 0.84)));
+  }
+}
+
 .nextGo {
   display: inline-flex;
   align-items: center;

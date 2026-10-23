@@ -49,7 +49,9 @@ export function ScrollRuntime() {
     );
     // Scroll speed as `--speed` on the root (about ±1 at a brisk scroll, 0 at
     // rest): cards marked `data-speed-tilt` lean with it, the reel card bends.
-    motion.add("(prefers-reduced-motion: no-preference)", () => {
+    // Mouse and trackpad only: writing a custom property on the root restyles
+    // the whole document every frame, which phones cannot afford mid-scroll.
+    motion.add("(prefers-reduced-motion: no-preference) and (pointer: fine)", () => {
       const root = document.documentElement;
       let raf = 0;
       let prev = window.scrollY;

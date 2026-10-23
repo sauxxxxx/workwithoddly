@@ -23,7 +23,17 @@ export function useDescent(root: RefObject<HTMLElement | null>) {
     }));
 
     let raf = 0;
-    let last = "";
+    // What each layer last showed: only a layer whose own state changed is
+    // written, so the off-frame scenes cost nothing while one scene moves.
+    const shown = layers.map(() => ({ key: "", visible: "", active: "" }));
+    let lastVh = 0;
+    // Read on resize only: reading it every frame, right after the previous
+    // frame's style writes, forces a synchronous layout.
+    let vh = window.innerHeight;
+    const onResize = () => {
+      vh = window.innerHeight;
+    };
+    window.addEventListener("resize", onResize, { passive: true });
 
     const clear = () => {
       for (const { layer, ride, settle } of layers) {
@@ -38,17 +48,21 @@ export function useDescent(root: RefObject<HTMLElement | null>) {
 
     const frame = () => {
       raf = requestAnimationFrame(frame);
-      const vh = window.innerHeight;
-      const states = layers.map(({ id }) => sceneDescent(id));
-      const key = states.map((d) => (d ? `${d.offset.toFixed(4)}:${d.copy.toFixed(3)}` : "-")).join("|") + vh;
-      if (key === last) return;
-      last = key;
-      layers.forEach(({ layer, ride, settle }, i) => {
-        const d = states[i];
+      const resized = vh !== lastVh;
+      lastVh = vh;
+      layers.forEach(({ id, layer, ride, settle }, i) => {
+        const d = sceneDescent(id);
+        const was = shown[i];
         const visible = !!d && d.visible;
-        layer.style.visibility = visible ? "visible" : "hidden";
-        layer.dataset.active = String(visible && !!d && d.copy > 0.5);
-        if (!d) return;
+        const vis = visible ? "visible" : "hidden";
+        if (vis !== was.visible) layer.style.visibility = was.visible = vis;
+        const active = String(visible && !!d && d.copy > 0.5);
+        if (active !== was.active) layer.dataset.active = was.active = active;
+        // Hidden layers keep their last transform; nothing to write.
+        if (!d || !visible) return;
+        const key = `${d.offset.toFixed(4)}:${d.copy.toFixed(3)}`;
+        if (key === was.key && !resized) return;
+        was.key = key;
         const y = d.offset * vh;
         for (const n of ride) n.style.transform = `translate3d(0, ${y.toFixed(1)}px, 0) scale(${d.grow.toFixed(4)})`;
         for (const n of settle) {
@@ -60,6 +74,7 @@ export function useDescent(root: RefObject<HTMLElement | null>) {
     raf = requestAnimationFrame(frame);
     return () => {
       cancelAnimationFrame(raf);
+      window.removeEventListener("resize", onResize);
       clear();
     };
   }, [root]);

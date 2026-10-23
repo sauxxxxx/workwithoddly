@@ -93,8 +93,20 @@ export function NextPage({
         leaveTo({ href, label, origin: fromRing() });
       }
     };
-    raf = requestAnimationFrame(frame);
-    return () => cancelAnimationFrame(raf);
+    // Measure only while the band is in or near view, not on every frame of the page.
+    const watch = new IntersectionObserver(
+      ([entry]) => {
+        cancelAnimationFrame(raf);
+        raf = 0;
+        if (entry.isIntersecting) raf = requestAnimationFrame(frame);
+      },
+      { rootMargin: "25% 0px 25% 0px" },
+    );
+    watch.observe(el);
+    return () => {
+      watch.disconnect();
+      cancelAnimationFrame(raf);
+    };
   }, [href, label]);
 
   // A plain click scrolls the rest of the way, then leaves; modified clicks stay native.

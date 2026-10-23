@@ -7,6 +7,14 @@
   pointer-events: none;
 }
 
+/* Phones: never resize with the address bar (a re-raster of the blur). */
+@media (pointer: coarse) {
+  .silk {
+    inset: 0 0 auto 0;
+    height: 100lvh;
+  }
+}
+
 .scroll {
   position: absolute;
   inset: -12% -6%;
@@ -46,9 +54,15 @@
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
+/* Phones keep the silk still: moving a large blurred SVG can make mobile
+   browsers (Safari especially) re-render its filters every frame. */
+@media (prefers-reduced-motion: reduce), (pointer: coarse) {
   .drift,
   .scroll {
     animation: none;
+  }
+
+  .drift {
+    will-change: auto;
   }
 }

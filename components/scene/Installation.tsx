@@ -232,7 +232,8 @@ export function Installation({ quality, compact, reducedMotion, onFirstFrame }: 
       g.scale.setScalar((L.s * hh) / H0);
 
       // A very slow breathing sway so the pieces feel suspended, not pasted.
-      const sway = reducedMotion ? 0 : Math.sin(time * 0.42 + i * 1.7) * 0.03;
+      // Not on phones: it would keep the GPU rendering every frame at rest.
+      const sway = reducedMotion || compact ? 0 : Math.sin(time * 0.42 + i * 1.7) * 0.03;
       g.rotation.set(L.rx + sway, L.ry + sway * 0.6, L.rz);
 
       // Scroll-linked rotation on each piece's own axes.
@@ -296,8 +297,10 @@ export function Installation({ quality, compact, reducedMotion, onFirstFrame }: 
     }
     const pointerMoving = Math.abs(p.tx - p.x) + Math.abs(p.ty - p.y) > 0.0005;
 
-    // Render only when something is actually changing on screen.
-    const idle = anyVisible && !reducedMotion;
+    // Render only when something is actually changing on screen. Desktop
+    // keeps rendering while pieces are in view (the sway); phones only while
+    // scrolling or settling.
+    const idle = anyVisible && !reducedMotion && !compact;
     if (frames.current < 3 || motion > 0.0004 || idle || pointerMoving || sc !== lastScroll.current) {
       state.gl.render(state.scene, state.camera);
       lastScroll.current = sc;

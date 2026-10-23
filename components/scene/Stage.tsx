@@ -75,9 +75,10 @@ export default function Stage() {
   const [ready, setReady] = useState(false);
   const [pastOpening, setPastOpening] = useState(false);
   const [pastLiveScenes, setPastLiveScenes] = useState(false);
-  const [dpr, setDpr] = useState(() =>
-    Math.min(window.devicePixelRatio || 1, window.innerWidth < 760 ? 1.5 : 1.75),
-  );
+  // Phones draw at 1.25x: sharp enough for smooth, glossy shapes, and about
+  // a third fewer pixels than 1.5x for the GPU to shade every frame.
+  const maxDpr = window.innerWidth < 760 ? 1.25 : 1.75;
+  const [dpr, setDpr] = useState(() => Math.min(window.devicePixelRatio || 1, maxDpr));
 
   useEffect(() => {
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -144,7 +145,12 @@ export default function Stage() {
 
   if (mode === "still") return <Still />;
 
-  const hidden = (reduced && (pastOpening || pathname !== "/")) || (compact && pastLiveScenes && pathname === "/");
+  // Phones: the home page keeps its live scenes; Services has no room beside
+  // its text for the pieces, so it reads as a plain page there.
+  const hidden =
+    (reduced && (pastOpening || pathname !== "/")) ||
+    (compact && pastLiveScenes && pathname === "/") ||
+    (compact && pathname.startsWith("/services"));
 
   return (
     <div
@@ -158,6 +164,9 @@ export default function Stage() {
       <StageBoundary fallback={<Still />}>
         <Canvas
           frameloop={hidden ? "never" : "always"}
+          // The canvas is fixed: its offset never changes on scroll, so skip
+          // re-measuring it (a forced layout) while the page scrolls.
+          resize={{ scroll: false }}
           dpr={dpr}
           shadows={quality === "high" ? "percentage" : false}
           camera={{ fov: CAMERA.fov, position: [0, 0, CAMERA.z], near: 0.1, far: 60 }}
@@ -175,7 +184,7 @@ export default function Stage() {
         >
           <PerformanceMonitor
             onDecline={() => setDpr(1)}
-            onIncline={() => setDpr((d) => Math.min(d, 1.75))}
+            onIncline={() => setDpr((d) => Math.min(d, maxDpr))}
           />
           <Installation
             quality={quality}
