@@ -6,8 +6,9 @@ const GLYPHS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ#%&*+/<>=?@";
 
 /**
  * A title that resolves out of shuffled characters, left to right (the Lusion
- * label move). Inside a project-stage layer it replays each time that layer
- * becomes the active scene; anywhere else, each time it scrolls into view.
+ * label move). It plays once: inside a project-stage layer, the first time
+ * that layer becomes the active scene; anywhere else, the first time it
+ * scrolls into view. Keep it to small labels; big headings stay plain.
  * Screen readers get the plain text; the shuffle is decoration.
  */
 export function ScrambleText({ text, className }: { text: string; className?: string }) {
@@ -45,7 +46,10 @@ export function ScrambleText({ text, className }: { text: string; className?: st
       let was = host.dataset.active === "true";
       const watch = new MutationObserver(() => {
         const now = host.dataset.active === "true";
-        if (now && !was) play();
+        if (now && !was) {
+          watch.disconnect();
+          play();
+        }
         was = now;
       });
       watch.observe(host, { attributes: true, attributeFilter: ["data-active"] });
@@ -53,7 +57,9 @@ export function ScrambleText({ text, className }: { text: string; className?: st
     } else {
       const watch = new IntersectionObserver(
         ([entry]) => {
-          if (entry.isIntersecting) play();
+          if (!entry.isIntersecting) return;
+          watch.disconnect();
+          play();
         },
         { threshold: 0.6 },
       );

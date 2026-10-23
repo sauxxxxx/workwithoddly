@@ -4,7 +4,6 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Plate } from "@/components/Plate";
 import { ArrowLeft, ArrowRight, ArrowUpRight } from "@/components/Icons";
-import { ScrambleText } from "@/components/motion/ScrambleText";
 import { NextPage } from "@/components/nav/NextPage";
 import { ProjectReel } from "@/components/projects/ProjectReel";
 import { tagLine } from "@/components/projects/ProjectCard";
@@ -106,7 +105,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
           </p>
         </div>
         <h1 id="project-title" className={`${s.name} display`} data-enter="word">
-          <ScrambleText text={p.name} />
+          {p.name}
         </h1>
         <div className={s.lead}>
           <p className={s.summary} data-enter>
@@ -229,7 +228,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
           <span className={s.nextLabel}>
             Next project · {tagLine(next)}
           </span>
-          <ScrambleText className={`${s.nextWord} display`} text={next.name} />
+          <span className={`${s.nextWord} display`}>{next.name}</span>
           <span className={s.nextGo}>
             View project <ArrowRight />
           </span>

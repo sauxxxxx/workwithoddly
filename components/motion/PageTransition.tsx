@@ -56,6 +56,24 @@ export function PageTransition() {
   const [label, setLabel] = useState("");
   const pending = useRef<{ unblock: () => void } | null>(null);
   const last = useRef<string | null>(null);
+  // Links open a page at its top; back/forward returns to where the reader
+  // was on that page (null = not a history step).
+  const restore = useRef<number | null>(null);
+
+  useEffect(() => {
+    const seen = new Map<string, number>();
+    const onScroll = () => seen.set(window.location.pathname, window.scrollY);
+    // Read before anything on the arriving page scrolls and overwrites it.
+    const onPop = () => {
+      restore.current = seen.get(window.location.pathname) ?? 0;
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("popstate", onPop);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("popstate", onPop);
+    };
+  }, []);
 
   // Leaving: cover in, then change the route underneath it.
   useEffect(() => {
@@ -92,6 +110,28 @@ export function PageTransition() {
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const chain = pending.current;
     const el = cover.current;
+    const back = restore.current;
+    restore.current = null;
+
+    // Next keeps the old scroll position whenever any of the new page is
+    // visible there, so a card clicked deep in a list would open the next
+    // page at its footer. Place the page ourselves: the top for a link, the
+    // reader's last position for back/forward.
+    const place = (y: number) => {
+      smooth.lenis?.scrollTo(y, { immediate: true, force: true });
+      window.scrollTo({ top: y, behavior: "instant" as ScrollBehavior });
+    };
+    const toTop = () => place(0);
+    let settle = 0;
+    if (!chain && !window.location.hash) {
+      const y = back ?? 0;
+      place(y);
+      // Once more after Next's own scroll handling and the new page's Lenis.
+      settle = requestAnimationFrame(() => {
+        place(y);
+        ScrollTrigger.refresh();
+      });
+    }
 
     const ctx = gsap.context(() => {});
     const entrance = () =>
@@ -107,11 +147,14 @@ export function PageTransition() {
     if (reduced) {
       chain?.unblock();
       pending.current = null;
-      return;
+      return () => cancelAnimationFrame(settle);
     }
     if (!chain || !el) {
       entrance();
-      return () => ctx.revert();
+      return () => {
+        cancelAnimationFrame(settle);
+        ctx.revert();
+      };
     }
 
     // Hold the entrance pieces down while the cover is still up.
@@ -122,8 +165,7 @@ export function PageTransition() {
     // Two frames: the new page is laid out and ScrollRuntime has its new Lenis.
     let raf = requestAnimationFrame(() => {
       raf = requestAnimationFrame(() => {
-        smooth.lenis?.scrollTo(0, { immediate: true, force: true });
-        window.scrollTo(0, 0);
+        toTop();
         ScrollTrigger.refresh();
         gsap
           .timeline({

@@ -1,4 +1,4 @@
-import { track } from "./track";
+import { sceneIdAt, track } from "./track";
 
 /**
  * The Noomo descent. From the first project to Contact, scrolling down moves
@@ -71,7 +71,7 @@ export function sceneDescent(id: string): Descent | null {
 /**
  * The descent scene currently on stage: the most recent one whose frame has
  * pinned, so a leaving scene keeps its pieces until it is gone. Before the
- * first one pins, it is claimed early (from its hold start) with its pieces
+ * first one pins, it is claimed early (once the track heads for it) with its pieces
  * waiting above the frame, so they are never steered in ahead of their word.
  */
 export function activeDescent(): Descent | null {
@@ -79,7 +79,9 @@ export function activeDescent(): Descent | null {
   if (scenes.length === 0) return null;
   let current = null as (typeof scenes)[number] | null;
   for (const h of scenes) if (track.scroll >= h.top) current = h;
-  if (!current && track.scroll >= scenes[0].start) current = scenes[0];
+  // Claimed as soon as the track heads for it, so the pieces wait above the frame
+  // instead of gliding in over the previous section and snapping away.
+  if (!current && (track.scroll >= scenes[0].start || sceneIdAt(track.to) === scenes[0].id)) current = scenes[0];
   if (!current) return null;
   // Once a later, ordinary scene (About) is under way, the choreography takes over.
   const top = current.top;
