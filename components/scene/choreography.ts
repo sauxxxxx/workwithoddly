@@ -47,6 +47,15 @@ const P = (x: number, y: number, z: number, rx: number, ry: number, rz: number, 
 });
 
 type Poses = Record<ObjectId, Pose>;
+
+/**
+ * Phones show each project object on its plinth exactly as desktop composes
+ * it, scaled down as one group: the object's desktop pose and the plinth
+ * (StageDressing) both shrink by `k` about the line `y`, so the object still
+ * rests on the plinth instead of floating above or sinking into it.
+ */
+export const PHONE_STAGE = { k: 0.55, y: 0.16 };
+const onPhone = (d: Pose): Pose => ({ ...d, x: d.x * PHONE_STAGE.k, y: PHONE_STAGE.y + d.y * PHONE_STAGE.k, s: d.s * PHONE_STAGE.k });
 type Extra = { links?: number; hang?: number; enter?: number; turn?: Scene["turn"] };
 
 /* Each piece always leaves the same way, so exits read as one gesture. */
@@ -189,12 +198,12 @@ const mobile: Record<string, Scene> = {
     },
     { hang: 1, enter: 0.65 },
   ),
-  "p-stack": M({ stack: P(0.0, -0.02, 0.6, 0.5, 0.3, 0.1, 0.5) }, { turn: { stack: [0.1, 1.4, 0] } }),
-  "p-wave": M({ wave: P(0.0, -0.02, 0.6, 0.2, -0.35, 0.05, 0.5) }, { turn: { wave: [0.05, 0.9, 0.05] } }),
-  "p-chain": M({ chain: P(0.0, -0.02, 0.6, 0.45, 0.55, 0.2, 0.46) }, { turn: { chain: [0.9, 0.3, 0.15] } }),
-  "p-spring": M({ spring: P(0.0, -0.02, 0.6, 0.1, 0.0, 0.12, 0.5) }, { turn: { spring: [0.05, 1.6, 0] } }),
-  "p-lens": M({ lens: P(0.0, -0.02, 0.6, 0.25, 0.45, -0.25, 0.46) }, { turn: { lens: [0.15, 0.9, 0.15] } }),
-  "p-rosette": M({ rosette: P(0.0, -0.02, 0.6, 0.5, 0.35, 0.1, 0.5) }, { turn: { rosette: [0.3, 0.6, 1.0] } }),
+  "p-stack": M({ stack: onPhone(desktop["p-stack"].stack) }, { turn: desktop["p-stack"].turn }),
+  "p-wave": M({ wave: onPhone(desktop["p-wave"].wave) }, { turn: desktop["p-wave"].turn }),
+  "p-chain": M({ chain: onPhone(desktop["p-chain"].chain) }, { turn: desktop["p-chain"].turn }),
+  "p-spring": M({ spring: onPhone(desktop["p-spring"].spring) }, { turn: desktop["p-spring"].turn }),
+  "p-lens": M({ lens: onPhone(desktop["p-lens"].lens) }, { turn: desktop["p-lens"].turn }),
+  "p-rosette": M({ rosette: onPhone(desktop["p-rosette"].rosette) }, { turn: desktop["p-rosette"].turn }),
   "case-loop": M({ loop: P(0.0, -0.02, 0.6, 0.5, -0.4, 0.4, 0.34) }),
   "case-knot": M({ knot: P(0.0, -0.02, 0.6, 0.5, 0.6, 0.2, 0.34) }),
   "case-twist": M({ twist: P(0.0, -0.02, 0.6, 0.45, 0.35, 0.3, 0.38) }),

@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useRef } from "react";
 import * as THREE from "three";
 import { useFrame, useThree } from "@react-three/fiber";
-import { CAMERA } from "./choreography";
+import { CAMERA, PHONE_STAGE } from "./choreography";
 import { sceneIdAt, track } from "./track";
 import { activeDescent } from "./descent";
 import { makeAsterisk, makeCube, makeStar, type Quality } from "./geometry";
@@ -47,6 +47,14 @@ const FLOATERS: Floater[] = [
   { kind: "asterisk", x: -0.86, y: -0.2, z: 1.6, s: 0.75, spin: [0.15, 0.25, 0.3], finish: { kind: "chrome" } },
   { kind: "cube", x: 0.88, y: -0.12, z: -0.4, s: 0.8, spin: [0.3, 0.2, 0.2], finish: { kind: "frosted", colour: "#F6F4FC" } },
   { kind: "star", x: 0.46, y: 0.92, z: -1.4, s: 0.6, spin: [0.2, 0.3, 0.2], finish: { kind: "chrome" } },
+];
+
+/* Phones show the first three only, placed in the margins beside the object
+   and below the word (the desktop spots sit on the word at phone widths). */
+const PHONE_SPOTS: Array<[number, number]> = [
+  [-0.72, 0.3],
+  [0.74, 0.34],
+  [-0.8, 0.02],
 ];
 
 const isStage = (id: string) => (id.startsWith("p-") || id.startsWith("case-") || id.startsWith("svc-") ? 1 : 0);
@@ -110,12 +118,12 @@ export function StageDressing({
     const p = plinth.current;
     if (p) {
       const hh = halfH(PLINTH.z);
-      const py = compact ? -0.16 : PLINTH.y;
+      const py = compact ? PHONE_STAGE.y + PLINTH.y * PHONE_STAGE.k : PLINTH.y;
       // Off the home stage the plinth rises into place by weight.
       const rise = descent ? 0 : (1 - w) * 0.9;
       p.position.set(PLINTH.x * hh * aspect, (py - rise + ride) * hh, PLINTH.z);
       p.rotation.set(PLINTH.tilt, Math.sin(time * 0.2) * 0.05, 0);
-      p.scale.setScalar(PLINTH.s * (compact ? 0.55 : 1) * (hh / halfH(0)) * grow);
+      p.scale.setScalar(PLINTH.s * (compact ? PHONE_STAGE.k : 1) * (hh / halfH(0)) * grow);
       p.visible = w > 0.01;
     }
 
@@ -123,10 +131,12 @@ export function StageDressing({
       const m = floaters.current[i];
       if (!m) return;
       const hh = halfH(f.z);
-      const x = compact ? f.x * 0.9 : f.x;
+      const spot = compact ? PHONE_SPOTS[i] : undefined;
+      const x = spot ? spot[0] : f.x;
+      const fy = spot ? spot[1] : f.y;
       // The marks ride with the scene, nearer ones a touch faster (parallax).
       const depth = 0.85 + ((f.z + 2) / 4) * 0.3;
-      m.position.set(x * hh * aspect, (f.y + ride * depth) * hh + Math.sin(time * 0.45 + i * 1.3) * 0.08, f.z);
+      m.position.set(x * hh * aspect, (fy + ride * depth) * hh + Math.sin(time * 0.45 + i * 1.3) * 0.08, f.z);
       m.rotation.set(time * f.spin[0] * 0.35 + i, time * f.spin[1] * 0.35, time * f.spin[2] * 0.35);
       m.scale.setScalar(f.s * w * (compact ? 0.55 : 1));
       m.visible = w > 0.01 && (!compact || i < 3);
