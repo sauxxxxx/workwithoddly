@@ -1,0 +1,225 @@
+/* A team member's page: the name, what they do beside their portrait, links,
+   then the rest of the team. Set in the project pages' language. */
+
+.page {
+  position: relative;
+  z-index: var(--z-front);
+}
+
+/* ═════════ The name ═════════ */
+
+.hero {
+  display: grid;
+  gap: var(--s-6);
+  padding: calc(var(--nav-h) + var(--s-6)) var(--margin) var(--s-7);
+}
+
+.top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--s-3) var(--s-6);
+}
+
+.back {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  font-size: var(--t-small);
+  color: var(--ink-soft);
+  text-decoration: none;
+}
+
+.back:hover {
+  color: var(--ink);
+}
+
+.kicker {
+  margin: 0;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.kicker span {
+  color: var(--coral);
+}
+
+.name {
+  margin: var(--s-6) 0 0;
+  font-size: clamp(3.25rem, 11.5vw, 12rem);
+  line-height: 0.9;
+  text-wrap: balance;
+}
+
+/* ═════════ What they do, beside the portrait ═════════ */
+
+.profile {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  align-items: start;
+  gap: var(--s-8) var(--gutter);
+  padding: 0 var(--margin) var(--section-pad);
+}
+
+.about {
+  display: grid;
+  gap: var(--s-6);
+  padding-top: var(--s-5);
+  border-top: var(--line);
+}
+
+.label {
+  margin: 0;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+}
+
+.skills {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.skills li {
+  display: grid;
+  grid-template-columns: 3rem 1fr;
+  align-items: baseline;
+  padding: var(--s-4) 0;
+  border-top: var(--hair);
+  font-family: var(--f-brand);
+  font-size: clamp(1.25rem, 2.1vw, 1.875rem);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.skills li:first-child {
+  border-top: 0;
+}
+
+.num {
+  font-family: var(--f-ui);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  color: var(--coral);
+}
+
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-3);
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-3);
+  padding: 0.85rem 1.4rem;
+  border: 1px solid var(--charcoal);
+  border-radius: 999px;
+  background: var(--charcoal);
+  color: var(--cream);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background-color var(--d-fast) linear, border-color var(--d-fast) linear, color var(--d-fast) linear;
+}
+
+.pill:hover {
+  border-color: var(--coral);
+  background: var(--coral);
+  color: var(--charcoal);
+}
+
+.soon {
+  margin: 0;
+  font-size: var(--t-small);
+  color: var(--ink-mute);
+}
+
+.portrait {
+  width: 100%;
+  max-width: 34rem;
+  justify-self: end;
+}
+
+/* ═════════ The rest of the team ═════════ */
+
+.others {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--gutter);
+  padding: 0 var(--margin) var(--section-pad);
+}
+
+.other {
+  display: grid;
+  gap: var(--s-3);
+  padding-top: var(--s-4);
+  border-top: var(--line);
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.otherNext {
+  text-align: right;
+  justify-items: end;
+}
+
+.otherLabel {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.otherName {
+  font-family: var(--f-display);
+  font-weight: 300;
+  text-transform: uppercase;
+  font-size: clamp(1.75rem, 4.4vw, 4rem);
+  line-height: 0.95;
+  transition: color var(--d-fast) linear;
+}
+
+.other:hover .otherName {
+  color: var(--coral);
+}
+
+@media (max-width: 899px) {
+  /* Phones: size the name to its longest word, never broken mid-word. */
+  .name {
+    overflow-wrap: normal;
+    font-size: min(13vw, calc((100vw - 2 * var(--margin)) / (var(--longest, 6) * 0.84)));
+  }
+
+  /* Portrait first, then what they do. */
+  .profile {
+    grid-template-columns: 1fr;
+    gap: var(--s-7);
+  }
+
+  .portrait {
+    order: -1;
+    max-width: none;
+    justify-self: stretch;
+  }
+
+  .otherName {
+    font-size: clamp(1.25rem, 6.4vw, 1.75rem);
+  }
+}

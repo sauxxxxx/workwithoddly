@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { LocalTime } from "../LocalTime";
 import { site } from "@/content/site";
-import { team } from "@/content/team";
+import { skillLine, team } from "@/content/team";
 import s from "./studio-ending.module.css";
 
 export function StudioAbout() {
@@ -30,7 +30,7 @@ export function StudioAbout() {
           {team.map((person) => (
             <li key={person.name}>
               <strong>{person.name}</strong>
-              <span>{person.role}</span>
+              <span>{skillLine(person)}</span>
             </li>
           ))}
         </ul>

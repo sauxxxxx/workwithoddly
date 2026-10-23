@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { projects } from "@/content/projects";
+import { people } from "@/content/team";
 import { site } from "@/content/site";
 
 export const dynamic = "force-static";
@@ -19,6 +20,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: now,
       changeFrequency: "yearly" as const,
       priority: 0.6,
+    })),
+    ...people.map((m) => ({
+      url: url(`/team/${m.slug}/`),
+      lastModified: now,
+      changeFrequency: "yearly" as const,
+      priority: 0.5,
     })),
   ];
 }
