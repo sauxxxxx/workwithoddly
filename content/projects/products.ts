@@ -19,7 +19,7 @@ export const productProjects: Project[] = [
     deliverables: ["Windows desktop application"],
     results:
       "BookVoice takes a document through local narration and audio arrangement to an exportable MP3. After the first model download, the core workflow runs without an account or a hosted backend.",
-    year: null,
+    year: "2026",
     url: null,
     kind: "apps",
     summary: "A Windows desktop application for converting long-form documents into locally generated narration and shaping the result in a multitrack editor.",
@@ -70,7 +70,7 @@ export const productProjects: Project[] = [
     deliverables: ["Marketing, account and checkout experience"],
     results:
       "Roarly gives a coherent path from product discovery to checkout and account access, and its static preview can still explain the concept when the backend is unavailable.",
-    year: null,
+    year: "2026",
     url: null,
     repo: "https://github.com/Enzizy/Roarly",
     kind: "software",
@@ -122,7 +122,7 @@ export const productProjects: Project[] = [
     deliverables: ["Operations web application"],
     results:
       "CCR is one place to trace an order through fulfillment and collection, review outstanding balances and investigate operational questions, without giving the assistant permission to change business records.",
-    year: null,
+    year: "2026",
     url: null,
     kind: "software",
     summary: "A private operations workspace that tracks an order from purchase order through delivery, billing and payment.",
@@ -165,7 +165,7 @@ export const productProjects: Project[] = [
     deliverables: ["Prospecting web application"],
     results:
       "LifeDesk CRM turns area-based discovery into an organized pipeline of reviewed prospects, contact context and draft outreach, while calls and emails stay deliberate, human actions.",
-    year: null,
+    year: "2026",
     url: null,
     kind: "software",
     summary: "A personal CRM that turns local business discovery into a reviewed prospect list and an organized outreach workflow.",
@@ -207,7 +207,7 @@ export const productProjects: Project[] = [
     deliverables: ["Android application"],
     results:
       "LifeDesk brings daily planning, payments, budgets and recorded stock and crypto positions into one personal app, and local export and restore keep the information portable.",
-    year: null,
+    year: "2026",
     url: null,
     kind: "apps",
     summary: "An Android-first home for daily tasks, personal finances, investments and AI-assisted planning.",

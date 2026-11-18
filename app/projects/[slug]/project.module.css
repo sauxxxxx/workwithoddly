@@ -35,7 +35,7 @@
 }
 
 .kicker {
-  font-size: 0.6875rem;
+  font-size: var(--t-label);
   font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -116,7 +116,7 @@
 .facts dt,
 .label {
   margin: 0;
-  font-size: 0.6875rem;
+  font-size: var(--t-label);
   font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -169,7 +169,7 @@
 }
 
 .num {
-  font-size: 0.6875rem;
+  font-size: var(--t-label);
   font-weight: 600;
   letter-spacing: 0.14em;
   color: var(--coral);
@@ -350,7 +350,7 @@
 }
 
 .nextLabel {
-  font-size: 0.6875rem;
+  font-size: var(--t-label);
   font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;

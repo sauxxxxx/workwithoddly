@@ -12,6 +12,12 @@ export const site = {
    * the meta tag it gives you). Not needed when the domain is verified by DNS.
    */
   googleSiteVerification: null as string | null,
+  /**
+   * The project brief's Google Apps Script web app (".../exec"); see
+   * scripts/apps-script/README.md. While null, the brief offers Gmail, the
+   * visitor's email app and copying instead.
+   */
+  formEndpoint: null as string | null,
   positioning: "Creative Technology Studio",
   statement: ["Different by design.", "Built for better."],
   location: { city: "Cebu", country: "Philippines", timeZone: "Asia/Manila" },
@@ -27,12 +33,13 @@ export const site = {
   social: [
     { label: "Instagram", url: null as string | null },
     { label: "LinkedIn", url: null as string | null },
-    { label: "Facebook", url: null as string | null },
+    { label: "Facebook", url: "https://www.facebook.com/profile.php?id=61595604291224" as string | null },
   ],
 
   nav: [
     { label: "Work", href: "/projects/" },
     { label: "Services", href: "/services/" },
+    { label: "How we work", href: "/how-we-work/" },
     { label: "About", href: "/about/" },
     { label: "Contact", href: "/contact/" },
   ],

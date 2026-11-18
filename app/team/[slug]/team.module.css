@@ -37,7 +37,7 @@
 
 .kicker {
   margin: 0;
-  font-size: 0.6875rem;
+  font-size: var(--t-label);
   font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -74,7 +74,7 @@
 
 .label {
   margin: 0;
-  font-size: 0.6875rem;
+  font-size: var(--t-label);
   font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -106,7 +106,7 @@
 
 .num {
   font-family: var(--f-ui);
-  font-size: 0.6875rem;
+  font-size: var(--t-label);
   font-weight: 600;
   letter-spacing: 0.14em;
   color: var(--coral);
@@ -180,7 +180,7 @@
   display: inline-flex;
   align-items: center;
   gap: var(--s-2);
-  font-size: 0.6875rem;
+  font-size: var(--t-label);
   font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;

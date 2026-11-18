@@ -146,7 +146,7 @@ export const portfolioProjects: Project[] = [
     deliverables: ["HR operations platform"],
     results:
       "Joyno HR brings employee records, leave decisions, workforce calendars, notifications, audit history and management reports into one operations platform.",
-    year: null,
+    year: "2026",
     url: null,
     kind: "software",
     summary:
@@ -203,7 +203,7 @@ export const portfolioProjects: Project[] = [
     deliverables: ["Android application"],
     results:
       "LocalAid gives residents a place to request assistance, discover nearby needs, coordinate in real time and close a request with feedback for the helper.",
-    year: null,
+    year: "2026",
     url: null,
     repo: "https://github.com/Enzizy/LocalAid",
     kind: "apps",
@@ -254,7 +254,7 @@ export const portfolioProjects: Project[] = [
       "We organized the service catalog around customer needs, then paired each path with completed work, process explanations, reviews and answers to common questions, with consultation, booking, directions, phone and Messenger kept close to the relevant content.",
     deliverables: ["Business website"],
     results: "Customers get a clear way to compare services, inspect the shop's work and choose how to contact or visit StreetKings.",
-    year: null,
+    year: "2026",
     url: "https://streetkingsph.com/",
     kind: "website",
     summary:
@@ -302,7 +302,7 @@ export const portfolioProjects: Project[] = [
     deliverables: ["Business website"],
     results:
       "Visitors can explore relevant work, understand the process from consultation to installation, and start an inquiry with a clearer idea of what B&W can make for their space.",
-    year: null,
+    year: "2026",
     url: "https://bwcustomizedfurniture.com/",
     kind: "website",
     summary: "A visual WordPress portfolio that helps customers explore custom furniture categories, evaluate craftsmanship and start an inquiry.",

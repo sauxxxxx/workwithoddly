@@ -11,7 +11,7 @@
 }
 
 .tag {
-  font-size: 0.6875rem;
+  font-size: var(--t-label);
   font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -27,6 +27,16 @@
   flex-wrap: wrap;
   justify-content: center;
   gap: var(--s-2);
+}
+
+.process {
+  font-size: var(--t-small);
+}
+
+.process a {
+  color: var(--ink);
+  text-decoration-color: var(--coral);
+  text-underline-offset: 3px;
 }
 
 .jump a {
@@ -84,7 +94,7 @@
   position: absolute;
   left: var(--margin);
   top: calc(var(--nav-h) + var(--s-2));
-  font-size: 0.6875rem;
+  font-size: var(--t-label);
   font-weight: 600;
   letter-spacing: 0.14em;
   color: var(--ink-soft);

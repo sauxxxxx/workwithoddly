@@ -16,7 +16,7 @@
 .tag,
 .label {
   margin: 0;
-  font-size: 0.6875rem;
+  font-size: var(--t-label);
   font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -77,7 +77,7 @@
   justify-content: space-between;
   gap: var(--s-6);
   padding: var(--s-9) var(--margin) var(--s-6);
-  font-size: 0.6875rem;
+  font-size: var(--t-label);
 }
 
 .wordmark {

@@ -242,7 +242,7 @@ export const featuredProjects: Project[] = [
     solution: null,
     deliverables: ["Campaigns", "Social graphics", "Video"],
     results: null,
-    year: null,
+    year: "2026",
     url: null,
     kind: "creative",
     summary: "Video for brands and businesses, planned, filmed and edited by the studio: travel, food and short-form social.",

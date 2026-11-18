@@ -57,7 +57,7 @@
   font-weight: 300;
 }
 .kicker {
-  font-size: 0.625rem;
+  font-size: var(--t-label-s);
   letter-spacing: 0.12em;
   text-transform: uppercase;
   margin: 0 3rem 1.5rem 0;
@@ -122,6 +122,18 @@
 }
 a.submit {
   text-decoration: none;
+}
+.submit:disabled {
+  opacity: 0.6;
+  cursor: progress;
+}
+/* The spam trap: out of sight and out of the tab order. */
+.trap {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
 }
 /* The brief, written: the ways to send it. */
 .ready {

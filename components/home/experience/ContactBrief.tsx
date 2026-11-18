@@ -16,6 +16,10 @@ export function ContactBrief() {
   // The finished brief, once written: then the ways to send it are shown.
   const [ready, setReady] = useState<string | null>(null);
   const [copied, setCopied] = useState<"brief" | "email" | null>(null);
+  // With a form endpoint: sending, then sent (or failed, which falls back to the ways above).
+  const [sending, setSending] = useState(false);
+  const [sent, setSent] = useState<{ name: string; email: string } | null>(null);
+  const [failed, setFailed] = useState(false);
   const open = () => {
     previousOverflow.current = document.documentElement.style.overflow;
     dialog.current?.showModal();
@@ -25,6 +29,8 @@ export function ContactBrief() {
     document.documentElement.style.overflow = previousOverflow.current;
     setReady(null);
     setCopied(null);
+    setSent(null);
+    setFailed(false);
     button.current?.focus();
   };
   const copy = async (what: "brief" | "email", text: string) => {
@@ -35,10 +41,31 @@ export function ContactBrief() {
       setCopied(null);
     }
   };
-  const submit = (event: FormEvent<HTMLFormElement>) => {
+  const submit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     const brief = `ODDLY — Project brief\n\nName: ${data.get("name")}\nEmail: ${data.get("email")}\nInterested in: ${data.get("discipline")}\n\n${data.get("message")}\n`;
+    // Sent straight to the studio's Google Apps Script when it is set up
+    // (scripts/apps-script); if that fails, the ways below still work.
+    if (site.formEndpoint) {
+      setSending(true);
+      setFailed(false);
+      try {
+        const body = new URLSearchParams();
+        data.forEach((value, key) => body.append(key, String(value)));
+        body.append("page", window.location.pathname);
+        const response = await fetch(site.formEndpoint, { method: "POST", body });
+        const result = (await response.json()) as { ok?: boolean };
+        if (!result.ok) throw new Error("not accepted");
+        setSent({ name: String(data.get("name")), email: String(data.get("email")) });
+      } catch {
+        setFailed(true);
+        setReady(brief);
+      } finally {
+        setSending(false);
+      }
+      return;
+    }
     // Not every visitor has a mail app set up, so a mailto link alone can fail
     // silently: offer Gmail, the mail app, and a copy of the brief instead.
     if (configured) setReady(brief);
@@ -90,9 +117,21 @@ export function ContactBrief() {
               ? "Tell us about the next thing you want to make."
               : "Create a short project brief to save and share with the studio."}
           </p>
-          {ready ? (
+          {sent ? (
             <div className={s.ready} role="status">
-              <p className={s.readyTitle}>Your brief is ready. Send it the way that suits you:</p>
+              <p className={s.readyTitle}>Thank you, {sent.name}. Your brief is with us.</p>
+              <p className={s.status}>We&rsquo;ll reply to {sent.email}.</p>
+              <button type="button" className={`${s.submit} ${s.quiet}`} onClick={() => dialog.current?.close()}>
+                Close
+              </button>
+            </div>
+          ) : ready ? (
+            <div className={s.ready} role="status">
+              <p className={s.readyTitle}>
+                {failed
+                  ? "We couldn’t send it from here just now. Your brief is ready; send it the way that suits you:"
+                  : "Your brief is ready. Send it the way that suits you:"}
+              </p>
               <div className={s.ways}>
                 <a
                   className={s.submit}
@@ -157,8 +196,10 @@ export function ContactBrief() {
               A little about your project
               <textarea name="message" rows={4} required />
             </label>
-            <button className={s.submit} type="submit">
-              {configured ? "Prepare my brief" : "Save project brief"}
+            {/* Left empty by people; bots that fill every field are ignored. */}
+            <input className={s.trap} name="company" tabIndex={-1} autoComplete="off" aria-hidden="true" />
+            <button className={s.submit} type="submit" disabled={sending}>
+              {sending ? "Sending…" : site.formEndpoint ? "Send my brief" : configured ? "Prepare my brief" : "Save project brief"}
               <ArrowUpRight />
             </button>
             {saved && (

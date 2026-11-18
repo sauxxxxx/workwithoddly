@@ -39,7 +39,7 @@
   position: absolute;
   top: var(--s-4);
   right: var(--s-4);
-  font-size: 0.625rem;
+  font-size: var(--t-label-s);
   font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;

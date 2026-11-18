@@ -37,6 +37,9 @@ export default function Services() {
             </a>
           ))}
         </nav>
+        <p className={s.process} data-enter>
+          <Link href="/how-we-work/">How a project works, and common questions</Link>
+        </p>
       </header>
 
       {disciplines.map((d, i) => {

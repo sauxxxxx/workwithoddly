@@ -15,9 +15,10 @@ import { JsonLd, studio } from "@/components/seo/JsonLd";
 import { ogImage, ogShared } from "@/components/seo/meta";
 
 /* Decides before first paint whether the entrance reveal plays: first visit of
-   the session, home page, motion allowed. A failsafe releases the page if the
-   reveal never runs. */
-const INTRO = `try{var d=document.documentElement;if(location.pathname==="/"&&!sessionStorage.getItem("oddly-intro")&&!matchMedia("(prefers-reduced-motion: reduce)").matches){d.dataset.intro="play";d.style.overflow="hidden";setTimeout(function(){if(d.dataset.intro!=="done"){d.dataset.intro="done";d.style.overflow="";}},7000);}}catch(e){}`;
+   the session, home page, motion allowed, and a screen at least 900px wide
+   (on phones it would hold the page back for seconds). A failsafe releases
+   the page if the reveal never runs. */
+const INTRO = `try{var d=document.documentElement;if(location.pathname==="/"&&innerWidth>=900&&!sessionStorage.getItem("oddly-intro")&&!matchMedia("(prefers-reduced-motion: reduce)").matches){d.dataset.intro="play";d.style.overflow="hidden";setTimeout(function(){if(d.dataset.intro!=="done"){d.dataset.intro="done";d.style.overflow="";}},7000);}}catch(e){}`;
 
 const archivo = Archivo({
   subsets: ["latin"],
@@ -46,7 +47,10 @@ export const metadata: Metadata = {
   },
   description: site.description,
   applicationName: site.name,
-  icons: { apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }] },
+  icons: {
+    icon: [{ url: "/icon.svg", type: "image/svg+xml", sizes: "any" }],
+    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
+  },
   alternates: { canonical: "/" },
   robots: { index: true, follow: true, googleBot: { index: true, follow: true, "max-image-preview": "large" } },
   openGraph: {

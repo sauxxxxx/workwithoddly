@@ -17,7 +17,7 @@
 .kicker,
 .hint {
   margin: 0;
-  font-size: 0.6875rem;
+  font-size: var(--t-label);
   font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -188,7 +188,7 @@
 }
 
 .endLabel {
-  font-size: 0.6875rem;
+  font-size: var(--t-label);
   font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;

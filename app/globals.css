@@ -39,6 +39,9 @@
   --t-body: 1.0625rem;
   --t-small: 0.9375rem;
   --t-micro: 0.8125rem;
+  /* Small-caps labels: 11px and 10px on desktop, never under 12px on phones. */
+  --t-label: 0.6875rem;
+  --t-label-s: 0.625rem;
 
   /* Spacing (4px base, one rhythm throughout) */
   --s-1: 0.25rem;
@@ -301,4 +304,11 @@ button {
 a:hover > .arrow,
 a:focus-visible > .arrow {
   transform: translate(0.15em, -0.15em);
+}
+
+@media (max-width: 899px) {
+  :root {
+    --t-label: 0.75rem;
+    --t-label-s: 0.75rem;
+  }
 }

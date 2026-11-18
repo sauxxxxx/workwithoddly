@@ -37,6 +37,13 @@ export function ContactSection() {
           <Link href="#services">Services</Link>
           <Link href="#about">About</Link>
           <Link href="/privacy/">Privacy</Link>
+          {site.social
+            .filter((x): x is { label: string; url: string } => !!x.url)
+            .map((x) => (
+              <a key={x.label} href={x.url} target="_blank" rel="noopener noreferrer">
+                {x.label}
+              </a>
+            ))}
         </nav>
         <p>
           © {new Date().getFullYear()} ODDLY®
