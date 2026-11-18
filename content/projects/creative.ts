@@ -13,7 +13,7 @@ export const creativeProjects: Project[] = [
     client: null,
     category: "Promotional reels for a travel and tour operator",
     disciplines: ["creative"],
-    overview: "Promotional reels for a travel and tour operator: island hopping, a sky-bike ride over the trees, and a party cruise at sea.",
+    overview: "Promotional reels for a travel and tour operator: island hopping, a sky-bike ride over the trees, a party cruise at sea, and a helicopter flight over Boracay.",
     context: null,
     problem: null,
     role: ["Planning", "Filming", "Video editing"],
@@ -27,7 +27,11 @@ export const creativeProjects: Project[] = [
     roleSummary: "Planning, filming and video editing",
     media: {
       cover: clip("travel-tours-reels", "island", "Island hopping and adventure reel for a travel and tour operator", "1280/720"),
-      gallery: [clip("travel-tours-reels", "party-cruise", "Vertical reel of a party cruise at sea", "720/1280")],
+      gallery: [
+        clip("travel-tours-reels", "helicopter", "Vertical reel of a helicopter flight over Boracay, filmed from the cockpit", "720/1280"),
+        clip("travel-tours-reels", "party-cruise", "Vertical reel of a party cruise at sea", "720/1280"),
+        clip("travel-tours-reels", "why-book", "Vertical reel on booking a Boracay trip, from the ferry to the island adventures", "720/1280"),
+      ],
     },
     art: { ground: "sage", ink: "charcoal", accent: "coral", layout: "panorama" },
   },
@@ -125,7 +129,7 @@ const pick = (slug: string, name: string): FeaturedClip => {
  */
 export const homeClips: FeaturedClip[] = [
   pick("travel-tours-reels", "island"),
-  pick("travel-tours-reels", "party-cruise"),
+  pick("travel-tours-reels", "helicopter"),
   pick("food-hall-reels", "three-kitchens"),
   pick("short-form-reels", "hook-reel"),
   pick("food-hall-reels", "come-hungry"),
