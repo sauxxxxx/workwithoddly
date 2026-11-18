@@ -1,0 +1,132 @@
+/* The full-screen player: the clip as large as fits, a quiet bar under it. */
+
+.player {
+  width: 100vw;
+  max-width: none;
+  height: 100dvh;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--cream);
+  overflow: hidden;
+}
+
+.player::backdrop {
+  background: rgb(15 23 42 / 0.92);
+  backdrop-filter: blur(8px);
+}
+
+.player[open] {
+  display: block;
+  animation: arrive 360ms var(--ease-out) both;
+}
+
+@keyframes arrive {
+  from {
+    opacity: 0;
+    transform: scale(0.97);
+  }
+}
+
+.stage {
+  display: grid;
+  justify-items: center;
+  gap: var(--s-4);
+  width: 100%;
+  /* A fixed height, so the clip below can be fitted inside it. */
+  height: 100dvh;
+  padding: var(--s-6) var(--margin) var(--s-5);
+  grid-template-rows: minmax(0, 1fr) auto;
+}
+
+/* As large as fits, whatever its shape. */
+.video {
+  max-width: 100%;
+  width: auto;
+  height: 100%;
+  min-height: 0;
+  border-radius: 0.75rem;
+  background: #000;
+  object-fit: contain;
+}
+
+.bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-3) var(--s-6);
+  width: min(100%, 72rem);
+}
+
+.caption {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--s-2) var(--s-5);
+  margin: 0;
+  font-family: var(--f-brand);
+  font-size: var(--t-lead);
+  letter-spacing: -0.015em;
+}
+
+.link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  font-family: var(--f-ui);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--coral);
+  text-decoration: none;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+}
+
+.count {
+  margin-right: var(--s-3);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  font-variant-numeric: tabular-nums;
+  color: rgb(248 246 239 / 0.7);
+}
+
+.round {
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border: 1px solid rgb(248 246 239 / 0.35);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--cream);
+  font: inherit;
+  font-size: 1.25rem;
+  cursor: pointer;
+  transition: background-color var(--d-fast) linear, color var(--d-fast) linear, border-color var(--d-fast) linear;
+}
+
+.round:hover {
+  border-color: var(--coral);
+  background: var(--coral);
+  color: var(--charcoal);
+}
+
+.close {
+  margin-left: var(--s-3);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .player[open] {
+    animation: none;
+  }
+}

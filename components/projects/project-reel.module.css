@@ -5,6 +5,7 @@
 }
 
 .card {
+  position: relative;
   overflow: hidden;
   border-radius: 0.75rem;
   aspect-ratio: 16 / 9;
@@ -27,8 +28,9 @@
   padding: 4% 6%;
 }
 
-/* A phone screen stands whole in the middle of its ground. */
-.card[data-shape="phone"] img {
+/* A phone screen or vertical video stands whole in the middle of its ground. */
+.card[data-shape="phone"] img,
+.card[data-shape="phone"] video {
   width: auto;
   height: 88%;
   margin: 6% auto 0;
@@ -36,6 +38,38 @@
   object-fit: contain;
   border-radius: 1.4rem;
   box-shadow: 0 30px 80px -30px rgb(15 23 42 / 0.5);
+}
+
+/* A low-resolution picture keeps a narrower frame rather than blurring at full width. */
+.reel[data-small="true"] .card {
+  max-width: min(100%, 60rem);
+  margin-inline: auto;
+}
+
+/* Sound for a video, in the card's corner. */
+.sound {
+  position: absolute;
+  right: var(--s-4);
+  bottom: var(--s-4);
+  padding: 0.6rem 1rem;
+  border: 0;
+  border-radius: 999px;
+  background: rgb(15 23 42 / 0.72);
+  color: var(--cream);
+  font: inherit;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  backdrop-filter: blur(6px);
+  transition: background-color var(--d-fast) linear;
+}
+
+.sound:hover,
+.sound[aria-pressed="true"] {
+  background: var(--coral);
+  color: var(--charcoal);
 }
 
 @media (max-width: 899px) {

@@ -6,7 +6,7 @@ import { Plate } from "@/components/Plate";
 import { ArrowLeft, ArrowRight, ArrowUpRight } from "@/components/Icons";
 import { NextPage } from "@/components/nav/NextPage";
 import { ProjectReel } from "@/components/projects/ProjectReel";
-import { tagLine } from "@/components/projects/ProjectCard";
+import { ProjectCard, tagLine } from "@/components/projects/ProjectCard";
 import { nextProject, projectBySlug, projects, type Media } from "@/content/projects";
 import { contactHref } from "@/content/site";
 import { JsonLd, absolute } from "@/components/seo/JsonLd";
@@ -51,6 +51,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
   const sharper = media.find((m) => m.kind !== "video" && width(m) >= 1200 && width(m) > width(p.media.cover) * 1.5);
   const reel = p.media.cover.src && width(p.media.cover) < 1000 && sharper ? sharper : p.media.cover.src ? p.media.cover : null;
   const gallery = media.filter((m) => m !== reel);
+  const related = (p.related ?? []).map(projectBySlug).filter((r): r is NonNullable<typeof r> => !!r);
 
   const story = [
     { title: "The challenge", body: p.problem },
@@ -210,9 +211,9 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
         </section>
       )}
 
-      {/* ── The rest of the pictures ── */}
+      {/* ── The rest of the pictures and clips ── */}
       {gallery.length > 0 && (
-        <section className={s.gallery} aria-label="More pictures" style={{ ["--ground" as string]: ground }}>
+        <section className={s.gallery} aria-label="More from this project" style={{ ["--ground" as string]: ground }}>
           {gallery.map((m) => {
             const [w, h] = m.ratio.split("/").map(Number);
             return (
@@ -221,6 +222,22 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
               </div>
             );
           })}
+        </section>
+      )}
+
+      {/* ── An overview's parts, as cards ── */}
+      {related.length > 0 && (
+        <section className={s.related} aria-labelledby="related-title">
+          <h2 id="related-title" className={s.label}>
+            The work
+          </h2>
+          <ul>
+            {related.map((r, i) => (
+              <li key={r.slug}>
+                <ProjectCard project={r} index={i} />
+              </li>
+            ))}
+          </ul>
         </section>
       )}
 

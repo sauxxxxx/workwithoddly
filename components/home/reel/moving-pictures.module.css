@@ -1,0 +1,284 @@
+/* Moving pictures: a headline, then one row of clips.
+   Default (phones, no script): a row swiped by hand. Desktop with motion:
+   [data-mode="pinned"], a held frame the row travels across. */
+
+.section {
+  position: relative;
+  z-index: var(--z-front);
+  padding: var(--section-pad) 0;
+}
+
+.intro {
+  display: grid;
+  gap: var(--s-4);
+  padding: 0 var(--margin) var(--s-7);
+}
+
+.kicker,
+.hint {
+  margin: 0;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.hint {
+  color: var(--coral);
+}
+
+.title {
+  margin: 0;
+  font-size: clamp(3.25rem, 13vw, 9rem);
+  line-height: 0.88;
+}
+
+.lede {
+  max-width: 22rem;
+  font-family: var(--f-brand);
+  font-size: var(--t-lead);
+  line-height: 1.3;
+  letter-spacing: -0.015em;
+}
+
+/* ── The row ── */
+
+.track {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--s-5);
+  margin: 0;
+  padding: var(--s-2) var(--margin) var(--s-6);
+  list-style: none;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: var(--margin);
+  scrollbar-width: none;
+}
+
+.track::-webkit-scrollbar {
+  display: none;
+}
+
+.item {
+  flex: none;
+  scroll-snap-align: start;
+}
+
+/* Phones: wide clips nearly the screen, vertical ones about half. */
+.item[data-shape="wide"] {
+  width: 84vw;
+}
+
+.item[data-shape="tall"] {
+  width: 56vw;
+}
+
+.clip {
+  display: grid;
+  gap: var(--s-2);
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--ink);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.picture {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: var(--ratio);
+  overflow: hidden;
+  border-radius: 1rem;
+  background: var(--ground-deep);
+}
+
+.picture video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: scale var(--d-slow) var(--ease-out);
+}
+
+.clip:hover .picture video {
+  scale: 1.04;
+}
+
+/* The play mark: small at rest, a coral disc on hover and focus. */
+.play {
+  position: absolute;
+  right: var(--s-3);
+  bottom: var(--s-3);
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 50%;
+  background: rgb(15 23 42 / 0.6);
+  color: var(--cream);
+  backdrop-filter: blur(6px);
+  transition: background-color var(--d-fast) linear, color var(--d-fast) linear, scale var(--d-base) var(--ease-out);
+}
+
+.play svg {
+  width: 40%;
+  margin-left: 8%;
+}
+
+.clip:hover .play,
+.clip:focus-visible .play {
+  background: var(--coral);
+  color: var(--charcoal);
+  scale: 1.12;
+}
+
+.name {
+  margin-top: var(--s-2);
+  font-family: var(--f-brand);
+  font-size: clamp(1.15rem, 1.6vw, 1.45rem);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+
+.role {
+  font-size: 0.75rem;
+  color: var(--ink-mute);
+}
+
+/* ── The last card: on to all the video work ── */
+
+.endItem {
+  width: 56vw;
+}
+
+.end {
+  display: grid;
+  align-content: space-between;
+  gap: var(--s-5);
+  aspect-ratio: 9 / 16;
+  padding: var(--s-6);
+  border-radius: 1rem;
+  background: var(--charcoal);
+  color: var(--cream);
+  text-decoration: none;
+  transition: background-color var(--d-fast) linear, color var(--d-fast) linear;
+}
+
+.end:hover {
+  background: var(--coral);
+  color: var(--charcoal);
+}
+
+.endLabel {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.endWord {
+  font-size: clamp(2.25rem, 5vw, 4rem);
+  line-height: 0.92;
+}
+
+.end :global(.arrow) {
+  width: 2rem;
+  height: 2rem;
+}
+
+/* ── Desktop, reduced motion: the clips wrap instead of scrolling sideways ── */
+
+@media (min-width: 900px) {
+  .section:not([data-mode="pinned"]) .track {
+    flex-wrap: wrap;
+    overflow: visible;
+    scroll-snap-type: none;
+  }
+
+  .section:not([data-mode="pinned"]) .item[data-shape="wide"] {
+    width: calc((100% - 2 * var(--s-5)) * 0.45);
+  }
+
+  .section:not([data-mode="pinned"]) .item[data-shape="tall"],
+  .section:not([data-mode="pinned"]) .endItem {
+    width: calc((100% - 2 * var(--s-5)) * 0.2);
+  }
+}
+
+/* ── Desktop with motion: the frame holds while the row travels ── */
+
+.section[data-mode="pinned"] {
+  --clip-h: min(56svh, 36rem);
+  height: calc(100svh + var(--travel, 0px));
+  padding: 0;
+}
+
+.section[data-mode="pinned"] .frame {
+  position: sticky;
+  top: 0;
+  display: flex;
+  align-items: center;
+  height: 100svh;
+  overflow: hidden;
+}
+
+/* The headline sits at the left, under the row's opening. */
+.section[data-mode="pinned"] .intro {
+  position: absolute;
+  left: var(--margin);
+  top: calc(var(--nav-h) + var(--s-7));
+  width: min(34vw, 30rem);
+  padding: 0;
+  will-change: transform, opacity;
+}
+
+/* Sized so "pictures." ends before the first clip begins. */
+.section[data-mode="pinned"] .title {
+  font-size: min(5.2vw, 12svh);
+}
+
+/* The row starts past the headline and runs off the right edge. */
+.section[data-mode="pinned"] .track {
+  flex: none;
+  width: max-content;
+  align-items: center;
+  gap: clamp(1.5rem, 3vw, 3.5rem);
+  padding: 0 var(--margin) 0 calc(var(--margin) + min(38vw, 34rem));
+  overflow: visible;
+  scroll-snap-type: none;
+  will-change: transform;
+}
+
+/* Every clip the same height; their widths follow their shape. */
+.section[data-mode="pinned"] .item,
+.section[data-mode="pinned"] .endItem {
+  width: auto;
+}
+
+.section[data-mode="pinned"] .picture,
+.section[data-mode="pinned"] .end {
+  height: var(--clip-h);
+  width: auto;
+}
+
+/* A little up and down, so the row reads as a sequence of frames, not a shelf. */
+.section[data-mode="pinned"] .item:nth-child(even) {
+  margin-top: var(--s-8);
+}
+
+.section[data-mode="pinned"] .item:nth-child(odd) {
+  margin-bottom: var(--s-8);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .picture video,
+  .play {
+    transition: none;
+  }
+}

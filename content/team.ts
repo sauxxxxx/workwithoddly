@@ -42,8 +42,7 @@ export const people: TeamMember[] = [
     name: "Zhy Batican",
     skills: ["Website developer", "Software developer", "Google SEO specialist"],
     portrait: "/team/rolex-zhyronne-batican.webp",
-    // Portfolio (zhyronne-batican.vercel.app) is offline for now; add it back when it resolves.
-    links: { github: "https://github.com/enzizy" },
+    links: { portfolio: "https://zhyronne.workwithoddly.com", github: "https://github.com/enzizy" },
   },
   {
     slug: "nathan-languido",

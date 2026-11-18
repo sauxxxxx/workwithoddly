@@ -103,7 +103,7 @@ export const disciplines: Discipline[] = [
         description: "Ideas taken from first sketch to finished, delivered assets.",
       },
     ],
-    projects: ["marketing-content", "nxone-dc"],
+    projects: ["marketing-content", "travel-tours-reels", "food-hall-reels", "yakitori-restaurant-reels", "short-form-reels", "nxone-dc"],
   },
 ];
 

@@ -1,5 +1,5 @@
 import type { Project } from "./types";
-import { plate, shot } from "./media";
+import { clip, shot } from "./media";
 
 export const featuredProjects: Project[] = [
   {
@@ -245,14 +245,14 @@ export const featuredProjects: Project[] = [
     year: null,
     url: null,
     kind: "creative",
+    summary: "Video for brands and businesses, planned, filmed and edited by the studio: travel, food and short-form social.",
+    roleSummary: "Planning, filming and video editing",
+    // The overview: its page shows one clip and the campaigns as cards.
+    related: ["travel-tours-reels", "food-hall-reels", "yakitori-restaurant-reels", "short-form-reels"],
     media: {
-      cover: plate("Campaign artwork", "4/5"),
-      gallery: [
-        plate("Social graphic", "4/5"),
-        plate("Video still", "9/16"),
-        plate("Campaign artwork", "4/5"),
-        plate("Social graphic", "1/1"),
-      ],
+      // A clip that no other card leads with, so the Creative grid never repeats itself.
+      cover: clip("travel-tours-reels", "party-cruise", "Vertical reel of a party cruise at sea", "720/1280"),
+      gallery: [],
     },
     art: { ground: "cream", ink: "charcoal", accent: "coral", layout: "sheet", word: "CAMPAIGNS", sculpture: "rosette" },
   },

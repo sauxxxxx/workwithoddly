@@ -14,7 +14,7 @@ import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const REMAR = "https://remarugsimar.com";
-const ZHYRONNE = "https://zhyronne-batican.vercel.app/images/projects";
+const ZHYRONNE = "https://zhyronne.workwithoddly.com/images/projects";
 
 /** [slug, file name (without .webp), source URL] */
 const MEDIA = [
@@ -35,7 +35,7 @@ const MEDIA = [
   ["sharks-tail", "screen", `${REMAR}/_next/static/media/sharks-tail-home.91aefa65.webp`],
   ["roarly-website", "screen", `${REMAR}/_next/static/media/roarly-website-home.cdd4566d.webp`],
   ["joyno-inc", "screen", `${REMAR}/_next/static/media/joyno-inc-home.7bb9f3d9.webp`],
-  // zhyronne-batican.vercel.app
+  // zhyronne.workwithoddly.com
   ["joyno-hr", "screen", `${ZHYRONNE}/hr.png`],
   ["localaid", "screen", `${ZHYRONNE}/localaid.png`],
   ["streetkings-ph", "screen", `${ZHYRONNE}/street.png`],

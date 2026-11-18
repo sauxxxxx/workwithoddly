@@ -309,6 +309,30 @@
 
 /* ═════════ Onward ═════════ */
 
+/* ═════════ The work (an overview's parts) ═════════ */
+
+.related {
+  display: grid;
+  gap: var(--s-6);
+  padding: var(--s-9) var(--margin) 0;
+}
+
+.related ul {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--s-8) var(--gutter);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+@media (max-width: 899px) {
+  .related ul {
+    grid-template-columns: 1fr;
+    gap: var(--s-7);
+  }
+}
+
 .onward {
   padding: var(--s-9) var(--margin) var(--section-pad);
 }

@@ -2,6 +2,7 @@ import type { Project, ProjectKind } from "./projects/types";
 import { featuredProjects } from "./projects/featured";
 import { portfolioProjects } from "./projects/portfolio";
 import { productProjects } from "./projects/products";
+import { creativeProjects } from "./projects/creative";
 
 export type { Media, CaseLayout, ProjectKind, Project, Swatch } from "./projects/types";
 
@@ -15,7 +16,7 @@ export type { Media, CaseLayout, ProjectKind, Project, Swatch } from "./projects
  *
  * The case-study detail (headline, summary, problem/solution/results,
  * highlights, capabilities, technology) comes from the team's own portfolio
- * case studies at remarugsimar.com and zhyronne-batican.vercel.app, rewritten
+ * case studies at remarugsimar.com and zhyronne.workwithoddly.com, rewritten
  * in the studio's voice with the same facts.
  *
  * The first entries with an `art.word` and `art.sculpture` are the home-page
@@ -27,7 +28,7 @@ export type { Media, CaseLayout, ProjectKind, Project, Swatch } from "./projects
  * entry without a `src` renders a labeled placeholder plate.
  */
 
-export const projects: Project[] = [...featuredProjects, ...portfolioProjects, ...productProjects];
+export const projects: Project[] = [...featuredProjects, ...portfolioProjects, ...productProjects, ...creativeProjects];
 
 export const projectBySlug = (slug: string) => projects.find((p) => p.slug === slug);
 

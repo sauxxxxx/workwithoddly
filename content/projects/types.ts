@@ -9,6 +9,10 @@ export type Media = {
   kind?: "image" | "video";
   /** Aspect ratio used for layout before the asset loads, e.g. "16/10". */
   ratio: string;
+  /** Video only: a short muted loop for project cards (scripts/encode-project-video.mjs). */
+  preview?: string;
+  /** Video only: it has a soundtrack worth offering (a "Sound on" button on the reel). */
+  sound?: boolean;
 };
 
 export type CaseLayout = "panorama" | "split" | "ledger" | "tide" | "sheet";
@@ -51,6 +55,8 @@ export type Project = {
   highlights?: { title: string; body: string }[];
   capabilities?: string[];
   technology?: { label: string; items: string }[];
+  /** Other projects shown as cards on this one's page (an overview's parts). */
+  related?: string[];
   media: { cover: Media; gallery: Media[] };
   art: {
     /** Palette tokens from the brand: charcoal | coral | lavender | sage | cream */

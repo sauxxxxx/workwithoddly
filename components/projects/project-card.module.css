@@ -17,7 +17,8 @@
   background: var(--ground, var(--ground-deep));
 }
 
-.frame img {
+.frame img,
+.frame video {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -25,8 +26,9 @@
   transition: scale var(--d-slow) var(--ease-out);
 }
 
-/* A phone screen stands whole in the middle of its ground. */
-.frame[data-shape="phone"] img {
+/* A phone screen or vertical video stands whole in the middle of its ground. */
+.frame[data-shape="phone"] img,
+.frame[data-shape="phone"] video {
   width: auto;
   height: 86%;
   margin: 7% auto 0;
@@ -36,7 +38,8 @@
   box-shadow: 0 24px 60px -24px rgb(15 23 42 / 0.45);
 }
 
-.card:hover .frame img {
+.card:hover .frame img,
+.card:hover .frame video {
   scale: 1.04;
 }
 

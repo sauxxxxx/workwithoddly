@@ -3,6 +3,7 @@ import { ScrollBadge } from "@/components/home/ScrollBadge";
 import { HomeMotion } from "@/components/home/HomeMotion";
 import { PerspectiveSequence } from "@/components/home/sequence/PerspectiveSequence";
 import { ProjectStage } from "@/components/home/stage/ProjectStage";
+import { MovingPictures } from "@/components/home/reel/MovingPictures";
 import { StudioAbout } from "@/components/home/experience/StudioAbout";
 import { ContactSection } from "@/components/home/experience/ContactSection";
 import { NextPage } from "@/components/nav/NextPage";
@@ -49,6 +50,7 @@ export default function Home() {
       </section>
       <PerspectiveSequence />
       <ProjectStage />
+      <MovingPictures />
       <StudioAbout />
       <ContactSection />
       <NextPage href="/projects/" label="Projects" size="min(12.6vw, 27svh)" leading={0.86} />

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { Media, Project } from "@/content/projects";
 import { ScrambleText } from "@/components/motion/ScrambleText";
+import { LoopVideo } from "./LoopVideo";
 import s from "./project-card.module.css";
 
 const tall = (m: Media) => {
@@ -16,8 +17,9 @@ export const tagLine = (p: Project) => (p.stack?.length ? p.stack : [p.headline 
 
 /**
  * One project in the grid (the Lusion card): the screenshot leans with the
- * scroll, its title resolves out of shuffled letters. Phone screens sit whole
- * on the project's ground; a project without media shows its name there.
+ * scroll, its title resolves out of shuffled letters. A video project loops
+ * its short preview while on screen. Phone screens and vertical videos sit
+ * whole on the project's ground; a project without media shows its name there.
  */
 export function ProjectCard({ project: p, index }: { project: Project; index: number }) {
   const src = still(p.media.cover);
@@ -25,7 +27,9 @@ export function ProjectCard({ project: p, index }: { project: Project; index: nu
   return (
     <Link href={`/projects/${p.slug}/`} className={s.card}>
       <span className={s.frame} data-speed-tilt data-shape={shape} style={{ ["--ground" as string]: `var(--${p.art.ground})` }}>
-        {src ? (
+        {p.media.cover.kind === "video" && p.media.cover.preview ? (
+          <LoopVideo src={p.media.cover.preview} poster={src ?? undefined} label={p.media.cover.alt} />
+        ) : src ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img src={src} alt={p.media.cover.alt} loading={index < 4 ? "eager" : "lazy"} decoding="async" />
         ) : (
