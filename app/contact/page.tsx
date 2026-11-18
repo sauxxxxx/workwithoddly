@@ -69,7 +69,9 @@ export default function Contact() {
         <Link href="/" aria-label="ODDLY home">
           <Wordmark className={s.wordmark} />
         </Link>
-        <p>© {new Date().getFullYear()} ODDLY®</p>
+        <p>
+          <Link href="/privacy/">Privacy policy</Link> · © {new Date().getFullYear()} ODDLY®
+        </p>
       </footer>
 
       <NextPage href="/" label="Back to the start" title={"Creative\nTechnology\nStudio."} />

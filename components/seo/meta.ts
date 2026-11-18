@@ -22,11 +22,24 @@ export const ogShared = {
  * canonical address, and an Open Graph entry pointing at that address. Pages
  * without this would inherit the home page's canonical and preview.
  */
-export function pageMeta({ title, description, path }: { title: string; description: string; path: string }): Metadata {
+export function pageMeta({
+  title,
+  description,
+  path,
+  image,
+}: {
+  title: string;
+  description: string;
+  path: string;
+  /** A page's own share picture (1200×630); the site's otherwise. */
+  image?: { url: string; alt: string };
+}): Metadata {
+  const images = image ? [{ ...ogImage, ...image }] : ogShared.images;
   return {
     title,
     description,
     alternates: { canonical: path },
-    openGraph: { ...ogShared, title: `${title} — ${site.legalName}`, description, url: path },
+    openGraph: { ...ogShared, images, title: `${title} — ${site.legalName}`, description, url: path },
+    ...(image && { twitter: { card: "summary_large_image", images: [image.url] } }),
   };
 }

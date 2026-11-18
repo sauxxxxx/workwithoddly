@@ -36,6 +36,7 @@ export function ContactSection() {
           <Link href="#work">Work</Link>
           <Link href="#services">Services</Link>
           <Link href="#about">About</Link>
+          <Link href="/privacy/">Privacy</Link>
         </nav>
         <p>
           © {new Date().getFullYear()} ODDLY®

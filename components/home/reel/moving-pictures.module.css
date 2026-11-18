@@ -24,8 +24,20 @@
   color: var(--ink-soft);
 }
 
+/* Coral text would be too faint on the light ground; the coral goes on a dot instead. */
 .hint {
-  color: var(--coral);
+  display: flex;
+  align-items: center;
+  gap: 0.6em;
+  color: var(--ink);
+}
+
+.hint::before {
+  content: "";
+  width: 0.55em;
+  height: 0.55em;
+  border-radius: 50%;
+  background: var(--coral);
 }
 
 .title {

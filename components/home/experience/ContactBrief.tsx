@@ -6,12 +6,16 @@ import { ArrowUpRight } from "@/components/Icons";
 import s from "./contact-brief.module.css";
 
 const configured = !site.contact.email.endsWith(".example");
+const subject = "A new project with ODDLY";
 
 export function ContactBrief() {
   const dialog = useRef<HTMLDialogElement>(null);
   const button = useRef<HTMLButtonElement>(null);
   const previousOverflow = useRef("");
   const [saved, setSaved] = useState(false);
+  // The finished brief, once written: then the ways to send it are shown.
+  const [ready, setReady] = useState<string | null>(null);
+  const [copied, setCopied] = useState<"brief" | "email" | null>(null);
   const open = () => {
     previousOverflow.current = document.documentElement.style.overflow;
     dialog.current?.showModal();
@@ -19,14 +23,25 @@ export function ContactBrief() {
   };
   const close = () => {
     document.documentElement.style.overflow = previousOverflow.current;
+    setReady(null);
+    setCopied(null);
     button.current?.focus();
+  };
+  const copy = async (what: "brief" | "email", text: string) => {
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopied(what);
+    } catch {
+      setCopied(null);
+    }
   };
   const submit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     const brief = `ODDLY — Project brief\n\nName: ${data.get("name")}\nEmail: ${data.get("email")}\nInterested in: ${data.get("discipline")}\n\n${data.get("message")}\n`;
-    if (configured)
-      window.location.href = `mailto:${site.contact.email}?subject=${encodeURIComponent("A new project with ODDLY")}&body=${encodeURIComponent(brief)}`;
+    // Not every visitor has a mail app set up, so a mailto link alone can fail
+    // silently: offer Gmail, the mail app, and a copy of the brief instead.
+    if (configured) setReady(brief);
     else {
       const url = URL.createObjectURL(
         new Blob([brief], { type: "text/plain;charset=utf-8" }),
@@ -75,6 +90,44 @@ export function ContactBrief() {
               ? "Tell us about the next thing you want to make."
               : "Create a short project brief to save and share with the studio."}
           </p>
+          {ready ? (
+            <div className={s.ready} role="status">
+              <p className={s.readyTitle}>Your brief is ready. Send it the way that suits you:</p>
+              <div className={s.ways}>
+                <a
+                  className={s.submit}
+                  href={`https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(site.contact.email)}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(ready)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Send with Gmail <ArrowUpRight />
+                </a>
+                <a
+                  className={`${s.submit} ${s.quiet}`}
+                  href={`mailto:${site.contact.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(ready)}`}
+                >
+                  Open my email app <ArrowUpRight />
+                </a>
+                <button type="button" className={`${s.submit} ${s.quiet}`} onClick={() => copy("brief", ready)}>
+                  {copied === "brief" ? "Brief copied" : "Copy the brief"}
+                </button>
+              </div>
+              <p className={s.status}>
+                Or paste it into any message to{" "}
+                <button type="button" className={s.inline} onClick={() => copy("email", site.contact.email)}>
+                  {site.contact.email}
+                </button>
+                {copied === "email" && " (copied)"}
+                {site.contact.phone && <> · call or text {site.contact.phone}</>}
+              </p>
+              <button type="button" className={s.inline} onClick={() => setReady(null)}>
+                ← Edit the brief
+              </button>
+              <p className={s.status}>
+                How we handle what you send: <a href="/privacy/">privacy policy</a>.
+              </p>
+            </div>
+          ) : (
           <form onSubmit={submit}>
             <div className={s.fields}>
               <label>
@@ -105,7 +158,7 @@ export function ContactBrief() {
               <textarea name="message" rows={4} required />
             </label>
             <button className={s.submit} type="submit">
-              {configured ? "Prepare email enquiry" : "Save project brief"}
+              {configured ? "Prepare my brief" : "Save project brief"}
               <ArrowUpRight />
             </button>
             {saved && (
@@ -114,6 +167,7 @@ export function ContactBrief() {
               </p>
             )}
           </form>
+          )}
         </div>
       </dialog>
     </>

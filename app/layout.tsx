@@ -9,6 +9,8 @@ import { ScrollRuntime } from "@/components/motion/ScrollRuntime";
 import { LogoReveal } from "@/components/intro/LogoReveal";
 import { PageTransition } from "@/components/motion/PageTransition";
 import { Silk } from "@/components/Silk";
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { JsonLd, studio } from "@/components/seo/JsonLd";
 import { ogImage, ogShared } from "@/components/seo/meta";
 
@@ -44,6 +46,7 @@ export const metadata: Metadata = {
   },
   description: site.description,
   applicationName: site.name,
+  icons: { apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }] },
   alternates: { canonical: "/" },
   robots: { index: true, follow: true, googleBot: { index: true, follow: true, "max-image-preview": "large" } },
   openGraph: {
@@ -80,6 +83,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <main id="main">{children}</main>
         <PageTransition />
         <JsonLd data={studio} />
+        {/* Cookieless visit counts and real-visitor speed, read in the Vercel dashboard. */}
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );

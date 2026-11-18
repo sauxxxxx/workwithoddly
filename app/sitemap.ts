@@ -15,6 +15,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: url("/services/"), lastModified: now, changeFrequency: "monthly", priority: 0.8 },
     { url: url("/about/"), lastModified: now, changeFrequency: "yearly", priority: 0.7 },
     { url: url("/contact/"), lastModified: now, changeFrequency: "yearly", priority: 0.7 },
+    { url: url("/privacy/"), lastModified: now, changeFrequency: "yearly", priority: 0.3 },
     ...projects.map((p) => ({
       url: url(`/projects/${p.slug}/`),
       lastModified: now,

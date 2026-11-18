@@ -22,7 +22,12 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const p = projectBySlug(slug);
   if (!p) return {};
-  return pageMeta({ title: `${p.name}: ${p.headline ?? p.category}`, description: p.summary ?? p.overview, path: `/projects/${p.slug}/` });
+  return pageMeta({
+    title: `${p.name}: ${p.headline ?? p.category}`,
+    description: p.summary ?? p.overview,
+    path: `/projects/${p.slug}/`,
+    image: { url: `/projects/${p.slug}/og.png`, alt: `${p.name}, a project by ODDLY®` },
+  });
 }
 
 const width = (m: Media) => Number(m.ratio.split("/")[0]);

@@ -84,7 +84,8 @@
 .percent {
   min-width: 3.5ch;
   font-variant-numeric: tabular-nums;
-  color: var(--coral);
+  /* Ink, not coral: coral text is too faint on the light ground (the ring stays coral). */
+  color: var(--ink);
 }
 
 .bob {
